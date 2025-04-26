@@ -15,6 +15,7 @@
 .menu p{
     margin: 0px 20px;
     transition: 0.3s;
+    color: white;
 }
 
 .menu p:hover{

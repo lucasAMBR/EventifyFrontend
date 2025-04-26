@@ -15,7 +15,7 @@ export const Intro = () => {
                     <p>User guide</p>
                 </div>
                 <div className={style.button} onClick={() => navigate("/login")}>Login</div>
-            </nav>  
+            </nav>
         </>
     )
 }
