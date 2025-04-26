@@ -1,0 +1,8 @@
+.page{
+    width: 100vw;
+    height: 100vh;
+    background-color: #004643;
+    background-image: url(/images/Background.svg);
+    background-size: cover;
+    background-position: center;
+}
