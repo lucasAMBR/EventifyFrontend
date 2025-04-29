@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import api from "../../../services/Api";
 import style from "../Login.module.css";
 import { ErrorMessage } from "./ErrorMessage";
@@ -8,6 +8,10 @@ import { useNavigate } from "react-router-dom";
 export const DefaultRegister = () => {
 
     const navigate = useNavigate();
+
+    useEffect(() => {
+        document.title = "Eventfy - Register"
+    }, []);
 
     const { loggedUser, setLoggedUser } = useUserContext();
 
@@ -23,6 +27,10 @@ export const DefaultRegister = () => {
     const [ contactInput, setContactInput] = useState("")
     const [ passwordInput, setPasswordInput ] = useState("");
     const [ profilePicInput, setProfilePicInput ] = useState(null);
+
+    const handleReturnClick = () => {
+        navigate("/");
+    }
 
     const handleNameChange = (e) => {
         setNameInput(e.target.value);
@@ -138,6 +146,7 @@ export const DefaultRegister = () => {
 
     return(
         <div className={style.form}>
+            <div className={style.return_button} onClick={handleReturnClick}>{"<-"}</div>
             <div className={style.section_area}></div>
             <p className={style.section_title}>You are a:</p>
             <div className={style.section_option}>

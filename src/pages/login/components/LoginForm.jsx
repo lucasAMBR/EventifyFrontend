@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import style from "../Login.module.css"
 import api from "../../../services/Api";
 import { useUserContext } from "../../../contexts/UserContext";
@@ -8,6 +8,10 @@ export const LoginForm = () => {
 
     const navigate = useNavigate();
 
+    useEffect(() => {
+        document.title = "Eventfy - Login"
+    }, []);
+
     const { loggedUser, setLoggedUser } = useUserContext();
 
     const [ errorMessage, setErrorMessage ] = useState(null);
@@ -15,6 +19,10 @@ export const LoginForm = () => {
 
     const [ emailInput, setEmailInput ] = useState("");
     const [ passwordInput, setPasswordInput ] = useState("");
+
+    const handleReturnClick = () => {
+        navigate("/");
+    }
 
     const handleEmailChange = (event) => {
         setEmailInput(event.target.value);
@@ -48,13 +56,14 @@ export const LoginForm = () => {
         }catch(apiError){
             console.log(apiError);
             setErrorMessage(apiError);
-            setLoading(false);
+            setLoading(false);                                                      
         }
     }
 
     return(
         <div className={style.form}>
-            <form className={style.login_form}>
+            <div className={style.return_button} onClick={handleReturnClick}>{"<-"}</div>
+            <form className={style.login_form} onSubmit={handleLoginAction}>
                 <label>Email</label>
                 <input type="text" className={style.input} placeholder="example@email.com" value={emailInput} onChange={handleEmailChange}/>
                 <label>Password</label>

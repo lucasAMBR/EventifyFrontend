@@ -29,11 +29,49 @@
     color: #004643;
     transition: 0.3s;
     border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
+}
+
+.button_icon{
+    margin-right: 10px;
 }
 
 .button:hover{
     background-color: white;
 }
 
+.mobile_search_event{
+    display: none;
+}
 
+@media (max-width: 640px) {
+    .menu p{
+        display: none;
+    }
+
+    .mobile_search_event{
+        display: flex;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 80px;
+        height: 80px;
+        margin: 15px;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        background-color: #F9B663;
+        color: #004643;
+    }
+
+    .mobile_search_event:hover{
+        background-color: white;
+    }
+
+    .navbar{
+        padding: 0px 20px;
+    }
+}
