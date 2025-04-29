@@ -2,9 +2,14 @@ import SearchIcon from '@mui/icons-material/Search';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 
 import style from "./EventSearch.module.css";
+import { useEffect } from 'react';
 
 export const EventSearch = () => {
     
+    useEffect(() => {
+        document.title = "Eventfy - Search"
+    }, [])
+
     return(
         <>
             <div className={style.navbar}>

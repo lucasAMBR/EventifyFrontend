@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import style from "../Login.module.css"
 import api from "../../../services/Api";
 import { useUserContext } from "../../../contexts/UserContext";
 import { useNavigate } from "react-router-dom";
+import { ArrowBack } from "@mui/icons-material";
 
 export const LoginForm = () => {
 
@@ -62,7 +64,7 @@ export const LoginForm = () => {
 
     return(
         <div className={style.form}>
-            <div className={style.return_button} onClick={handleReturnClick}>{"<-"}</div>
+            <div className={style.return_button} onClick={handleReturnClick}><ArrowBack className={style.arrow} sx={{fill: "#FFFFFF"}}/></div>
             <form className={style.login_form} onSubmit={handleLoginAction}>
                 <label>Email</label>
                 <input type="text" className={style.input} placeholder="example@email.com" value={emailInput} onChange={handleEmailChange}/>

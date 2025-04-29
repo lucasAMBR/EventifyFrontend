@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import api from "../../../services/Api";
 import style from "../Login.module.css";
+import { ArrowBack } from "@mui/icons-material";
 import { ErrorMessage } from "./ErrorMessage";
 import { useUserContext } from "../../../contexts/UserContext";
 import { useNavigate } from "react-router-dom";
@@ -146,7 +147,7 @@ export const DefaultRegister = () => {
 
     return(
         <div className={style.form}>
-            <div className={style.return_button} onClick={handleReturnClick}>{"<-"}</div>
+            <div className={style.return_button} onClick={handleReturnClick}><ArrowBack className={style.arrow} sx={{fill: "#FFFFFF"}}/></div>
             <div className={style.section_area}></div>
             <p className={style.section_title}>You are a:</p>
             <div className={style.section_option}>
