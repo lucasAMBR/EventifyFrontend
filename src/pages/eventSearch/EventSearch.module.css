@@ -63,4 +63,92 @@
     height: calc(100% - 80px);
     padding: 10px 60px;
     background-color: #D9D9D9;
+    overflow: auto;
+}
+
+.popular_events_list, .recent_events_list{
+    margin-top: 20px;
+}
+
+.event_list{
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+}
+.event_card{
+
+    background-color: #C5D3D3;
+    max-width: 400px;
+    min-width: 400px;
+    margin-bottom: 15px;
+    margin-right: 15px;
+    border-radius: 10px;
+}
+
+.event_card img{
+    width: 100%;;
+}
+
+.card_infos{
+    padding: 10px;
+}
+
+.card_title{
+    font-weight: bold;
+    font-size: 1.3rem;
+}
+
+.card_infos p{
+    margin-bottom: 5px;
+    color: #004643;
+    display: flex;
+    align-items: center;
+}
+
+.card_infos svg{
+    margin-right: 10px;
+}
+
+.card_infos button{
+    width: 100%;
+    height: 35px;
+    color: white;
+    font-weight: bold;
+    background-color: #004643;
+    border: 1px solid #004643;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.card_infos button:hover{
+    background-color: white;
+    color: #004643;
+}
+
+.card_image{
+    width: 100%;
+    height: 200px;
+    background-color: #004643;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    overflow: hidden;
+}
+
+@media (max-width: 640px) {
+    .popular_events_list, .recent_events_list{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .event_card{
+        margin: 0;
+    }
+
+    .navbar{
+        justify-content: center;
+    }
+
+    .search_bar{
+        display: none;
+    }
 }

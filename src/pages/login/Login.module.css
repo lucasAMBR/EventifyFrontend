@@ -210,10 +210,6 @@ input[type="file"]::file-selector-button:hover {
     color: black;
 }
 
-.arrow_mobile{
-    display: none;
-}
-
 @media (max-width: 640px) {
     .login_section{
         width: 100vw;
@@ -225,9 +221,5 @@ input[type="file"]::file-selector-button:hover {
         display: flex;
         align-items: center;
         justify-content: center;
-    }
-
-    .arrow{
-        display: none;
     }
 }
