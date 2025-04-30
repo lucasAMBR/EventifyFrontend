@@ -4,7 +4,7 @@ import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import LocationPinIcon from '@mui/icons-material/LocationPin';
 import PeopleIcon from '@mui/icons-material/People';
 
-export const EventCard = ({EventBanner, EventTitle, EventLocal, EventDate, EventHour, EventGuestLimit, EventHostName}) => {
+export const EventCard = ({EventId, EventBanner, EventTitle, EventLocal, EventDate, EventHour, EventGuestLimit, EventHostName}) => {
 
     return(
         <div className={style.event_card}>
