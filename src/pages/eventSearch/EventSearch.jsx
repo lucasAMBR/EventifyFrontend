@@ -78,7 +78,30 @@ export const EventSearch = () => {
                         </div>
                     </>
                 }
-                {searchTerm != "" && `Termo pesquisado: ${searchTerm}`}
+                {searchTerm != "" && searchType == "title" && 
+                    <div className={style.popular_events_list}>
+                    <h2 onClick={() => console.log(popularEvents)}>Searching for: {searchTerm}</h2>
+                    <div className={style.event_list}>
+                        {allRegisteredEvents.filter((event) => event.title.toLowerCase().includes(searchTerm.toLowerCase())).length == 0 ? "No events founded..." : 
+                        <>
+                            {allRegisteredEvents.filter((event) => event.title.toLowerCase().includes(searchTerm.toLowerCase())).map(item => <EventCard EventBanner={`http://localhost:8080${item.imagePath}`} EventTitle={item.title} EventDate={item.date} EventHour={item.hour} EventLocal={item.location} EventGuestLimit={item.guestLimit} EventHostName={item.organizerName}/>)}
+                        </>
+                        }
+                    </div>
+                </div>
+                }
+                {searchTerm != "" && searchType == "organizer" && 
+                    <div className={style.popular_events_list}>
+                    <h2 onClick={() => console.log(popularEvents)}>Searching for: {searchTerm}</h2>
+                    <div className={style.event_list}>
+                        {allRegisteredEvents.filter((event) => event.organizerName.toLowerCase().includes(searchTerm.toLowerCase())).length == 0 ? "No events founded..." : 
+                        <>
+                            {allRegisteredEvents.filter((event) => event.organizerName.toLowerCase().includes(searchTerm.toLowerCase())).map(item => <EventCard EventBanner={`http://localhost:8080${item.imagePath}`} EventTitle={item.title} EventDate={item.date} EventHour={item.hour} EventLocal={item.location} EventGuestLimit={item.guestLimit} EventHostName={item.organizerName}/>)}
+                        </>
+                        }
+                    </div>
+                </div>
+                }
             </div>
         </>
     );
