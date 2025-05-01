@@ -45,6 +45,10 @@ export const EventSearch = () => {
         setSearchTerm(event.target.value);
     }
 
+    const handleSearchTypeChange = (type) => {
+        setSearchType(type);
+    }
+
     return(
         <>
             <div className={style.navbar}>
@@ -62,8 +66,8 @@ export const EventSearch = () => {
                             <h2 onClick={() => console.log(popularEvents)}>Popular events</h2>
                             <div className={style.event_list}>
                                 {popularEvents.length == 0 && "No registered events..."}
-                                {popularEvents.map((item) => 
-                                    <EventCard EventId={item.id} EventBanner={`http://localhost:8080${item.imagePath}`} EventTitle={item.title} EventDate={item.date} EventHour={item.hour} EventLocal={item.location} EventGuestLimit={item.guestLimit} EventHostName={item.organizerName}/>
+                                {popularEvents.map((item, index) => 
+                                    <EventCard key={index} EventId={item.id} EventBanner={`http://localhost:8080${item.imagePath}`} EventTitle={item.title} EventDate={item.date} EventHour={item.hour} EventLocal={item.location} EventGuestLimit={item.guestLimit} EventHostName={item.organizerName}/>
                                 )}
                             </div>
                         </div>
@@ -71,8 +75,8 @@ export const EventSearch = () => {
                             <h2>Recent events</h2>
                             <div className={style.event_list}>
                                 {popularEvents.length == 0 && "No registered events..."}
-                                {popularEvents.map((item) => 
-                                    <EventCard EventBanner={`http://localhost:8080${item.imagePath}`} EventTitle={item.title} EventDate={item.date} EventHour={item.hour} EventLocal={item.location} EventGuestLimit={item.guestLimit} EventHostName={item.organizerName}/>
+                                {popularEvents.map((item, index) => 
+                                    <EventCard key={index} EventId={item.id} EventBanner={`http://localhost:8080${item.imagePath}`} EventTitle={item.title} EventDate={item.date} EventHour={item.hour} EventLocal={item.location} EventGuestLimit={item.guestLimit} EventHostName={item.organizerName}/>
                                 )}
                             </div>
                         </div>
@@ -84,7 +88,7 @@ export const EventSearch = () => {
                     <div className={style.event_list}>
                         {allRegisteredEvents.filter((event) => event.title.toLowerCase().includes(searchTerm.toLowerCase())).length == 0 ? "No events founded..." : 
                         <>
-                            {allRegisteredEvents.filter((event) => event.title.toLowerCase().includes(searchTerm.toLowerCase())).map(item => <EventCard EventBanner={`http://localhost:8080${item.imagePath}`} EventTitle={item.title} EventDate={item.date} EventHour={item.hour} EventLocal={item.location} EventGuestLimit={item.guestLimit} EventHostName={item.organizerName}/>)}
+                            {allRegisteredEvents.filter((event) => event.title.toLowerCase().includes(searchTerm.toLowerCase())).map((item, index) => <EventCard key={index} EventId={item.id} EventBanner={`http://localhost:8080${item.imagePath}`} EventTitle={item.title} EventDate={item.date} EventHour={item.hour} EventLocal={item.location} EventGuestLimit={item.guestLimit} EventHostName={item.organizerName}/>)}
                         </>
                         }
                     </div>
@@ -96,7 +100,7 @@ export const EventSearch = () => {
                     <div className={style.event_list}>
                         {allRegisteredEvents.filter((event) => event.organizerName.toLowerCase().includes(searchTerm.toLowerCase())).length == 0 ? "No events founded..." : 
                         <>
-                            {allRegisteredEvents.filter((event) => event.organizerName.toLowerCase().includes(searchTerm.toLowerCase())).map(item => <EventCard EventBanner={`http://localhost:8080${item.imagePath}`} EventTitle={item.title} EventDate={item.date} EventHour={item.hour} EventLocal={item.location} EventGuestLimit={item.guestLimit} EventHostName={item.organizerName}/>)}
+                            {allRegisteredEvents.filter((event) => event.organizerName.toLowerCase().includes(searchTerm.toLowerCase())).map((item, index) => <EventCard key={index} EventId={item.id} EventBanner={`http://localhost:8080${item.imagePath}`} EventTitle={item.title} EventDate={item.date} EventHour={item.hour} EventLocal={item.location} EventGuestLimit={item.guestLimit} EventHostName={item.organizerName}/>)}
                         </>
                         }
                     </div>
