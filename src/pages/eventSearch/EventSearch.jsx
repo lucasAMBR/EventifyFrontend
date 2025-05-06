@@ -1,13 +1,17 @@
 import SearchIcon from '@mui/icons-material/Search';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import api from "../../services/Api";
 
 import style from "./EventSearch.module.css";
 import { useEffect, useState } from 'react';
 import { EventCard } from './components/EventCard';
+import { useNavigate } from 'react-router-dom';
 
 export const EventSearch = () => {
     
+    const navigate = useNavigate();
+
     useEffect(() => {
         document.title = "Eventfy - Search"
 
@@ -22,6 +26,8 @@ export const EventSearch = () => {
 
     const [ searchTerm, setSearchTerm ] = useState("");
     const [ searchType, setSearchType ] = useState("title");
+
+    const [ filterSelectIsOpen, setFilterSelectIsOpen ] = useState(false);
 
     const fetchPopularEvents = async() => {
         const response = await api.get("/event/popular");
@@ -52,14 +58,52 @@ export const EventSearch = () => {
     return(
         <>
             <div className={style.navbar}>
-                <img src="/images/LogoWhite.png" />
+                <div className={style.return_button} onClick={() => navigate("/")}><ArrowBackIcon sx={{fill: '#004643'}}/></div>
+                <div className={style.header_logo}><img src="/images/LogoWhite.png" />  -  Search</div>
                 <div className={style.search_bar}>
                 <div className={style.search_icon}><SearchIcon sx={{fill: '#004643'}} /></div>
                     <input type="text" placeholder="Search event..." value={searchTerm} onChange={handleSearchTerm}/>
-                    <div className={style.search_icon_alt}><FilterAltIcon sx={{fill: '#F9B663'}} /></div>
+                    <div className={style.search_icon_alt}><FilterAltIcon sx={{fill: '#F9B663'}} onClick={() => setFilterSelectIsOpen(!filterSelectIsOpen)}/></div>
                 </div>
             </div>
             <div className={style.event_list_area}>
+
+                <div className={style.mobile_search}>
+                    <div className={style.mobile_icon}><SearchIcon /></div>
+                    <div className={style.mobile_input_area}>
+                        <input type='text' className={style.mobile_input} placeholder='Search for a event...' value={searchTerm} onChange={handleSearchTerm}/>
+                        <div className={style.mobile_filter} onClick={() => setFilterSelectIsOpen(!filterSelectIsOpen)}><FilterAltIcon /></div>
+                    </div>
+                </div>
+                {filterSelectIsOpen && 
+                    <div className={style.filters}>
+                        <h2>Search for: </h2>
+                        <div className={style.checkbox_area} onClick={() => setSearchType("title")}>
+                            <div className={style.checkbox_item}>
+                                <div className={searchType == "title" ? style.checked : style.unchecked}></div>
+                            </div>
+                            <div className={style.checkbox_text}>
+                                Title
+                            </div>
+                        </div>
+                        <div className={style.checkbox_area} onClick={() => setSearchType("organizer")}>
+                            <div className={style.checkbox_item}>
+                                <div className={searchType == "organizer" ? style.checked : style.unchecked}></div>
+                            </div>
+                            <div className={style.checkbox_text}>
+                                Organizer
+                            </div>
+                        </div>
+                        <div className={style.checkbox_area} onClick={() => setSearchType("location")}>
+                            <div className={style.checkbox_item}>
+                                <div className={searchType == "location" ? style.checked : style.unchecked}></div>
+                            </div>
+                            <div className={style.checkbox_text}>
+                                Location
+                            </div>
+                        </div>
+                    </div>
+                }
                 {searchTerm == "" && 
                     <>
                         <div className={style.popular_events_list}>

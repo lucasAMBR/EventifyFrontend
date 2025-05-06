@@ -140,7 +140,88 @@
     overflow: hidden;
 }
 
+.return_button{
+    background-color: #F9B663;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    cursor: pointer
+}
+
+.return_button:hover{
+    background-color: white;
+}
+
+.header_logo{
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    padding-left: 30px;
+    color: white;
+    font-size: 25px;
+}
+
+.mobile_search{
+    display: none;
+}
+
+.filters{
+    max-width: 500px;
+    background-color: #004643;
+    color: white;
+    padding: 15px;
+    margin-top: 15px;
+    border-radius: 10px;
+}
+
+.filters h2{
+    color: white;
+}
+
+.checkbox_area{
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    color: white;
+    margin-left: 20px;
+}
+
+.checkbox_item{
+    width: 20px;
+    height: 20px;
+    background-color: white;
+    padding: 2px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.checkbox_text{
+    color: white;
+}
+
+.checked{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: green;
+}
+
+.unchecked{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: white;
+}
+
 @media (max-width: 640px) {
+    .event_list_area{
+        padding: 10px;
+    }
+
     .popular_events_list, .recent_events_list{
         display: flex;
         flex-direction: column;
@@ -152,10 +233,77 @@
     }
 
     .navbar{
-        justify-content: center;
+        justify-content: space-between;
+        padding: 10px;
+    }
+
+    .header_logo{
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: start;
     }
 
     .search_bar{
         display: none;
+    }
+
+    .mobile_search{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        background-color: #004643;
+        padding: 15px;
+        border-radius: 10px;
+    }
+
+    .mobile_input{
+        background-color: white;
+        border: none;
+        width: 100%;
+        height: 40px;
+        border-radius: 30px;
+        padding-left: 10px;
+    }
+
+    .mobile_input:focus{
+        outline: none;
+    }
+
+    .mobile_icon{
+        background-color: #F9B663;
+        min-width: 50px;
+        min-height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        margin-right: 10px;
+    }
+
+    .mobile_input_area{
+        width: 100%;
+        background-color: white;
+        display: flex;
+        border-radius: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0px 5px;
+    }
+
+    .mobile_filter{
+        background-color: #F9B663;
+        min-width: 30px;
+        min-height: 30px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .filters{
+        margin-top: 5px;
     }
 }

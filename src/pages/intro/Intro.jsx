@@ -18,14 +18,14 @@ export const Intro = () => {
             <nav className={style.navbar}>
                 <img src="/images/LogoWhite.png" />
                 <div className={style.menu}>
-                    <p onClick={() => navigate("event-search")}>Search events</p>
+                    <p onClick={() => navigate("/event-search")}>Search events</p>
                     <p>About us</p>
                     <p>User guide</p>
                 </div>
                 <div className={style.button} onClick={() => navigate("/login")}><LoginIcon sx={{fill: '#004643'}} className={style.button_icon}/>Login</div>
             </nav>
             <div className={style.mobile_search_event}>
-                <SearchIcon sx={{fill: '#004643'}} className={style.search_icon}/>
+                <SearchIcon sx={{fill: '#004643'}} className={style.search_icon} onClick={() => navigate("/event-search")}/>
             </div>
         </>
     )
