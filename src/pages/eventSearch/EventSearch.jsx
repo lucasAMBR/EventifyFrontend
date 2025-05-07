@@ -150,6 +150,18 @@ export const EventSearch = () => {
                     </div>
                 </div>
                 }
+                {searchTerm != "" && searchType == "location" && 
+                    <div className={style.popular_events_list}>
+                    <h2 onClick={() => console.log(popularEvents)}>Searching for: {searchTerm}</h2>
+                    <div className={style.event_list}>
+                        {allRegisteredEvents.filter((event) => event.location.toLowerCase().includes(searchTerm.toLowerCase())).length == 0 ? "No events founded..." : 
+                        <>
+                            {allRegisteredEvents.filter((event) => event.location.toLowerCase().includes(searchTerm.toLowerCase())).map((item, index) => <EventCard key={index} EventId={item.id} EventBanner={`http://localhost:8080${item.imagePath}`} EventTitle={item.title} EventDate={item.date} EventHour={item.hour} EventLocal={item.location} EventGuestLimit={item.guestLimit} EventHostName={item.organizerName}/>)}
+                        </>
+                        }
+                    </div>
+                </div>
+                }
             </div>
         </>
     );
