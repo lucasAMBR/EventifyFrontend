@@ -3,8 +3,16 @@ import style from "../EventSearch.module.css";
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import LocationPinIcon from '@mui/icons-material/LocationPin';
 import PeopleIcon from '@mui/icons-material/People';
+import { useLocation, useNavigate } from "react-router-dom";
 
 export const EventCard = ({EventId, EventBanner, EventTitle, EventLocal, EventDate, EventHour, EventGuestLimit, EventHostName}) => {
+
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    const handleOpenEventDetails = ( id ) => {
+        navigate(`/event-search/details/${id}`);
+    };
 
     return(
         <div className={style.event_card}>
@@ -17,7 +25,7 @@ export const EventCard = ({EventId, EventBanner, EventTitle, EventLocal, EventDa
                 <p><LocationPinIcon sx={{fill: '#004643'}} />{EventLocal}</p>
                 <p><PeopleIcon sx={{fill: '#004643'}} />Limit: {EventGuestLimit} person</p>
                 <p><PeopleIcon sx={{fill: '#004643'}} />{EventHostName}</p>
-                <button>More details</button>
+                <button onClick={() => handleOpenEventDetails(EventId)}>More details</button>
             </div>
         </div>
     );

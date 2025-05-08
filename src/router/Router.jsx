@@ -4,6 +4,7 @@ import { Intro } from "../pages/intro/Intro";
 import { Login } from "../pages/login/Login";
 import { Feed } from "../pages/feed/Feed";
 import { EventSearch } from "../pages/eventSearch/EventSearch";
+import { EventDetails } from "../pages/EventDetails/EventDetails";
 
 const Router = createBrowserRouter([
     {
@@ -21,6 +22,10 @@ const Router = createBrowserRouter([
             {
                 path: "/event-search",
                 element: <EventSearch />
+            },
+            {
+                path: "/event-search/details/:id",
+                element: <EventDetails />
             },
             {
                 path: "/feed",

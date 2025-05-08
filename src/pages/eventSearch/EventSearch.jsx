@@ -6,11 +6,15 @@ import api from "../../services/Api";
 import style from "./EventSearch.module.css";
 import { useEffect, useState } from 'react';
 import { EventCard } from './components/EventCard';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 
 export const EventSearch = () => {
     
     const navigate = useNavigate();
+
+    const [ searchParams, setSearchParams ] = useSearchParams();
+    const searchTerm = searchParams.get("searchTerm") || "";
+    const searchType = searchParams.get("searchType") || "title"
 
     useEffect(() => {
         document.title = "Eventfy - Search"
@@ -23,9 +27,6 @@ export const EventSearch = () => {
     const [ allRegisteredEvents, setAllRegisteredEvents ] = useState([]);
     const [ popularEvents, setPopularEvents ] = useState([]);
     const [ recentEvents, setRecentEvents ] = useState([]);
-
-    const [ searchTerm, setSearchTerm ] = useState("");
-    const [ searchType, setSearchType ] = useState("title");
 
     const [ filterSelectIsOpen, setFilterSelectIsOpen ] = useState(false);
 
@@ -48,13 +49,17 @@ export const EventSearch = () => {
     }
 
     const handleSearchTerm = (event) => {
-        setSearchTerm(event.target.value);
+        setSearchParams({searchTerm: event.target.value, searchType});
     }
 
     const handleSearchTypeChange = (type) => {
-        setSearchType(type);
+        setSearchParams({searchTerm, searchType: type});
     }
 
+    const normalizeText = (text) => {
+        return text.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+    }
+    
     return(
         <>
             <div className={style.navbar}>
@@ -78,7 +83,7 @@ export const EventSearch = () => {
                 {filterSelectIsOpen && 
                     <div className={style.filters}>
                         <h2>Search for: </h2>
-                        <div className={style.checkbox_area} onClick={() => setSearchType("title")}>
+                        <div className={style.checkbox_area} onClick={() => handleSearchTypeChange("title")}>
                             <div className={style.checkbox_item}>
                                 <div className={searchType == "title" ? style.checked : style.unchecked}></div>
                             </div>
@@ -86,7 +91,7 @@ export const EventSearch = () => {
                                 Title
                             </div>
                         </div>
-                        <div className={style.checkbox_area} onClick={() => setSearchType("organizer")}>
+                        <div className={style.checkbox_area} onClick={() => handleSearchTypeChange("organizer")}>
                             <div className={style.checkbox_item}>
                                 <div className={searchType == "organizer" ? style.checked : style.unchecked}></div>
                             </div>
@@ -94,7 +99,7 @@ export const EventSearch = () => {
                                 Organizer
                             </div>
                         </div>
-                        <div className={style.checkbox_area} onClick={() => setSearchType("location")}>
+                        <div className={style.checkbox_area} onClick={() => handleSearchTypeChange("location")}>
                             <div className={style.checkbox_item}>
                                 <div className={searchType == "location" ? style.checked : style.unchecked}></div>
                             </div>
@@ -130,9 +135,9 @@ export const EventSearch = () => {
                     <div className={style.popular_events_list}>
                     <h2 onClick={() => console.log(popularEvents)}>Searching for: {searchTerm}</h2>
                     <div className={style.event_list}>
-                        {allRegisteredEvents.filter((event) => event.title.toLowerCase().includes(searchTerm.toLowerCase())).length == 0 ? "No events founded..." : 
+                        {allRegisteredEvents.filter((event) => normalizeText(event.title.toLowerCase()).includes(normalizeText(searchTerm.toLowerCase()))).length == 0 ? "No events founded..." : 
                         <>
-                            {allRegisteredEvents.filter((event) => event.title.toLowerCase().includes(searchTerm.toLowerCase())).map((item, index) => <EventCard key={index} EventId={item.id} EventBanner={`http://localhost:8080${item.imagePath}`} EventTitle={item.title} EventDate={item.date} EventHour={item.hour} EventLocal={item.location} EventGuestLimit={item.guestLimit} EventHostName={item.organizerName}/>)}
+                            {allRegisteredEvents.filter((event) => normalizeText(event.title.toLowerCase()).includes(normalizeText(searchTerm.toLowerCase()))).map((item, index) => <EventCard key={index} EventId={item.id} EventBanner={`http://localhost:8080${item.imagePath}`} EventTitle={item.title} EventDate={item.date} EventHour={item.hour} EventLocal={item.location} EventGuestLimit={item.guestLimit} EventHostName={item.organizerName}/>)}
                         </>
                         }
                     </div>
@@ -142,9 +147,9 @@ export const EventSearch = () => {
                     <div className={style.popular_events_list}>
                     <h2 onClick={() => console.log(popularEvents)}>Searching for: {searchTerm}</h2>
                     <div className={style.event_list}>
-                        {allRegisteredEvents.filter((event) => event.organizerName.toLowerCase().includes(searchTerm.toLowerCase())).length == 0 ? "No events founded..." : 
+                        {allRegisteredEvents.filter((event) => normalizeText(event.organizerName.toLowerCase()).includes(normalizeText(searchTerm.toLowerCase()))).length == 0 ? "No events founded..." : 
                         <>
-                            {allRegisteredEvents.filter((event) => event.organizerName.toLowerCase().includes(searchTerm.toLowerCase())).map((item, index) => <EventCard key={index} EventId={item.id} EventBanner={`http://localhost:8080${item.imagePath}`} EventTitle={item.title} EventDate={item.date} EventHour={item.hour} EventLocal={item.location} EventGuestLimit={item.guestLimit} EventHostName={item.organizerName}/>)}
+                            {allRegisteredEvents.filter((event) => normalizeText(event.organizerName.toLowerCase()).includes(normalizeText(searchTerm.toLowerCase()))).map((item, index) => <EventCard key={index} EventId={item.id} EventBanner={`http://localhost:8080${item.imagePath}`} EventTitle={item.title} EventDate={item.date} EventHour={item.hour} EventLocal={item.location} EventGuestLimit={item.guestLimit} EventHostName={item.organizerName}/>)}
                         </>
                         }
                     </div>
@@ -154,9 +159,9 @@ export const EventSearch = () => {
                     <div className={style.popular_events_list}>
                     <h2 onClick={() => console.log(popularEvents)}>Searching for: {searchTerm}</h2>
                     <div className={style.event_list}>
-                        {allRegisteredEvents.filter((event) => event.location.toLowerCase().includes(searchTerm.toLowerCase())).length == 0 ? "No events founded..." : 
+                        {allRegisteredEvents.filter((event) => normalizeText(event.location.toLowerCase()).includes(normalizeText(searchTerm.toLowerCase()))).length == 0 ? "No events founded..." : 
                         <>
-                            {allRegisteredEvents.filter((event) => event.location.toLowerCase().includes(searchTerm.toLowerCase())).map((item, index) => <EventCard key={index} EventId={item.id} EventBanner={`http://localhost:8080${item.imagePath}`} EventTitle={item.title} EventDate={item.date} EventHour={item.hour} EventLocal={item.location} EventGuestLimit={item.guestLimit} EventHostName={item.organizerName}/>)}
+                            {allRegisteredEvents.filter((event) => normalizeText(event.location.toLowerCase()).includes(normalizeText(searchTerm.toLowerCase()))).map((item, index) => <EventCard key={index} EventId={item.id} EventBanner={`http://localhost:8080${item.imagePath}`} EventTitle={item.title} EventDate={item.date} EventHour={item.hour} EventLocal={item.location} EventGuestLimit={item.guestLimit} EventHostName={item.organizerName}/>)}
                         </>
                         }
                     </div>

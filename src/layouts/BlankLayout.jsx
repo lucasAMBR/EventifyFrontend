@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, Route, Routes, useLocation } from "react-router-dom";
 import style from "./BlankLayout.module.css"
 
 export const BlankLayout = () => {
