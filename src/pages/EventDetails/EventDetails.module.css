@@ -34,6 +34,115 @@
     background-color: white;
 }
 
+.event_area{
+    max-width: 100%;
+    max-height: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 60px;
+}
+
+.event_area h1{
+    color: #004643;
+}
+
+.event_information{
+    margin-right: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+}
+
+.subscribe_button{
+    width: 100%;
+    background-color: #004643;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    border-radius: 10px;
+    transition: 0.3s;
+    margin-top: 40px;
+    cursor: pointer;  
+}
+
+.subscribe_button:hover{
+    background-color: #FFFFFF;
+    color: #004643;
+}
+
+.event_image{
+    width: 500px;
+    height: 300px;
+    border-radius: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background-color: #004643;
+}
+
+.organizer{
+    display: flex;
+    align-items: center;
+}
+
+.organizer_profile_pic{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #004643;
+}
+
+.organizer_name{
+    font-size: 20px;
+    margin-left: 10px;
+}
+
+.description h3{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    color: #004643;
+}
+
+.description h2{
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: flex;
+}
+
+.description{
+    max-width: 400px;
+}
+
+.description h3 svg{
+    margin-right: 10px;
+}
+
+.location_details p{
+    display: flex;
+    align-items: center;
+}
+
+.location_details p svg{
+    margin-right: 10px;
+}
+
+.other_events{
+    height: 100%;
+    width: 500px;
+    background-color: rgb(175, 175, 175);
+    padding: 20px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
 .event_list_area{
     height: calc(100% - 80px);
