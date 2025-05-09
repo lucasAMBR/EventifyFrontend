@@ -8,6 +8,7 @@ import api from "../../services/Api";
 
 import style from "./EventDetails.module.css"
 import { useEffect, useState } from "react";
+import { Accessibility, DateRange } from "@mui/icons-material";
 
 export const EventDetails = () => {
 
@@ -39,35 +40,32 @@ export const EventDetails = () => {
             <div className={style.event_list_area}>
                 <div className={style.event_area}>
                     <div className={style.event_information}>
-                        <h1>Titulo do evento</h1>
-                        <div className={style.event_image}>
-                            image
-                        </div>
-                        <div className={style.organizer}>
-                            <div className={style.organizer_profile_pic}>
-
+                        <div className={style.event_card}>
+                            <h1>Titulo do evento</h1>
+                            <div className={style.event_image}>
+                                image
                             </div>
-                            <div className={style.organizer_name}>Nome do organizador</div>
+                            <div className={style.organizer}>
+                                <div className={style.organizer_profile_pic}></div>
+                                <div className={style.organizer_name}>Organizer name</div>
+                            </div>
+                            <div className={style.description}>
+                                <h2>Description</h2>
+                                <p>testetestetestetestetestetestetestetesteteste testetesteteste testetestetesteteste testetestetesteteste testetestetesteteste</p>
+                            </div>
+                            <button className={style.subscribe}>Subscribe</button>
                         </div>
-                        <div className={style.description}>
-                            <h2>Description</h2>
-                            <p>texto grande que ocupa muito espaço para testar se as descrições vão caber perfeitamente e não vão quebrar o layout do sistema de maneira porca e mal feita,texto grande que ocupa muito espaço para testar se as descrições vão caber perfeitamente e não vão quebrar o layout do sistema de maneira porca e mal feita</p>
+                        <div className={style.more_infos}>
+                            <h1>More information</h1>
+                            <h2><Accessibility sx={{fill: "#004643"}} />Type: PRESENTIAL</h2>
+                            <h2><DateRange sx={{fill: "#004643"}} />Date: 10/10/25</h2>
+                            <h2><AccessTimeIcon sx={{fill: "#004643"}} />Hour: 10:30</h2>
+                            <h2><LocationPinIcon sx={{fill: "#004643"}} />Local: Rua 123, São Paulo, SP</h2>
+                            <h2><LocationPinIcon sx={{fill: "#004643"}} />Map: </h2>
+                            <div className={style.event_image}>image</div>
                         </div>
                     </div>
-                    <div className={style.event_information}>
-                        <div>
-                        <h2>Localização</h2>
-                        <div className={style.event_image}>
-                            image
-                        </div>
-                        <div className={style.description}>
-                            <h3><LocationPinIcon sx={{fill: "#004643"}}/> Rua 191, São Paulo, SP</h3>
-                            <h3><PeopleIcon sx={{fill: "#004643"}}/>Guest Limits: 42 / 50</h3>
-                            <h3><AccessTimeIcon sx={{fill: "#004643"}}/>Date: 10/10/25, 13:30</h3>
-                        </div>
-                        </div>
-                        <div className={style.subscribe_button}>Subscribe</div>
-                    </div>
+                    <div className={style.divisory}>.</div>
                     <div className={style.event_information}>
                         <div className={style.other_events}>
                             <h2>Other events from ths organizer</h2>
