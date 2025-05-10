@@ -66,6 +66,11 @@
     margin-top: 20px;
     margin-bottom: 20px;
     background-color: white;
+    overflow: hidden;
+}
+
+.event_image img{
+    width: 100%;
 }
 
 .organizer{
