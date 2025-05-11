@@ -177,6 +177,7 @@
     padding: 30px;
     color: white;
     border-radius: 20px;
+    max-width: 550px;
     margin-right: 40px;
 }
 
@@ -194,8 +195,8 @@
 }
 
 .subscribe:hover{
-    background-color: green;
-    color: white;
+    background-color: #C5D3D3;
+    color: #004643;
 }
 
 .more_infos{

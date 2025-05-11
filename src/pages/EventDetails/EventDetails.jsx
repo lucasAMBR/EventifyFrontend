@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from "react-router-dom"
+import { useLocation, useNavigate, useParams } from "react-router-dom"
 
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
@@ -9,17 +9,31 @@ import api from "../../services/Api";
 import style from "./EventDetails.module.css"
 import { useEffect, useState } from "react";
 import { Accessibility, DateRange } from "@mui/icons-material";
+import { useUserContext } from "../../contexts/UserContext";
 
 export const EventDetails = () => {
 
     const navigate = useNavigate();
+    const location = useLocation();
+
+    const from = location.state?.from;
+
+    const { loggedUser } = useUserContext();
 
     const { id } = useParams();
 
     const [ loading, setLoading ] = useState(false);
 
     const [ eventData, setEventData ] = useState(null);
-    const [ organizerData, setOrganizerData ] = useState(null)
+    const [ organizerData, setOrganizerData ] = useState(null);
+
+    const handleBackPage = () => {
+        if(from){
+            navigate(-1)
+        }else{
+            navigate("/event-search")
+        }
+    }
 
     useEffect(() => {
         fetchData();
@@ -39,10 +53,24 @@ export const EventDetails = () => {
         setLoading(false);
     }
 
+    const handleSubscription = async() => {
+        if(loggedUser != null){
+            const response = await api.post(`/subscription/create/${id}/${loggedUser.id}`);
+            fetchData();
+        }else{
+            navigate(`/login?fromEvent=${id}`)
+        }
+    }
+
+    const handleCancelSubscription = async() => {
+        const response =  await api.post(`/subscription/cancel/${id}/${loggedUser.id}`);
+        fetchData();
+    }
+
     return (
         <>
             <div className={style.navbar}>
-                <div className={style.return_button} onClick={() => navigate("/")}><ArrowBackIcon sx={{fill: '#004643'}}/></div>
+                <div className={style.return_button} onClick={handleBackPage}><ArrowBackIcon sx={{fill: '#004643'}}/></div>
                 <div className={style.header_logo}><img src="/images/LogoWhite.png" />  -  Details</div>
             </div>
             <div className={style.event_list_area}>
@@ -63,7 +91,7 @@ export const EventDetails = () => {
                                         <h2>Description</h2>
                                         <p>{eventData.description}</p>
                                     </div>
-                                    <button className={style.subscribe}>Subscribe</button>
+                                    <button className={style.subscribe} onClick={eventData.subscriptionList.some(subs => subs.userId === loggedUser.id) ? handleCancelSubscription : handleSubscription}>Subscribe</button>
                                 </div>
                                 <div className={style.more_infos}>
                                     <h1>More information</h1>
@@ -82,7 +110,7 @@ export const EventDetails = () => {
                                     {organizerData.eventList.filter((event) => event.id != id).length == 0 ? "No more events from this organizer" : 
                                         <>
                                             {organizerData.eventList.filter((event) => event.id != id).map(event => 
-                                                <div className={style.other_event_item} onClick={() => navigate(`/event-search/details/${event.id}`)}>
+                                                <div className={style.other_event_item} onClick={() => navigate(`/event-search/details/${event.id}`, {state: {from: location.pathname}})}>
                                                     <img src={`http://localhost:8080${event.imagePath}`} />
                                                     <div className={style.item_text}>
                                                         <h3>{event.title}</h3>

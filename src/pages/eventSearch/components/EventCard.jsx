@@ -11,7 +11,7 @@ export const EventCard = ({EventId, EventBanner, EventTitle, EventLocal, EventDa
     const location = useLocation();
 
     const handleOpenEventDetails = ( id ) => {
-        navigate(`/event-search/details/${id}`);
+        navigate(`/event-search/details/${id}`, {state: {from: location.pathname}});
     };
 
     return(
