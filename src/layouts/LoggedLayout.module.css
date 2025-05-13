@@ -1,0 +1,56 @@
+.page{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    background-color: #d9d9d9;
+}
+
+.sidebar{
+    background-color: #004643;
+    width: 400px;
+    background-image: url(/images/Background.svg);
+    background-size: cover;
+    background-position: center;
+}
+
+.navbar_content{
+    width: 100%;
+}
+
+.navbar_header{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px 0px;
+}
+
+.navbar_item{
+    width: 100%;
+    padding: 20px 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    cursor: pointer;
+}
+
+.navbar_item:hover{
+    background-color: #36918d52;
+}
+
+.active{
+    background-color: #36918d52;
+}
+
+.profile_pic{
+    width: 60px;
+    height: 60px;
+    background-color: red;
+    border-radius: 50%;
+    margin-right: 20px;
+}
+
+.navbar_item h3, .navbar_item p{
+    color: white;
+}

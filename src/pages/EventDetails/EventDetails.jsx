@@ -71,7 +71,7 @@ export const EventDetails = () => {
         <>
             <div className={style.navbar}>
                 <div className={style.return_button} onClick={handleBackPage}><ArrowBackIcon sx={{fill: '#004643'}}/></div>
-                <div className={style.header_logo}><img src="/images/LogoWhite.png" />  -  Details</div>
+                <div className={style.header_logo}><img src="/images/LogoWhite.png" />  <span>-  Details</span></div>
             </div>
             <div className={style.event_list_area}>
                 <div className={style.event_area}>
