@@ -8,12 +8,6 @@ export const Feed = () => {
 
     const { loggedUser } = useUserContext();
 
-    useEffect(()=>{
-        if(loggedUser == null){
-            navigate("/login")
-        }
-    })
-
     return(
         <p>
             {loggedUser != null && `
