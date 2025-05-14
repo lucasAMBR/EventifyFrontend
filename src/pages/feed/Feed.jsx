@@ -8,10 +8,14 @@ export const Feed = () => {
 
     const { loggedUser } = useUserContext();
 
+    useEffect(() => {
+        document.title = "Eventfy - Home"
+    }, [])
+
     return(
         <p>
             {loggedUser != null && `
-                ${loggedUser}
+                feed
             `}
         </p>
     )

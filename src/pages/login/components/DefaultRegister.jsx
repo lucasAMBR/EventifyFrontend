@@ -99,7 +99,7 @@ export const DefaultRegister = () => {
             setLoading(false);
             setLoggedUser(response.data.id);
 
-            navigate("/feed");
+            navigate("/home");
         }catch(apiError){
             console.log(apiError);
             setErrorMessage(apiError)
@@ -136,7 +136,7 @@ export const DefaultRegister = () => {
             setLoading(false);
             setLoggedUser(response.data.id);
 
-            navigate("/feed");
+            navigate("/home");
         }catch(apiError){
             console.log(apiError);
             setErrorMessage(apiError)

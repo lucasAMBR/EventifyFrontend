@@ -6,6 +6,9 @@ import { Feed } from "../pages/feed/Feed";
 import { EventSearch } from "../pages/eventSearch/EventSearch";
 import { EventDetails } from "../pages/EventDetails/EventDetails";
 import { LoggedLayout } from "../layouts/LoggedLayout";
+import { Subscriptions } from "../pages/subscriptions/Subscriptions";
+import { Search } from "../pages/search/Search";
+import { Profile } from "../pages/profile/Profile";
 
 const Router = createBrowserRouter([
     {
@@ -31,12 +34,24 @@ const Router = createBrowserRouter([
         ]
     },
     {
-        path: "/feed",
+        path: "/home",
         element: <LoggedLayout />,
         children: [
             {
-                path: "/feed",
+                path: "/home",
                 element: <Feed />
+            },
+            {
+                path: "/home/subscriptions",
+                element: <Subscriptions />
+            },
+            {
+                path: "/home/search",
+                element: <Search />
+            },
+            {
+                path: "/home/me",
+                element: <Profile />
             }
         ]
     }

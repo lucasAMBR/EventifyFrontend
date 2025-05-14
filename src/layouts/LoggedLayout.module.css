@@ -48,9 +48,12 @@
 .profile_pic{
     width: 60px;
     height: 60px;
-    background-color: red;
     border-radius: 50%;
     margin-right: 20px;
+}
+
+.profile_pic img{
+    width: 100%;
 }
 
 .section_icon{
@@ -116,4 +119,117 @@
 .logout_modal h2, .logout_modal p{
     margin-bottom: 15px;
     text-align: center;
+}
+
+.mobile_navbar{
+    display: none;
+}
+
+@media (max-width: 1281px) {
+    .sidebar{
+        background-color: purple;
+    }
+}
+
+@media (max-width: 950px) {
+    .page{
+        flex-direction: column;
+    }
+    .sidebar{
+        display: none;
+    }
+
+    .mobile_navbar{
+        display: flex;
+        background-color: #004643;
+        width: 100%;
+        height: 80px;
+        padding: 0px 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .menu_box{
+        border: 1px solid white;
+        padding: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 4px;
+    }
+
+    .menu_box_active{
+        background-color: white;
+    }
+
+    .mobile_navbar img{
+        width: 130px;
+        height: 40px;
+    }
+
+    .menu_area{
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: rgba(0, 0, 0, 0.76);
+        width: 100vw;
+        height: 100vh;
+    }
+
+    .mobile_sidebar{
+        background-color: #004643;
+        width: 80%;
+        height: 100%;
+    }
+
+    .mobile_sidebar_header{
+        padding: 20px;
+        display: flex;
+        justify-content: end;
+    }
+
+    .mobile_sidebar_header p{
+        display: flex;
+        align-items: center;
+        font-size: 18px;
+        font-weight: bold;
+        color: white;
+    }
+
+    .mobile_profile_button{
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        margin-right: 15px;
+    }
+
+    .mobile_profile_button img{
+        width: 100%;
+        height: 100%;
+    }
+
+    .mobile_profile_button_active{
+        box-shadow: 0px 0px 10px white;
+    }
+
+    .mobile_wrapper{
+        display: flex;
+    }
+
+    .mobile_sidebar_item{
+        display: flex;
+        align-items: center;
+        padding: 20px;
+        color: white;
+    }
+
+    .mobile_sidebar_item svg{
+        margin-right: 10px;
+    }
+
+    .mobile_sidebar_item_active{
+        background-color: #00635e;
+        font-weight: bold;
+    }
 }

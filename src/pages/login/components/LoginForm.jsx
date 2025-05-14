@@ -53,7 +53,7 @@ export const LoginForm = () => {
 
             setLoggedUser(response.data.id);
             setLoading(false);
-            navigate("/feed");
+            navigate("/home");
 
         }catch(apiError){
             console.log(apiError);
