@@ -96,10 +96,7 @@ export const DefaultRegister = () => {
                 }
             });
 
-            setLoading(false);
-            setLoggedUser(response.data.id);
-
-            navigate("/home");
+            handleLoginAction(emailInput, passwordInput);
         }catch(apiError){
             console.log(apiError);
             setErrorMessage(apiError)
@@ -134,9 +131,8 @@ export const DefaultRegister = () => {
             });
 
             setLoading(false);
-            setLoggedUser(response.data.id);
-
-            navigate("/home");
+            
+            handleLoginAction(emailInput, passwordInput);
         }catch(apiError){
             console.log(apiError);
             setErrorMessage(apiError)
@@ -144,6 +140,33 @@ export const DefaultRegister = () => {
         }        
     }
 
+
+    const handleLoginAction = async(email, password) => {
+        setLoading(true);
+
+        const formData = new FormData();
+
+        formData.append("email", email);
+        formData.append("password", password);
+
+        try{
+            const response = await api.post("/auth/login", formData, {
+                headers: {
+                    'Content-Type': "multipart/form-data"
+                }
+            })
+
+            setLoggedUser(response.data.id);
+            setUserRole(response.data.role)
+            setLoading(false);
+            navigate("/home");
+
+        }catch(apiError){
+            console.log(apiError);
+            setErrorMessage(apiError);
+            setLoading(false);                                                      
+        }
+    }
 
     return(
         <div className={style.form}>

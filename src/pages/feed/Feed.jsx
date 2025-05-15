@@ -6,7 +6,7 @@ export const Feed = () => {
 
     const navigate = useNavigate();
 
-    const { loggedUser } = useUserContext();
+    const { loggedUser, userRole } = useUserContext();
 
     useEffect(() => {
         document.title = "Eventfy - Home"
@@ -15,7 +15,7 @@ export const Feed = () => {
     return(
         <p>
             {loggedUser != null && `
-                feed
+                ${loggedUser} - role: ${userRole}
             `}
         </p>
     )

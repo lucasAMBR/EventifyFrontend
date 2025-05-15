@@ -50,6 +50,7 @@
     height: 60px;
     border-radius: 50%;
     margin-right: 20px;
+    overflow: hidden;
 }
 
 .profile_pic img{
@@ -202,6 +203,7 @@
         height: 50px;
         border-radius: 50%;
         margin-right: 15px;
+        overflow: hidden;
     }
 
     .mobile_profile_button img{

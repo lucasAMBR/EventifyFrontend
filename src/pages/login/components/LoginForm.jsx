@@ -14,7 +14,7 @@ export const LoginForm = () => {
         document.title = "Eventfy - Login"
     }, []);
 
-    const { loggedUser, setLoggedUser } = useUserContext();
+    const { setLoggedUser, setUserRole } = useUserContext();
 
     const [ errorMessage, setErrorMessage ] = useState(null);
     const [ loading, setLoading ] = useState(false);
@@ -52,6 +52,7 @@ export const LoginForm = () => {
             })
 
             setLoggedUser(response.data.id);
+            setUserRole(response.data.role)
             setLoading(false);
             navigate("/home");
 
