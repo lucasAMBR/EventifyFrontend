@@ -14,7 +14,7 @@ export const DefaultRegister = () => {
         document.title = "Eventfy - Register"
     }, []);
 
-    const { loggedUser, setLoggedUser } = useUserContext();
+    const { loggedUser, setLoggedUser, setUserRole } = useUserContext();
 
     const [ userType, setUserType ] = useState("default");
 

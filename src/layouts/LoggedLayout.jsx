@@ -19,7 +19,7 @@ export const LoggedLayout = () => {
 
     const [ userData, setUserData ] = useState(null);
 
-    const { loggedUser, setLoggedUser } = useUserContext();
+    const { loggedUser, setLoggedUser, userRole, setUserRole } = useUserContext();
 
     const handleLogout = () => {
         setManualLogout(true)
@@ -89,6 +89,7 @@ export const LoggedLayout = () => {
                             <p>Search</p>
                         </div>
                     </div>
+                    {userRole == "DEFAULT" &&
                     <div className={location.pathname == `/home/subscriptions` ? [style.navbar_item, style.active].join(" ") : style.navbar_item} onClick={() => navigate("/home/subscriptions")}>
                         <div className={style.section_icon}>
                             <DateRange sx={{width: "40px", height: "40px", fill: "#004643"}} />
@@ -97,6 +98,17 @@ export const LoggedLayout = () => {
                             <p>Subscriptions</p>
                         </div>
                     </div>
+                    }
+                    {userRole == "ORGANIZER" &&
+                    <div className={location.pathname == `/home/my_events` ? [style.navbar_item, style.active].join(" ") : style.navbar_item} onClick={() => navigate("/home/my_events")}>
+                        <div className={style.section_icon}>
+                            <DateRange sx={{width: "40px", height: "40px", fill: "#004643"}} />
+                        </div>
+                        <div className={style.profile_desc}>
+                            <p>Your Events</p>
+                        </div>
+                    </div>
+                    }
                 </div>  
                 <div className={[style.navbar_item, style.logout].join(" ")} onClick={handleLogout}>
                     <div className={style.section_icon}>
@@ -130,9 +142,16 @@ export const LoggedLayout = () => {
                                 <div className={location.pathname == "/home/search" ? [style.mobile_sidebar_item, style.mobile_sidebar_item_active].join(" ") : style.mobile_sidebar_item} onClick={() => handleMobileSectionSwitch("/home/search")}>
                                     <Search sx={{fill: "#ffffff"}}/> Search
                                 </div>
-                                <div className={location.pathname == "/home/subscriptions" ? [style.mobile_sidebar_item, style.mobile_sidebar_item_active].join(" ") : style.mobile_sidebar_item} onClick={() => handleMobileSectionSwitch("/home/subscriptions")}>
-                                    <DateRange sx={{fill: "#ffffff"}}/> Subscriptions
-                                </div>
+                                {userRole == "DEFAULT" &&
+                                    <div className={location.pathname == "/home/subscriptions" ? [style.mobile_sidebar_item, style.mobile_sidebar_item_active].join(" ") : style.mobile_sidebar_item} onClick={() => handleMobileSectionSwitch("/home/subscriptions")}>
+                                        <DateRange sx={{fill: "#ffffff"}}/> Subscriptions
+                                    </div>
+                                }
+                                {userRole == "ORGANIZER" &&
+                                    <div className={location.pathname == "/home/my_events" ? [style.mobile_sidebar_item, style.mobile_sidebar_item_active].join(" ") : style.mobile_sidebar_item} onClick={() => handleMobileSectionSwitch("/home/my_events")}>
+                                        <DateRange sx={{fill: "#ffffff"}}/> Your Events
+                                    </div>
+                                }
                                 <div className={style.mobile_sidebar_item}>
                                     <Logout sx={{fill: "#ffffff"}}/> Logout
                                 </div>

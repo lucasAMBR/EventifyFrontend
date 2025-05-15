@@ -7,7 +7,7 @@
 
 .sidebar{
     background-color: #004643;
-    width: 400px;
+    min-width: 400px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;

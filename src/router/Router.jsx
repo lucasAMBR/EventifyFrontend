@@ -9,6 +9,7 @@ import { LoggedLayout } from "../layouts/LoggedLayout";
 import { Subscriptions } from "../pages/subscriptions/Subscriptions";
 import { Search } from "../pages/search/Search";
 import { Profile } from "../pages/profile/Profile";
+import { Events } from "../pages/OrganizerEvents/Events";
 
 const Router = createBrowserRouter([
     {
@@ -52,6 +53,10 @@ const Router = createBrowserRouter([
             {
                 path: "/home/me",
                 element: <Profile />
+            },
+            {
+                path: "/home/my_events",
+                element: <Events />
             }
         ]
     }
