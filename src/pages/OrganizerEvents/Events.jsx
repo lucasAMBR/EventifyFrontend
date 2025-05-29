@@ -5,6 +5,7 @@ import style from "./Events.module.css";
 
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { AddEventModal } from "./components/AddEventModal";
+import { EventCard } from "./components/EventCard";
 
 export const Events = () => {
 
@@ -29,7 +30,7 @@ export const Events = () => {
     }, [])
 
     return(
-        <div className={style.page}>
+        <div className={addEventModalIsOpen ? style.page_modal : style.page}>
             {loggedUser != null &&
                 <>
                     <div className={style.page_header}>
@@ -44,9 +45,17 @@ export const Events = () => {
                                 <button onClick={() => setAddEventModalIsOpen(true)}>Cadastrar novos eventos</button>
                             </div>
                         }
-                        {userEventList.length > 0 && !loading && "Tem eventos"}
+                        {userEventList.length > 0 && !loading && 
+                            <div className={style.event_list_area}>
+                                <>
+                                    {userEventList.map((item, index) => (
+                                        <EventCard key={index} EventId={item.id} EventBanner={`http://localhost:8080${item.imagePath}`} EventTitle={item.title} EventDate={item.date} EventHour={item.hour} EventLocal={item.location} EventGuestLimit={item.guestLimit} EventHostName={item.organizerName}/>
+                                    ))}
+                                </>
+                            </div>
+                        }
                     </div>
-                    {addEventModalIsOpen && <AddEventModal />}
+                    {addEventModalIsOpen && <AddEventModal setEventModal={setAddEventModalIsOpen} fetchData={fetchUserEvents}/>}
                 </>  
             }
         </div>
