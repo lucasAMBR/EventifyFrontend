@@ -88,10 +88,17 @@
     text-align: center;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
     flex-direction: column;
     max-width: 600px;
     border-radius: 10px;
+}
+
+.normal_input:disabled{
+    background-color: #516968;
+    border-color: #516968;
+    color: white;
+    cursor:not-allowed;
 }
 
 .add_event h2{
@@ -139,6 +146,7 @@ form div textarea{
     width: 400px;
     background-color: transparent;
     height: 150px;
+    margin: 10px 0px;
     border: 2px solid #004643;
     border-radius: 5px;
     padding-left: 10px;
@@ -240,6 +248,12 @@ form button:hover{
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     overflow: hidden;
+}
+
+form p{
+    color: #004643;
+    font-weight: bold;
+    margin-bottom: -10px;
 }
 
 @media (max-width: 640px) {

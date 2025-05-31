@@ -6,6 +6,7 @@ import style from "./Events.module.css";
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { AddEventModal } from "./components/AddEventModal";
 import { EventCard } from "./components/EventCard";
+import { UpdateEventModal } from "./components/UpdateEventModal";
 
 export const Events = () => {
 
@@ -15,6 +16,8 @@ export const Events = () => {
     const [ loading, setLoading ] = useState(false);
 
     const [ addEventModalIsOpen, setAddEventModalIsOpen ] = useState(false);
+    const [ updateEventModalIdOpen, setUpdateModalIsOpen ] = useState(false);
+    const [ choosedEvent, setChoosedEvent] = useState(null);
 
     const [ hoverAddButton, setHoverAddButton ] = useState(false)
 
@@ -23,6 +26,11 @@ export const Events = () => {
         const response = await api.get(`/event/list/user/${loggedUser}`)
         setUserEventList(response.data);
         setLoading(false);
+    }
+
+    const handleOpenUpdateModal = (id) => {
+        setChoosedEvent(id);
+        setUpdateModalIsOpen(true);
     }
 
     useEffect(() => {
@@ -49,13 +57,14 @@ export const Events = () => {
                             <div className={style.event_list_area}>
                                 <>
                                     {userEventList.map((item, index) => (
-                                        <EventCard key={index} EventId={item.id} EventBanner={`http://localhost:8080${item.imagePath}`} EventTitle={item.title} EventDate={item.date} EventHour={item.hour} EventLocal={item.location} EventGuestLimit={item.guestLimit} EventHostName={item.organizerName}/>
+                                        <EventCard key={index} EventId={item.id} EventBanner={`http://localhost:8080${item.imagePath}`} EventTitle={item.title} EventDate={item.date} EventHour={item.hour} EventLocal={item.location} EventGuestLimit={item.guestLimit} EventHostName={item.organizerName} handleOpenModal={handleOpenUpdateModal}/>
                                     ))}
                                 </>
                             </div>
                         }
                     </div>
                     {addEventModalIsOpen && <AddEventModal setEventModal={setAddEventModalIsOpen} fetchData={fetchUserEvents}/>}
+                    {updateEventModalIdOpen && <UpdateEventModal EventId={choosedEvent} handleOpenModal={setUpdateModalIsOpen} />}
                 </>  
             }
         </div>

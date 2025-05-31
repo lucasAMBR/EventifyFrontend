@@ -7,7 +7,7 @@ import PeopleIcon from '@mui/icons-material/People';
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
-export const EventCard = ({EventId, EventBanner, EventTitle, EventLocal, EventDate, EventHour, EventGuestLimit}) => {
+export const EventCard = ({EventId, EventBanner, EventTitle, EventLocal, EventDate, EventHour, EventGuestLimit, handleOpenModal}) => {
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -15,14 +15,6 @@ export const EventCard = ({EventId, EventBanner, EventTitle, EventLocal, EventDa
     const handleOpenEventDetails = ( id ) => {
         navigate(`/event-search/details/${id}`, {state: {from: location.pathname}});
     };
-
-    const [ updateModalIsOpen, setUpdateModalIsOpen ] = useState(false);
-    const [ choosedEvent, setChoosedEvent ] = useState()
-
-    const handleOpenModal = (id) => {
-        setChoosedEvent(id);
-        setUpdateModalIsOpen(true);
-    }
 
     return(
         <div className={style.event_card}>
@@ -37,6 +29,7 @@ export const EventCard = ({EventId, EventBanner, EventTitle, EventLocal, EventDa
                 <button onClick={() => handleOpenEventDetails(EventId)}>View event feed</button>
                 <button onClick={() => handleOpenModal(EventId)}>Edit event data</button>
             </div>
+        
         </div>
     );
 }
