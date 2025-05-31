@@ -16,6 +16,7 @@ export const AddEventModal = ({ setEventModal, fetchData }) => {
     const [ hourInputContent, setHourInputContent ] = useState("");
     const [ guestLimitInputContent, setGuestLimitInputContent ] = useState("");
     const [ locationInputContent, setLocationInputContent ] = useState("");
+    const [ linkInputContent, setLinkInputContent ] = useState("");
     const [ eventBannerInputContent, setEventBannerInputContent ] = useState(null);
 
     const handleTitleInputChange = (event) => {
@@ -40,6 +41,10 @@ export const AddEventModal = ({ setEventModal, fetchData }) => {
 
     const handleLocationInputChange = (event) => {
         setLocationInputContent(event.target.value);
+    }
+
+    const handleLinkInputChange = (event) => {
+        setLinkInputContent(event.target.value);
     }
 
     const handleEventBannerInputChange = (event) => {
@@ -67,9 +72,38 @@ export const AddEventModal = ({ setEventModal, fetchData }) => {
         }
         formData.append("location", locationInputContent);
 
-        console.log(formData.get("guestLimit"));
         try{
             const response = await api.post("/event/create/presential", formData, {
+                headers: {
+                    "Content-Type": "multipart/form-data"
+                }
+            });
+
+            console.log(response.data)
+            handleSubmitSucess();
+        }catch(error){
+            console.log(error);
+        }
+    }
+
+    const handleOnlineEventSubmit = async(event) => {
+        event.preventDefault();
+
+        const formData = new FormData();
+
+        formData.append("title", titleInputContent);
+        formData.append("description", descriptionInputContent);
+        formData.append("date", dateInputContent);
+        formData.append("hour", hourInputContent);
+        formData.append("guestLimit", guestLimitInputContent.toString());
+        formData.append("organizerId", loggedUser);
+        if(eventBannerInputContent){
+            formData.append("image", eventBannerInputContent);
+        }
+        formData.append("eventLink", linkInputContent);
+
+        try{
+            const response = await api.post("/event/create/online", formData, {
                 headers: {
                     "Content-Type": "multipart/form-data"
                 }
@@ -102,6 +136,20 @@ export const AddEventModal = ({ setEventModal, fetchData }) => {
                             <input type="file" accept="image/*" onChange={handleEventBannerInputChange}/>
                         </div>
                     <button type="submit">Create</button>
+                    </form>
+                }
+                {eventType == "online" && 
+                    <form onSubmit={handleOnlineEventSubmit}>
+                        <div>
+                            <input className={style.normal_input} type="text" placeholder="Event title" value={titleInputContent} onChange={handleTitleInputChange}/>
+                            <textarea type="text" placeholder="Description" value={descriptionInputContent} onChange={handleDescriptionInputChange}/>
+                            <input className={style.normal_input} type="date" value={dateInputContent} onChange={handleDataInputChange}/>
+                            <input className={style.normal_input} type="time" value={hourInputContent} onChange={handleHourInputChange}/>
+                            <input className={style.normal_input} type="number" placeholder="Guest limit" value={guestLimitInputContent} onChange={handleGuestLimitInputChange}/>
+                            <input className={style.normal_input} type="text" placeholder="Link" value={linkInputContent} onChange={handleLinkInputChange}/>
+                            <input type="file" accept="image/*" onChange={handleEventBannerInputChange}/>
+                        </div>
+                        <button type="submit">Create</button>
                     </form>
                 }
             </div>

@@ -5,6 +5,7 @@
     display: flex;
     flex-direction: column;
     background-color: #d9d9d9;
+    overflow: hidden;
 }
 
 .page_modal{
@@ -187,8 +188,8 @@ form button:hover{
 
 .event_card{
     background-color: #C5D3D3;
-    max-width: 400px;
-    min-width: 400px;
+    max-width: 390px;
+    min-width: 390px;
     max-height: fit-content;
     margin: 15px;
     border-radius: 10px;
@@ -263,6 +264,11 @@ form p{
 
     .no_events h2{
         text-align: center;
+    }
+
+    .event_list_area{
+        display: flex;
+        justify-content: center;
     }
 
     .event_card{

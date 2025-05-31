@@ -220,6 +220,9 @@
 @media (max-width: 640px) {
     .event_list_area{
         padding: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 
     .popular_events_list, .recent_events_list{
@@ -228,8 +231,13 @@
         align-items: center;
     }
     .event_card{
-        margin: 0;
+        margin-left: 0px;
+        margin-right: 0px;
         margin-bottom: 15px;
+    }
+
+    .event_card:hover{
+        scale: 1;
     }
 
     .navbar{

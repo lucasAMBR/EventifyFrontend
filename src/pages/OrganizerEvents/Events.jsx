@@ -57,14 +57,14 @@ export const Events = () => {
                             <div className={style.event_list_area}>
                                 <>
                                     {userEventList.map((item, index) => (
-                                        <EventCard key={index} EventId={item.id} EventBanner={`http://localhost:8080${item.imagePath}`} EventTitle={item.title} EventDate={item.date} EventHour={item.hour} EventLocal={item.location} EventGuestLimit={item.guestLimit} EventHostName={item.organizerName} handleOpenModal={handleOpenUpdateModal}/>
+                                        <EventCard key={index} EventId={item.id} EventLink={item.link} EventType={item.type} EventBanner={`http://localhost:8080${item.imagePath}`} EventTitle={item.title} EventDate={item.date} EventHour={item.hour} EventLocal={item.location} EventGuestLimit={item.guestLimit} EventHostName={item.organizerName} handleOpenModal={handleOpenUpdateModal}/>
                                     ))}
                                 </>
                             </div>
                         }
                     </div>
                     {addEventModalIsOpen && <AddEventModal setEventModal={setAddEventModalIsOpen} fetchData={fetchUserEvents}/>}
-                    {updateEventModalIdOpen && <UpdateEventModal EventId={choosedEvent} handleOpenModal={setUpdateModalIsOpen} />}
+                    {updateEventModalIdOpen && <UpdateEventModal EventId={choosedEvent} handleOpenModal={setUpdateModalIsOpen} updateEvents={fetchUserEvents}/>}
                 </>  
             }
         </div>

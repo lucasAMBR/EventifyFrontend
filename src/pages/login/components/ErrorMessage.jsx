@@ -1,6 +1,6 @@
 export const ErrorMessage = ({ message }) => {
 
     return(
-        <p>Error: { message }</p>
+        <p style={{marginBottom: "10px"}}>Error: { message }</p>
     )
 }
