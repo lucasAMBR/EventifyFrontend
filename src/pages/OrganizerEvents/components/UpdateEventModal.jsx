@@ -94,6 +94,46 @@ export const UpdateEventModal = ({EventId, handleOpenModal, updateEvents}) => {
         }
     }
 
+    
+    const handleOnlineEventSubmit = async(event) => {
+        event.preventDefault();
+
+        const formData = new FormData();
+
+        formData.append("organizerId", loggedUser);
+        formData.append("eventId", EventId);
+
+        if(currentEventData.title != newEventTitle){
+            formData.append("newTitle", newEventTitle);
+        }
+
+        if(currentEventData.guestLimit != newEventGuestLimit){
+            formData.append("newGuestLimit",newEventGuestLimit);
+        }else{
+            formData.append("newGuestLimit", 0);
+        }
+
+        if(currentEventData.link != newEventLink){
+            formData.append("newLink", newEventLink);
+        }
+
+        if(currentEventData.description != newEventLocation){
+            formData.append("newDescription", newEventDescription);
+        }
+
+        try{
+            const response = await api.put("/event/update/online", formData, {
+                headers: {
+                    "Content-Type": "multipart/form-data"
+                }
+            })
+
+            handleSubmitSuccess();
+        }catch(error){
+            console.log(error);
+        }
+    }
+
     useEffect(() => {
         fetchData();
     }, [])
@@ -125,7 +165,7 @@ export const UpdateEventModal = ({EventId, handleOpenModal, updateEvents}) => {
                     </form>
                 }
                 {currentEventData != null && currentEventData.type == "ONLINE" && !loading &&
-                    <form onSubmit={handleSubmit}>
+                    <form onSubmit={handleOnlineEventSubmit}>
                         <div>
                             <p>Id</p>
                             <input type="text" className={style.normal_input} value={EventId} disabled/>
