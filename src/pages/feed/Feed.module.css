@@ -3,6 +3,7 @@
     flex: 1;
     display: flex;
     flex-direction: row;
+    overflow-y: auto;
 }
 
 .post_list{
@@ -79,6 +80,82 @@
 
 .add_post_form div .image_input p{
     margin-bottom: 10px;
+}
+
+.feed_selector{
+    margin-top: 15px;
+    font-size: 23px;
+}
+
+.feed_selector span{
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.feed_post_list{
+    width: 90%;
+    padding-top: 20px;
+}
+
+.post_item{
+    background-color: #C5D3D3;
+    width: 100%;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.post_header{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.owner_profile_pic{
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    margin-right: 10px;
+    overflow: hidden;
+}
+
+.owner_profile_pic img{
+    width: 100%;
+}
+
+.post_infos h3{
+    color: #004643;
+}
+
+.post_infos p{
+    color: #344443;
+    font-size: 14px;
+}
+
+.post_text_content{
+    padding-top: 20px;
+}
+
+.feedback_infos{
+    margin-top: 15px;
+    display: flex;
+    flex-direction: row;
+}
+
+.feedback_button{
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+}
+
+.feedback_button svg{
+    margin-right: 5px;
+}
+
+.selected{
+    color: #004643;
+    font-weight: bold;
 }
 
 .recomendations{
