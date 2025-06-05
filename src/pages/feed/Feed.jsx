@@ -18,6 +18,13 @@ export const Feed = () => {
     const [ userPopularFeed, setUserPopularFeed ] = useState([]);
     const [ userFollowingFeed, setUserFollowingFeed ] = useState([])
 
+    const [ newPostContent, setNewPostContent ] = useState("");
+    const [ images, setImages ] = useState([]);
+
+    const handleNewContentChange = (event) => {
+        setNewPostContent(event.target.value);
+    }
+
     const [ loading, setLoading ] = useState(true);
 
     useEffect(() => {
@@ -51,6 +58,33 @@ export const Feed = () => {
         fetchAllFeeds();
     }
 
+    const handleFormSubmit = async(event) => {
+        event.preventDefault();
+
+        console.log(loggedUser)
+                console.log(images);
+
+        const formData = new FormData();
+        formData.append("userId", loggedUser);
+        formData.append("content", newPostContent);
+
+        images.forEach((image, index) => {formData.append("postImages", image)});
+
+        try{
+            const response = await api.post("post/create", formData, {
+                headers: {
+                    "Content-Type": "multipart/form-data"
+                }
+            });
+
+            fetchAllFeeds();
+            setNewPostContent("")
+            setImages([])
+        }catch(error){
+            console.log(error);
+        }
+    } 
+
     const fetchAllFeeds = () => {
         setLoading(true);
         fetchPopularFeed();
@@ -62,20 +96,20 @@ export const Feed = () => {
         <div className={style.feed_area}>
             <div className={style.post_list}>
                 <div className={style.add_post_form}>
-                    <form>
+                    <form onSubmit={handleFormSubmit}>
                         <div className={style.form_header}>
                             <h2 onClick={() => console.log(userPopularFeed)}>Make a post</h2>
-                             <ImageSelector />
+                             <ImageSelector onfilesSelected={setImages}/>
                         </div>
                 
-                        <textarea placeholder="Insert the post content here"></textarea>
+                        <textarea placeholder="Insert the post content here" value={newPostContent} onChange={handleNewContentChange}></textarea>
                         <div className={style.post_buttons_area}>
                             <button type="submit" className={style.publish_button}>Publish</button>
                         </div>
                     </form> 
                 </div>
                 <div className={style.feed_selector}>
-                    <span className={selectedFeed == "popular" ? style.selected : ""} onClick={() => handleFeedSwitch("popular")}>Popular</span> | <span className={selectedFeed == "following" ? style.selected : ""} onClick={() => handleFeedSwitch("following")}>Following</span>
+                <div><span className={selectedFeed == "popular" ? style.selected : ""} onClick={() => handleFeedSwitch("popular")}>Popular</span> | <span className={selectedFeed == "following" ? style.selected : ""} onClick={() => handleFeedSwitch("following")}>Following</span></div>
                 <div className={style.feed_post_list}>
                 </div>
                     {!loading && userPopularFeed.length > 0 && selectedFeed == "popular" &&

@@ -88,6 +88,9 @@
 }
 
 .feed_selector{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     margin-top: 15px;
     font-size: 23px;
 }
@@ -98,16 +101,21 @@
 }
 
 .feed_post_list{
-    width: 90%;
+    max-width: 90%;
     padding-top: 20px;
 }
 
 .post_item{
     background-color: #C5D3D3;
-    width: 100%;
+    min-width: 100%;
+    max-width: 100%;
     padding: 20px;
     border-radius: 10px;
     margin-bottom: 15px;
+}
+
+.post_item .post_text_content p{
+    font-size: 18px;
 }
 
 .post_header{
@@ -237,10 +245,71 @@
 }
 
 .post_images{
-    display: flex;
-    flex-direction: row;
-    padding: 10px;
+    margin-top: 10px;
+    max-width: 100%;
+    display: block;
 }
+
+.single_image {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+/* Layout com 2 imagens */
+.two_images {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+  flex-wrap: wrap;
+}
+
+.two_image_item {
+  flex: 1;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  height: 250px;
+  width: 100%;
+  border-radius: 10px;
+}
+
+/* Layout com 3 imagens */
+.three_images {
+  display: flex;
+  gap: 6px;
+  height: 300px;
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.three_main_image {
+  flex: 2;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+}
+
+.three_side_images {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.three_side_image {
+  flex: 1;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+}
+
 
 .one_image{
     background-color: #004643;
@@ -328,10 +397,6 @@
     display: none;
 } 
 
-.file_selector_button{
-
-}
-
 .image_selector_button{
     width: 60px;
     height: 60px;
@@ -352,6 +417,13 @@
 
     .post_list{
         padding: 0;
+    }
+    .post_item{
+        width: 100%;
+    }
+
+    .post_item .post_text_content p{
+        font-size: 16px;
     }
 
     .add_post_form{
@@ -406,4 +478,38 @@
     .image_input{
         display: none;
     }
+
+    .post_images{
+        flex-direction: column;
+    }
+
+    .post_images .image_column{
+        flex-direction: row;
+    }
+
+    .two_images {
+    flex-direction: column;
+  }
+
+  .two_image_item {
+    aspect-ratio: unset;
+    height: 200px;
+  }
+
+  .three_images {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .three_main_image {
+    height: 200px;
+  }
+
+  .three_side_images {
+    flex-direction: row;
+  }
+
+  .three_side_image {
+    height: 100px;
+  }
 }

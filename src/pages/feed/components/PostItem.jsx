@@ -54,39 +54,28 @@ const { loggedUser } = useUserContext();
                 </div>
             </div>
             <div className={style.post_text_content}>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>
+                <p>{content}</p>
             </div>
             <div className={style.post_images}>
                 {imagesPath.length === 0 && ""}
                 {imagesPath.length === 1 && 
-                    <div className={style.single_image}>
-                        <img src={`http://localhost:8080${imagesPath[0]}`}/>
-                    </div>
+                    <img src={`http://localhost:8080${imagesPath[0]}`} className={style.single_image} />
                 }
                 {imagesPath.length === 2 && 
-                    <>
-                        <div className={style.divided_image}>
-                            <img src={`http://localhost:8080${imagesPath[0]}`}/>
-                        </div>
-                        <div className={style.divided_image}>
-                            <img src={`http://localhost:8080${imagesPath[1]}`}/>
-                        </div>
-                    </>
+                    <div className={style.two_images}>
+                        {imagesPath.map((src, i) => (
+                            <img key={i} src={`http://localhost:8080${src}`} className={style.two_image_item} alt={`post ${i}`} />
+                        ))}
+                    </div>
                 }
                 {imagesPath.length === 3 && 
-                    <>
-                        <div className={style.one_image}>
-                            <img src={`http://localhost:8080${imagesPath[0]}`}/>
+                    <div className={style.three_images}>
+                        <img src={`http://localhost:8080${imagesPath[0]}`} className={style.three_main_image} alt="main" />
+                        <div className={style.three_side_images}>
+                            <img src={`http://localhost:8080${imagesPath[1]}`} className={style.three_side_image} alt="side1" />
+                            <img src={`http://localhost:8080${imagesPath[2]}`} className={style.three_side_image} alt="side2" />
                         </div>
-                        <div className={style.image_column}>
-                            <div className={style.two_image}>
-                                <img src={`http://localhost:8080${imagesPath[1]}`}/>
-                            </div>
-                            <div className={style.three_image}>
-                                <img src={`http://localhost:8080${imagesPath[2]}`}/>
-                            </div>
-                        </div>
-                    </>
+                    </div>
                 }
             </div>
             <div className={style.feedback_infos}>
