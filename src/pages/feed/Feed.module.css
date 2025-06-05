@@ -21,7 +21,16 @@
     border-radius: 10px;
 }
 
-.add_post_form h2{
+.form_header{
+    display: flex;
+    min-width: 100%;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.form_header h2{
     color: white;
     margin-bottom: 10px;
 }
@@ -30,7 +39,7 @@
     flex: 1;
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
+    align-items: flex-start;
     justify-content: center;
 }
 
@@ -45,17 +54,13 @@
 
 .add_post_form .publish_button{
     background-color: #F9B663;
-    width: 200px;
+    width: 300px;
     color: #004643;
     transition: 0.3s;
 }
 
 .add_post_form .publish_button:hover{
     background-color: white;
-}
-
-.image_input{
-    min-width: 700PX;
 }
 
 .image_input p{
@@ -70,12 +75,12 @@
 }
 
 .post_buttons_area{
-    min-width: 100%;
     margin-top: 10px;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
+    align-self: center;
 }
 
 .add_post_form div .image_input p{
@@ -319,6 +324,22 @@
     background-color: aqua;
 }
 
+.mobile_add_image {
+    display: none;
+} 
+
+.file_selector_button{
+
+}
+
+.image_selector_button{
+    width: 60px;
+    height: 60px;
+    background-color: #F9B663;
+    border-radius: 50%;
+    padding: 10px;
+}
+
 @media (max-width: 640px) {
     .recomendations{
         display: none;
@@ -344,16 +365,45 @@
 
     .post_buttons_area {
         align-items: center;
-        justify-content: center;
-        flex-direction: column;
+        justify-content: space-between;
+        flex-direction: row;
     }
 
     .post_buttons_area p{
         display: none;
     }
 
+    .mobile_publish{
+        background-color: #F9B663;
+    }
+
+
+    .form_header{
+        display: flex;
+        width: 100%;
+        flex-direction: row;
+        align-items: baseline;
+        justify-content: space-between;
+        margin-bottom: 15px;
+    }
+
+
+    .mobile_add_image input[type="file"]::file-selector-button{
+    background-color: #F9B663;
+    border: #F9B663;
+    color: #004643;
+    }   
+
+    .mobile_add_image{
+        display: flex;
+    }
+
+    .mobile_add_image input[type="file"]{
+    
+        width: 100%;
+    }
+
     .image_input{
-        min-width: none;
-        text-wrap: wrap;
+        display: none;
     }
 }
