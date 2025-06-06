@@ -112,6 +112,11 @@ export const Feed = () => {
                 <div><span className={selectedFeed == "popular" ? style.selected : ""} onClick={() => handleFeedSwitch("popular")}>Popular</span> | <span className={selectedFeed == "following" ? style.selected : ""} onClick={() => handleFeedSwitch("following")}>Following</span></div>
                 <div className={style.feed_post_list}>
                 </div>
+                    {!loading && userPopularFeed.length == 0 && selectedFeed == "popular" &&
+                        <>
+                            <p>parece que ainda não temos post</p>
+                        </>
+                    }
                     {!loading && userPopularFeed.length > 0 && selectedFeed == "popular" &&
                         <>
                             {userPopularFeed.map((post, index) => (

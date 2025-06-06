@@ -107,8 +107,8 @@
 
 .post_item{
     background-color: #C5D3D3;
-    min-width: 100%;
-    max-width: 100%;
+    min-width: 90%;
+    max-width: 90%;
     padding: 20px;
     border-radius: 10px;
     margin-bottom: 15px;
@@ -405,6 +405,19 @@
     padding: 10px;
 }
 
+.delete_post_modal{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: white;
+    z-index: 101;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 @media (max-width: 640px) {
     .recomendations{
         display: none;
@@ -419,7 +432,8 @@
         padding: 0;
     }
     .post_item{
-        width: 100%;
+        min-width: 100%;
+        max-width: 100%;
     }
 
     .post_item .post_text_content p{
