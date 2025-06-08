@@ -411,11 +411,191 @@
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-color: white;
+    background-color: rgba(0, 0, 0, 0.493);
     z-index: 101;
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.delete_area{
+    background-color: white;
+    width: fit-content;
+    max-width: 400px;
+    padding: 15px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.delete_area h3{
+    text-align: center;
+    color: #004643;
+}
+
+.delete_area p{
+    text-align: center;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+.delete_area .confirm_delete{
+    margin-top: 10px;
+    color: white;
+    border-radius: 5px;
+    background-color: rgb(255, 51, 51);
+    border: 1px solid rgb(252, 51, 51);
+    padding: 10px;
+        transition: 0.3s;
+}
+
+.delete_area .cancel_delete{
+    margin-top: 5px;
+    border-radius: 5px;
+    background-color: rgb(221, 221, 221);
+    border: 1px solid  rgb(226, 226, 226);
+    padding: 10px;
+    transition: 0.3s;
+}
+
+.confirm_delete:hover{
+    background-color: white;
+    color: red;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.cancel_delete:hover{
+    background-color: #004643;
+    border: 1px solid #004643;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.update_area{
+    background-color: white;
+    width: fit-content;
+    padding: 15px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.update_area h3{
+    text-align: center;
+    color: #004643;
+}
+
+.update_area p{
+    text-align: center;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+.update_area textarea{
+    width: 380px;
+    height: 120px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: transparent;
+    border: 1px solid #004643;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+
+.update_area .edit_button{
+    margin-top: 10px;
+    color: white;
+    border-radius: 5px;
+    background-color: #004643;
+    border: 1px solid #004643;
+    padding: 10px;
+        transition: 0.3s;
+}
+
+.update_area .cancel_delete{
+    margin-top: 5px;
+    border-radius: 5px;
+    background-color: rgb(221, 221, 221);
+    border: 1px solid  rgb(226, 226, 226);
+    padding: 10px;
+    transition: 0.3s;
+}
+
+.edit_button:hover{
+    background-color: white;
+    color: #004643;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.cancel_delete:hover{
+    background-color: gray;
+    border: 1px solid gray;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.comment_modal_area{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.61);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.comment_modal{
+    background-color: white;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.comment_modal_header{
+    color: #004643;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+
+.comment_modal_list{
+    flex: 1
+}
+
+.comment_modal_add_new{
+    border-top: 1px solid #cbe0df;
+    padding: 15px 0px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.comment_modal_add_new input {
+    width: 100%;
+    margin-right: 10px;
+    height: 50px;
+    border-radius: 10px;
+    background-color: transparent;
+    border: 2px solid #004643;
+    padding-left: 10px;
+}
+
+.comment_modal_add_new button {
+    min-width: 50px;
+    min-height: 55px;
+    background-color: #004643;
+    border: 1px solid #004643;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 @media (max-width: 640px) {
@@ -525,5 +705,15 @@
 
   .three_side_image {
     height: 100px;
+  }
+
+  .comment_modal{
+    width: 100%;
+    height: 100%;
+  }
+
+  .comment_modal_list{
+    min-width: none;
+    min-height: none;
   }
 }

@@ -8,6 +8,7 @@ import { useEffect, useRef, useState } from "react";
 import { useUserContext } from "../../../contexts/UserContext";
 import api from "../../../services/Api";
 import { DropDownMenu } from "./DropDownMenu";
+import { CommentsModal } from "./CommentsModal";
 
 export const PostItem = ({postId, userId, userProfilePic, userName, content, imagesPath, likeList, commentList, date }) => {
 
@@ -19,6 +20,12 @@ const { loggedUser } = useUserContext();
 
     const [liked, setLiked] = useState(false);
     const [likesCount, setLikesCount] = useState(likeList.length);
+
+    const [ removed, setRemoved ] = useState(false);
+
+    const [ postContent, setPostContent] = useState(content);
+
+    const [ commentModalIsOpen, setCommentModalIsOpen ] = useState(false);
 
     useEffect(() => {
         const hasLiked = likeList.some(like => like.userId === loggedUser);
@@ -38,7 +45,7 @@ const { loggedUser } = useUserContext();
         }
     };
     return(
-        <div className={style.post_item}>
+        <div className={style.post_item} style={removed ? {display: "none"} : {}}>
             <div className={style.post_header}>
                 <div className={style.post_header_infos}>
                     <div className={style.owner_profile_pic}>
@@ -50,11 +57,11 @@ const { loggedUser } = useUserContext();
                     </div>
                 </div>
                 <div className={style.logged_user_post_menu}>
-                    {userId == loggedUser ? <DropDownMenu /> : ""}
+                    {userId == loggedUser ? <DropDownMenu postId={postId} setRemoved={setRemoved} postContent={content} setPostContent={setPostContent}/> : ""}
                 </div>
             </div>
             <div className={style.post_text_content}>
-                <p>{content}</p>
+                <p>{postContent}</p>
             </div>
             <div className={style.post_images}>
                 {imagesPath.length === 0 && ""}
@@ -80,8 +87,9 @@ const { loggedUser } = useUserContext();
             </div>
             <div className={style.feedback_infos}>
                 <div className={style.feedback_button} onClick={handleLikeClick}>{liked ? <FavoriteIcon sx={{ fill: "#004643" }} /> : <FavoriteBorderIcon sx={{ fill: "#004643" }} />} {likesCount}</div>
-                <div className={style.feedback_button}><ChatBubbleOutlineIcon sx={{fill: "#004643"}}/> {`${commentList.length}`}</div>
+                <div className={style.feedback_button} onClick={() => setCommentModalIsOpen(true)}><ChatBubbleOutlineIcon sx={{fill: "#004643"}}/> {`${commentList.length}`}</div>
             </div>
+            {commentModalIsOpen && <CommentsModal setCommentModal={() => setCommentModalIsOpen(false)}/>}
         </div>
     )
 }

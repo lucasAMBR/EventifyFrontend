@@ -176,6 +176,7 @@
         background-color: rgba(0, 0, 0, 0.76);
         width: 100vw;
         height: 100vh;
+        z-index: 150;
     }
 
     .mobile_sidebar{
