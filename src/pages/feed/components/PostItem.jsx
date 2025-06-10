@@ -12,7 +12,7 @@ import { CommentsModal } from "./CommentsModal";
 
 export const PostItem = ({postId, userId, userProfilePic, userName, content, imagesPath, likeList, commentList, date }) => {
 
-const { loggedUser } = useUserContext();
+    const { loggedUser } = useUserContext();
 
     function formatNumber(n) {
         return String(n).padStart(2, '0');
@@ -26,6 +26,22 @@ const { loggedUser } = useUserContext();
     const [ postContent, setPostContent] = useState(content);
 
     const [ commentModalIsOpen, setCommentModalIsOpen ] = useState(false);
+
+    const [liveCommentList, setLiveCommentList ] = useState([]);
+
+    const fetchComments = async() => {
+        try{
+            const response = await api.get(`/comment/${postId}`)
+
+            setLiveCommentList(response.data);
+        }catch (error){
+            console.log(error);
+        }
+    }
+
+    useEffect(()=>{
+        fetchComments();
+    },[])
 
     useEffect(() => {
         const hasLiked = likeList.some(like => like.userId === loggedUser);
@@ -87,9 +103,9 @@ const { loggedUser } = useUserContext();
             </div>
             <div className={style.feedback_infos}>
                 <div className={style.feedback_button} onClick={handleLikeClick}>{liked ? <FavoriteIcon sx={{ fill: "#004643" }} /> : <FavoriteBorderIcon sx={{ fill: "#004643" }} />} {likesCount}</div>
-                <div className={style.feedback_button} onClick={() => setCommentModalIsOpen(true)}><ChatBubbleOutlineIcon sx={{fill: "#004643"}}/> {`${commentList.length}`}</div>
+                <div className={style.feedback_button} onClick={() => setCommentModalIsOpen(true)}><ChatBubbleOutlineIcon sx={{fill: "#004643"}}/> {`${liveCommentList.length}`}</div>
             </div>
-            {commentModalIsOpen && <CommentsModal setCommentModal={() => setCommentModalIsOpen(false)}/>}
+            {commentModalIsOpen && <CommentsModal setCommentModal={() => setCommentModalIsOpen(false)} postId={postId}/>}
         </div>
     )
 }
