@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 import { PostItem } from "./components/PostItem";
 import { ImageSelector } from "./components/ImageSelector";
+import { UserCard } from "./components/UserCard";
 
 export const Feed = () => {
 
@@ -16,7 +17,8 @@ export const Feed = () => {
     const [ selectedFeed, setSelectedFeed ] = useState("popular");
 
     const [ userPopularFeed, setUserPopularFeed ] = useState([]);
-    const [ userFollowingFeed, setUserFollowingFeed ] = useState([])
+    const [ userFollowingFeed, setUserFollowingFeed ] = useState([]);
+    const [ popularUsers, setPopularUsers ] = useState([]);
 
     const [ newPostContent, setNewPostContent ] = useState("");
     const [ images, setImages ] = useState([]);
@@ -34,11 +36,20 @@ export const Feed = () => {
         }
     }, [loggedUser]);
 
+        const fetchPopularUsers = async() => {
+        try{
+            const populars = await api.get(`feed/popular-users/${loggedUser}`)
+            setPopularUsers(populars.data);
+        }catch (error){
+            console.log(error);
+        }
+    } 
+
     const fetchPopularFeed = async() => {
         try{
             const response = await api.get(`feed/popular/${loggedUser}`);
 
-            setUserPopularFeed(response.data)
+            setUserPopularFeed(response.data);
         }catch (error){
             console.log(error);
         }
@@ -89,6 +100,7 @@ export const Feed = () => {
         setLoading(true);
         fetchPopularFeed();
         fetchFollowingFeed();
+        fetchPopularUsers();
         setLoading(false);
     }
 
@@ -139,7 +151,12 @@ export const Feed = () => {
                 </div>
             </div>
             <div className={style.recomendations}>
-                ...
+                <div className={style.popular_users}>
+                    <h2>Popular Users</h2>
+                    {popularUsers.map((item, index)=>(
+                        <UserCard fetchPopulars={fetchPopularUsers} userId={item.id} userName={item.name} profilePic={item.profilePicPath} usertype={item.type} followers={item.followers} following={item.following} posts={item.posts}/>
+                    ))}
+                </div>
             </div>
         </div>
     )

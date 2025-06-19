@@ -390,7 +390,6 @@
 
 .recomendations{
     flex: 1;
-    background-color: aqua;
 }
 
 .mobile_add_image {
@@ -659,6 +658,85 @@
     align-items: center;
 }
 
+.popular_users h2{
+    color: white;
+    margin-bottom: 15px;
+}
+
+.popular_users{
+    background-color: #609490;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 10px;
+}
+
+.user_card{
+    background-color: #004643;
+    width: 100%;
+    padding: 15px;
+    margin-top: 8px;
+    color: white;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.user_card button{
+    padding: 15px;
+    background-color: white;
+    border: 1px solid white;
+    border-radius: 5px;
+    height: fit-content;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.user_card button:hover{
+    background-color: #F9B663;
+    border: 1px solid #F9B663;
+    color: #004643;
+}
+
+.card_infos{
+    color: white;
+    display: flex;
+    align-items: center;
+}
+
+.card_pic{
+    background-color: red;
+    width: 65px;
+    height: 65px;
+    margin-right: 10px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.card_pic img{
+    width: 100%;
+}
+
+.user_details h3, .user_details p{
+    color: white;
+}
+
+.user_details h3{
+    display: flex;
+    align-items: center;
+}
+
+.user_details h3 span{
+    font-weight:normal;
+    font-size: 14px;
+    background-color: #e5bf91;
+    padding: 5px;
+    border-radius: 2px;
+    color: #004643;
+    margin-left: 10px;
+}
 @media (max-width: 640px) {
     .recomendations{
         display: none;
