@@ -224,7 +224,7 @@ form button:hover{
     margin-right: 10px;
 }
 
-.card_infos button{
+.card_infos .normal_button{
     width: 100%;
     height: 35px;
     color: white;
@@ -237,9 +237,93 @@ form button:hover{
     margin-bottom: 10px;
 }
 
-.card_infos button:hover{
+.card_infos .normal_button:hover{
     background-color: white;
     color: #004643;
+}
+
+
+.card_infos .cancel_button{
+    width: 100%;
+    height: 35px;
+    color: white;
+    font-weight: bold;
+    background-color: red;
+    border: 1px solid red;
+    border-radius: 5px;
+    transition: 0.3s;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+
+.cancel_modal_area{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.651);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cancel_modal{
+    background-color: white;
+    padding: 20px;
+    max-width: 400px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+}
+
+.cancel_modal p {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.confirm_cancel{
+    height: 45px;
+    background-color: red;
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+    border: 1px solid red;
+    margin-bottom: 5px;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.confirm_cancel:hover{
+    background-color: white;
+    color: red;
+}
+
+.abort_cancel{
+    height: 45px;
+    background-color: #004643;
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+    border: 1px solid #004643;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.abort_cancel:hover{
+    background-color: white;
+    color: #004643;
+}
+
+.cancel_modal h2{
+    color: #004643;
+}
+
+.card_infos .cancel_button:hover{
+    background-color: white;
+    color: red;
 }
 
 .card_image{

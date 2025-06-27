@@ -105,6 +105,7 @@
     align-items: center;
     cursor: pointer;
     transition: 0.3s;
+    margin-bottom: 10px;
 }
 
 .other_event_item:hover{
@@ -152,7 +153,8 @@
 }
 
 .description{
-    max-width: 400px;
+    max-width: 100%;
+    overflow: hidden;
 }
 
 .description h3 svg{
@@ -202,7 +204,7 @@
 .more_infos{
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-evenly;
 }
 
 .more_infos h1{

@@ -3,6 +3,7 @@ import { useLocation, useNavigate, useParams } from "react-router-dom"
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import LocationPinIcon from '@mui/icons-material/LocationPin';
+import LinkIcon from '@mui/icons-material/Link';
 import PeopleIcon from '@mui/icons-material/People';
 import api from "../../services/Api";
 
@@ -99,8 +100,15 @@ export const EventDetails = () => {
                                     <h2><DateRange sx={{fill: "#004643"}} />Date: {`${eventData.date[2]}/${eventData.date[1]}/${eventData.date[0]}`}</h2>
                                     <h2><AccessTimeIcon sx={{fill: "#004643"}} />Hour: {`${eventData.hour[0]}:${eventData.hour[1]}`}</h2>
                                     <h2><LocationPinIcon sx={{fill: "#004643"}} />Guest limit: {eventData.subscriptionList.length} / {eventData.guestLimit}</h2>
-                                    <h2><LocationPinIcon sx={{fill: "#004643"}} />Local: {`${eventData.location}`}</h2>
-                                    <iframe className={style.map} width="100%" height="300" loading="lazy" allowFullScreen src={`https://www.google.com/maps?q=${eventData.latitude},${eventData.longitude}&output=embed`} />
+                                    {eventData.type == "PRESENTIAL" &&
+                                        <>
+                                        <h2><LocationPinIcon sx={{fill: "#004643"}} />Local: {`${eventData.location}`}</h2>
+                                        <iframe className={style.map} width="100%" height="300" loading="lazy" allowFullScreen src={`https://www.google.com/maps?q=${eventData.latitude},${eventData.longitude}&output=embed`} />
+                                        </>
+                                    }
+                                    {eventData.type == "ONLINE" &&
+                                        <h2><LinkIcon sx={{fill: "#004643"}}/> Link: {eventData.link}</h2>
+                                    }
                                 </div>
                             </div>
                             <div className={style.divisory}>.</div>

@@ -672,6 +672,81 @@
     border-radius: 10px;
 }
 
+.popular_events{
+    background-color: #609490;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+
+.popular_events h2{
+    color: white;
+    margin-bottom: 15px;
+}
+
+.popular_event_card{
+    background-color: #C5D3D3;
+    width: 100%;
+    height: 130px;
+    display: flex;
+    border-radius: 10px;
+    transition: 0.3s;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.popular_event_card:hover{
+    background-color: #b2cfcf;
+    scale: 1.01;
+}
+
+.popular_event_image img{
+    width: 150%;
+}
+
+.popular_event_image{
+    background-color: #004643;
+    width: 200px;
+    height: 100%;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.popular_event_infos{
+    padding: 10px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    width: 100%;
+}
+
+.popular_event_infos h3{
+    color: #004643;
+}
+
+.popular_infos_button button{
+    background-color: #004643;
+    padding: 10px;
+    color: white;
+    min-width: 80px;
+    border: 1px solid #004643;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.popular_infos_button button:hover{
+    background-color: white;
+    color: #004643;
+}
+
 .user_card{
     background-color: #004643;
     width: 100%;
@@ -724,7 +799,7 @@
 }
 
 .user_details h3{
-    display: flex;
+     display: flex;
     align-items: center;
 }
 
@@ -736,6 +811,78 @@
     border-radius: 2px;
     color: #004643;
     margin-left: 10px;
+}
+
+.subscribe_modal{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.712);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.subscription_area{
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.subscription_area p{
+    max-width: 450px;
+    color: #004643;
+    font-size: 18px;
+}
+
+.close_subs_modal{
+    font-weight: bold;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: 18px;
+    color: #004643;
+    cursor: pointer;
+}
+
+.subscription_area h2{
+    color: #004643;
+}
+
+.more_infos{
+    width: 100%;
+    margin-top: 10px;
+}
+
+.more_infos h3{
+    margin-bottom: 15px;
+    display: flex;
+    align-content: center;
+    color: #004643;
+}
+
+.subscribe_button{
+    background-color: #004643;
+    width: 100%;
+    height: 45px;
+    border: 1px solid #004643;
+    color: white;
+    border-radius: 5px;
+    font-weight: bold;
+    margin-top: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.subscribe_button:hover{
+    background-color: white;
+    color: #004643;
 }
 @media (max-width: 640px) {
     .recomendations{
@@ -854,5 +1001,18 @@
   .comment_modal_list{
     min-width: none;
     max-height: none;
+  }
+  
+  .subscription_area{
+    width: 100vw;
+    height: 100vh;
+  }
+
+  .subscribe_button{
+    min-height: 45px
+  }
+
+  .more_infos h3{
+    margin-bottom: 10px;
   }
 }

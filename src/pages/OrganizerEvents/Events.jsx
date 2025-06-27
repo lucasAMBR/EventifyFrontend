@@ -7,6 +7,7 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { AddEventModal } from "./components/AddEventModal";
 import { EventCard } from "./components/EventCard";
 import { UpdateEventModal } from "./components/UpdateEventModal";
+import { CancelEventModal } from "./components/CancelEventModal";
 
 export const Events = () => {
 
@@ -17,6 +18,7 @@ export const Events = () => {
 
     const [ addEventModalIsOpen, setAddEventModalIsOpen ] = useState(false);
     const [ updateEventModalIdOpen, setUpdateModalIsOpen ] = useState(false);
+    const [ cancelEventModalIsOpen, setCancelEventModalIsOpen ] = useState(false)
     const [ choosedEvent, setChoosedEvent] = useState(null);
 
     const [ hoverAddButton, setHoverAddButton ] = useState(false)
@@ -33,6 +35,16 @@ export const Events = () => {
         setUpdateModalIsOpen(true);
     }
 
+    const handleOpenCancelEventModal = (id) => {
+        setChoosedEvent(id);
+        setCancelEventModalIsOpen(true)
+    }
+
+    const handleCloseCancelEventModal = () => {
+        setChoosedEvent(null);
+        setCancelEventModalIsOpen(false)
+    }
+
     useEffect(() => {
         fetchUserEvents();
     }, [])
@@ -42,22 +54,22 @@ export const Events = () => {
             {loggedUser != null &&
                 <>
                     <div className={style.page_header}>
-                        <h1>My Events</h1>
+                        <h1 onClick={() => console.log(userEventList)}>My Events</h1>
                         <AddCircleIcon onClick={() => setAddEventModalIsOpen(true)} onMouseEnter={() => setHoverAddButton(true)} onMouseLeave={() => setHoverAddButton(false)} sx={hoverAddButton ? {width: "60px", height: "60px", fill: "#F9B663", cursor: "pointer"} : {width: "60px", height: "60px", fill: "#004643", cursor: "pointer"}}/>
                     </div>
                     <div className={style.page_content}>
-                        {userEventList.length == 0 && loading && "loading..."}
-                        {userEventList.length == 0 && !loading && 
+                        {userEventList.filter(event => event.active == true).length == 0 && loading && "loading..."}
+                        {userEventList.filter(event => event.active == true).length == 0 && !loading && 
                             <div className={style.no_events}>
-                                <h2>Parece que voce não tem eventos cadastrados...</h2>
+                                <h2>Parece que voce não tem eventos ativos cadastrados...</h2>
                                 <button onClick={() => setAddEventModalIsOpen(true)}>Cadastrar novos eventos</button>
                             </div>
                         }
-                        {userEventList.length > 0 && !loading && 
+                        {userEventList.filter(event => event.active == true).length > 0 && !loading && 
                             <div className={style.event_list_area}>
                                 <>
-                                    {userEventList.map((item, index) => (
-                                        <EventCard key={index} EventId={item.id} EventLink={item.link} EventType={item.type} EventBanner={`http://localhost:8080${item.imagePath}`} EventTitle={item.title} EventDate={item.date} EventHour={item.hour} EventLocal={item.location} EventGuestLimit={item.guestLimit} EventHostName={item.organizerName} handleOpenModal={handleOpenUpdateModal}/>
+                                    {userEventList.filter(event => event.active == true).slice().map((item, index) => (
+                                        <EventCard openCancelModal={handleOpenCancelEventModal} key={index} EventId={item.id} EventLink={item.link} EventType={item.type} EventBanner={`http://localhost:8080${item.imagePath}`} EventTitle={item.title} EventDate={item.date} EventHour={item.hour} EventLocal={item.location} EventGuestLimit={item.guestLimit} EventHostName={item.organizerName} handleOpenModal={handleOpenUpdateModal}/>
                                     ))}
                                 </>
                             </div>
@@ -65,6 +77,7 @@ export const Events = () => {
                     </div>
                     {addEventModalIsOpen && <AddEventModal setEventModal={setAddEventModalIsOpen} fetchData={fetchUserEvents}/>}
                     {updateEventModalIdOpen && <UpdateEventModal EventId={choosedEvent} handleOpenModal={setUpdateModalIsOpen} updateEvents={fetchUserEvents}/>}
+                    {cancelEventModalIsOpen && choosedEvent != null && <CancelEventModal id={choosedEvent} closeModal={handleCloseCancelEventModal} fetchEvents={fetchUserEvents}/>}
                 </>  
             }
         </div>

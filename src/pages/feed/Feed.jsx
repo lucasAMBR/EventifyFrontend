@@ -7,6 +7,8 @@ import { useNavigate } from "react-router-dom";
 import { PostItem } from "./components/PostItem";
 import { ImageSelector } from "./components/ImageSelector";
 import { UserCard } from "./components/UserCard";
+import { EventCard } from "./components/EventCard";
+import { SubscribeModal } from "./components/SubscribeModal";
 
 export const Feed = () => {
 
@@ -19,6 +21,7 @@ export const Feed = () => {
     const [ userPopularFeed, setUserPopularFeed ] = useState([]);
     const [ userFollowingFeed, setUserFollowingFeed ] = useState([]);
     const [ popularUsers, setPopularUsers ] = useState([]);
+    const [ popularEvents, setPopularEvents ] = useState([]);
 
     const [ newPostContent, setNewPostContent ] = useState("");
     const [ images, setImages ] = useState([]);
@@ -26,8 +29,23 @@ export const Feed = () => {
     const handleNewContentChange = (event) => {
         setNewPostContent(event.target.value);
     }
+     
+    const [ subscriptionModalIsOpen, setSubscriptionModalIsOpen ] = useState(false);
+    const [ choosedEvent, setChoosedEvent ] = useState(null);
+
+    const openSubscribeModal = (id) => {
+        console.log("executando")
+        setChoosedEvent(id);
+        setSubscriptionModalIsOpen(true);
+    }
+
+    const closeSubscriptionModal = () => {
+        setChoosedEvent(null);
+        setSubscriptionModalIsOpen(false);
+    }
 
     const [ loading, setLoading ] = useState(true);
+
 
     useEffect(() => {
         if (loggedUser) {
@@ -36,7 +54,7 @@ export const Feed = () => {
         }
     }, [loggedUser]);
 
-        const fetchPopularUsers = async() => {
+    const fetchPopularUsers = async() => {
         try{
             const populars = await api.get(`feed/popular-users/${loggedUser}`)
             setPopularUsers(populars.data);
@@ -44,6 +62,17 @@ export const Feed = () => {
             console.log(error);
         }
     } 
+
+    const fetchPopulaEvents = async() => {
+        try{
+            const pop_events = await api.get(`feed/popular/events/${loggedUser}`)
+
+            console.log(pop_events.data)
+            setPopularEvents(pop_events.data);
+        }catch(error){
+            console.log(error);
+        }
+    }
 
     const fetchPopularFeed = async() => {
         try{
@@ -101,6 +130,7 @@ export const Feed = () => {
         fetchPopularFeed();
         fetchFollowingFeed();
         fetchPopularUsers();
+        fetchPopulaEvents()
         setLoading(false);
     }
 
@@ -126,7 +156,7 @@ export const Feed = () => {
                 </div>
                     {!loading && userPopularFeed.length == 0 && selectedFeed == "popular" &&
                         <>
-                            <p>parece que ainda não temos post</p>
+                            <p>It seems that we still don't have any posts...</p>
                         </>
                     }
                     {!loading && userPopularFeed.length > 0 && selectedFeed == "popular" &&
@@ -145,19 +175,36 @@ export const Feed = () => {
                     }
                     {!loading && userFollowingFeed.length == 0 && selectedFeed == "following" &&
                         <>
-                            <p>parece que voce ainda não segue ninguem</p>
+                            <p>It seems that you are still not following anyone...</p>
                         </>
                     }
                 </div>
             </div>
             <div className={style.recomendations}>
                 <div className={style.popular_users}>
-                    <h2>Popular Users</h2>
+                    <h2 onClick={() => console.log(userRole)}>Popular Users</h2>
+                    {popularUsers.length == 0 &&
+                        <p>It seems that we still don't have any registered users...</p>
+                    }
                     {popularUsers.map((item, index)=>(
                         <UserCard fetchPopulars={fetchPopularUsers} userId={item.id} userName={item.name} profilePic={item.profilePicPath} usertype={item.type} followers={item.followers} following={item.following} posts={item.posts}/>
                     ))}
                 </div>
+                {userRole != "ORGANIZER" &&
+                <div className={style.popular_events}>
+                    <h2>Popular events</h2>
+                    {popularEvents.filter(event => event.active == true).length == 0 &&
+                        <p>It seems that we still don't have any registered users...</p>
+                    }
+                    {popularEvents.filter(event => event.active == true).map((item, index)=>(
+                        <EventCard id={item.id} type={item.type} banner={`http://localhost:8080${item.imagePath}`} title={item.title} organizer={item.organizerName} date={item.date} hour={item.hour} setModal={openSubscribeModal}/>
+                    ))}
+                </div>
+                }
             </div>
+            {subscriptionModalIsOpen && choosedEvent != null &&
+                <SubscribeModal id={choosedEvent} closeModal={closeSubscriptionModal} fetchEvents={fetchPopulaEvents}/>
+            }
         </div>
     )
 }

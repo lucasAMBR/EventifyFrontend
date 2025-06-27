@@ -1,0 +1,365 @@
+.page{
+    width: 100%;
+    height: 100%;
+    padding: 40px 60px;
+    display: flex;
+    flex-direction: column;
+    background-color: #d9d9d9;
+    overflow: hidden;
+}
+
+.page_modal{
+    width: 100%;
+    height: 100%;
+    padding: 40px 60px;
+    display: flex;
+    flex-direction: column;
+    background-color: #d9d9d9;
+    overflow: hidden;
+}
+
+.page_header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.page_header h1{
+    color: #004643;
+}
+
+.page_content{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    overflow: hidden;
+}
+
+.event_list_area{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    overflow-y: auto;
+}
+
+.no_events{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.no_events button{
+    height: 45px;
+    padding: 10px;
+    background-color: #004643;
+    border: 1px solid #004643;
+    color: white;
+    border-radius: 5px;
+    margin-top: 10px;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.no_events button:hover{
+    background-color: white;
+    color: #004643;
+}
+
+.event_modal{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.671);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.add_event{
+    background-color: #d9d9d9;
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+    max-width: 600px;
+    border-radius: 10px;
+}
+
+.normal_input:disabled{
+    background-color: #516968;
+    border-color: #516968;
+    color: white;
+    cursor:not-allowed;
+}
+
+.add_event h2{
+    color: #004643;
+}
+
+.add_event h1{
+    color: #004643;
+}
+
+.type_select{
+    font-size: 20px;
+}
+
+.type_select span{
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.type_select span.active{
+    font-weight: bold;
+    color: #004643;
+    text-decoration: underline;
+}
+
+form div{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    max-width: 400px;
+}
+
+form div .normal_input{
+    width: 400px;
+    background-color: transparent;
+    border: 2px solid #004643;
+    height: 45px;
+    margin: 10px 0px;
+    border-radius: 5px;
+    padding-left: 10px;
+}
+
+form div textarea{
+    width: 400px;
+    background-color: transparent;
+    height: 150px;
+    margin: 10px 0px;
+    border: 2px solid #004643;
+    border-radius: 5px;
+    padding-left: 10px;
+}
+
+.normal_input:focus, textarea:focus{
+    outline: none;
+    border: 3px solid #004643;
+}
+
+form button{
+    width: 400px;
+    background-color: #004643;
+    height: 45px;
+    border: 1px solid #004643;
+    color: white;
+    margin-top: 10px;
+    border-radius: 5px;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+form button:hover{
+    background-color: white;
+    color: #004643;
+}
+
+.close_add_event{
+    color: #004643;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: start;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.event_card{
+    background-color: #C5D3D3;
+    max-width: 390px;
+    min-width: 390px;
+    max-height: fit-content;
+    margin: 15px;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+
+.event_card:hover{
+    scale: 1.05;
+}
+
+.event_card img{
+    width: 100%;;
+}
+
+.card_infos{
+    padding: 10px;
+}
+
+.card_title{
+    font-weight: bold;
+    font-size: 1.3rem;
+}
+
+.card_infos p{
+    margin-bottom: 5px;
+    color: #004643;
+    display: flex;
+    align-items: center;
+}
+
+.card_infos svg{
+    margin-right: 10px;
+}
+
+.card_infos .normal_subs_button{
+    width: 100%;
+    height: 35px;
+    color: white;
+    font-weight: bold;
+    background-color: #004643;
+    border: 1px solid #004643;
+    border-radius: 5px;
+    transition: 0.3s;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.card_infos .normal_subs_button:hover{
+    background-color: white;
+    color: #004643;
+}
+
+.card_infos .cancel_subs_button{
+    width: 100%;
+    height: 35px;
+    color: white;
+    font-weight: bold;
+    background-color: rgb(255, 59, 59);
+    border: 1px solid rgb(255, 59, 59);
+    border-radius: 5px;
+    transition: 0.3s;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.card_infos .cancel_subs_button:hover{
+    background-color: white;
+    color: rgb(255, 59, 59);
+}
+
+.card_image{
+    width: 100%;
+    height: 200px;
+    background-color: #004643;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    overflow: hidden;
+}
+
+form p{
+    color: #004643;
+    font-weight: bold;
+    margin-bottom: -10px;
+}
+
+.cancel_modal_area{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.651);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cancel_modal{
+    background-color: white;
+    padding: 20px;
+    max-width: 400px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+}
+
+.cancel_modal p {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.confirm_cancel{
+    height: 45px;
+    background-color: red;
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+    border: 1px solid red;
+    margin-bottom: 5px;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.confirm_cancel:hover{
+    background-color: white;
+    color: red;
+}
+
+.abort_cancel{
+    height: 45px;
+    background-color: #004643;
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+    border: 1px solid #004643;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.abort_cancel:hover{
+    background-color: white;
+    color: #004643;
+}
+
+.cancel_modal h2{
+    color: #004643;
+}
+
+@media (max-width: 640px) {
+    .page{
+        padding: 10px;
+    }
+
+    .no_events h2{
+        text-align: center;
+    }
+
+    .event_list_area{
+        display: flex;
+        justify-content: center;
+    }
+
+    .event_card{
+        margin: 0;
+        margin-bottom: 15px;
+        margin-top: 15px;
+    }
+    .add_event{
+        width: 100vw;
+        height: 100vh;
+    }
+}
