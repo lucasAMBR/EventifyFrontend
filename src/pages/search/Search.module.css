@@ -1,0 +1,396 @@
+.search_area{
+    display: flex;
+    flex: 1;
+    overflow-y: auto;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.search_bar{
+    background-color: #004643;
+    width: 100%;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    padding: 20px;
+    border-radius: 40px;
+}
+
+.search_bar_icon{
+    background-color: #F9B663;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.bar_input{
+    background-color: white;
+    border: none;
+    width: 100%;
+    height: 45px;
+    margin: 10px;
+    padding: 20px;
+    border-radius: 22px;
+}
+
+.search_type{
+    margin-top: 10px;
+    display: flex;
+}
+
+.search_type .default_button{
+    background-color: #004643;
+    color: white;
+    padding: 10px;
+    border: 1px solid #004643;
+    margin-right: 10px;
+    border-radius: 5px;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.default_button.active_button{
+    background-color: #F9B663;
+    border: 1px solid #F9B663;
+    color: #004643;
+    font-weight: bold;
+}
+
+.data_exib h2{
+    color: #004643;
+    margin-top: 10px;
+}
+
+.userList{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.user_card{
+    background-color: #004643;
+    min-width: 300px;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.user_card_name{
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: white;
+}
+
+.user_card_image{
+    width: 100px;
+    height: 100px;
+    margin-bottom: 10px;
+    object-fit: cover;
+}
+
+.user_card_info{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.user_card_info p{
+    color: white;
+}
+
+.user_card_info p span{
+    font-weight: bold;
+    color: white
+}
+.user_card_button{
+    width: 100%;
+    margin-top: 10px;
+}
+
+.user_card_button button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    background-color: #F9B663;
+    color: #004643;
+    border: 1px solid #F9B663;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.user_card_button_unfollow{
+    width: 100%;
+    margin-top: 10px;
+}
+
+.user_card_button_unfollow button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    background-color: red;
+    color: white;
+    border: 1px solid red;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.user_card_button_unfollow button:hover{
+    background-color: white;
+    color: red;
+}
+
+.user_card_button button:hover{
+    background-color: white;
+    color: #F9B663;
+}
+
+.user_card_image img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.event_card{
+    background-color: #004643;
+    min-width: 350px;
+    color: white;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.post_card{
+    background-color: #004643;
+    min-width: 400px;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    color: white;
+    padding: 15px;
+}
+
+.event_card_image img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.event_card_image{
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    overflow: hidden;
+}
+
+.event_card_info{
+    display: flex;
+    width: 100%;
+    padding: 10px;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.event_card_info p, .event_card_info h3{
+    text-align: left;
+    color: white;
+}
+
+.event_card_info p{
+    display: flex;
+    align-self: start;
+    margin-bottom: 5px;
+}
+
+.event_card_info p svg{
+    fill: white;
+    margin-right: 5px;
+}
+
+.event_card_button{
+    width: 100%;
+    padding: 10px;
+}
+
+.event_card_button .subscribe_button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 10px;
+    background-color: #F9B663;
+    color: #004643;
+    border: 1px solid #F9B663;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.event_card_button button:hover{
+    background-color: white;
+    color: #F9B663;
+}
+
+.post_user_info{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+}
+
+.post_user_image{
+    width: 50px;
+    height: 50px;
+}   
+
+.post_user_image img{
+    width: 100%;
+    height: 100%;
+}
+
+.post_user_info_text p{
+    color: white;
+}
+
+.post_user_info_text p span{
+    font-weight: bold;
+    color: white;
+}
+
+.post_content{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: white;
+}
+
+.post_actions{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    color: white;
+}
+
+.post_likes{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 5px;
+    color: white;
+}
+
+.post_comments{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 5px;
+    color: white;
+}
+
+.post_actions .post_comments svg{
+    fill: white;
+}
+
+.post_actions .post_likes svg{
+    fill: white;
+}
+
+.unsubscribe_button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 10px;
+    background-color: red;
+    color: white;
+    border: 1px solid red;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.data_exib h2{
+    margin-bottom: 25px;
+}
+
+.search_event_by{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    margin-bottom: 25px;
+    margin-top: 10px;
+}   
+
+.search_event_by .default_button{
+    padding: 10px;
+    background-color: #004643;
+    color: white;
+    border: 1px solid #004643;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}           
+
+.search_event_by .active_button{
+    background-color: #F9B663;
+    border: 1px solid #F9B663;
+    color: #004643;
+}
+
+@media (max-width: 640px) {
+
+    .search_type{
+        flex-direction: column;
+    }
+
+    .default_button{
+        margin-bottom: 5px;
+    }
+
+    .userList{
+        flex-direction: column;
+    }
+
+    .user_card{
+        min-width: 100%;
+    }
+
+    .event_card{
+        min-width: 100%;
+    }
+
+    .post_card{
+        min-width: 100%;
+    }
+    
+}

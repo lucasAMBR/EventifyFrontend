@@ -835,7 +835,7 @@
 }
 
 .subscription_area p{
-    max-width: 450px;
+    min-width: 450px;
     color: #004643;
     font-size: 18px;
 }
