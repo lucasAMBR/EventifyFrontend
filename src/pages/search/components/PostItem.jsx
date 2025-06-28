@@ -1,4 +1,4 @@
-import style from "../Feed.module.css"
+import style from "../Search.module.css"
 
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -8,7 +8,7 @@ import { useEffect, useRef, useState } from "react";
 import { useUserContext } from "../../../contexts/UserContext";
 import api from "../../../services/Api";
 import { DropDownMenu } from "./DropDownMenu";
-import { CommentsModal } from "./CommentsModal";
+import { CommentsModal } from "./CommentModal";
 
 export const PostItem = ({postId, userId, userProfilePic, userName, content, imagesPath, likeList, commentList, date }) => {
 

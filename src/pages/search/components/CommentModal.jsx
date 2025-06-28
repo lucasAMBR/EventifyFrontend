@@ -1,4 +1,4 @@
-import style from "../Feed.module.css"
+import style from "../Search.module.css"
 
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import SendIcon from '@mui/icons-material/Send';
@@ -19,6 +19,11 @@ export const CommentsModal = ({ setCommentModal, postId, fetchComments }) => {
         setCommentContent(e.target.value);
     }
 
+    const handleCloseModal = () => {
+        setCommentModal(false);
+        fetchComments();
+    }
+
     const fetchCommentList = async() => {
         try{
             const response = await api.get(`/comment/${postId}`)
@@ -28,12 +33,6 @@ export const CommentsModal = ({ setCommentModal, postId, fetchComments }) => {
             console.log(error);
         }
     }
-
-    const handleCloseModal = () => {
-        setCommentModal(false);
-        fetchComments();
-    }
-
     function formatNumber(n) {
         return String(n).padStart(2, '0');
     }
