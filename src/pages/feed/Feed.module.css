@@ -148,6 +148,18 @@
 
 .post_infos h3{
     color: #004643;
+    display: flex;
+    align-items: center;
+    
+}
+
+.post_infos  h3 span{
+    background-color: #F9B663;
+    color: #004643;
+    margin-left: 10px;
+    font-size: 14px;
+    padding: 5px;
+    border-radius: 5px;
 }
 
 .post_infos h3:hover{
@@ -158,6 +170,7 @@
 
 .post_infos p{
     color: #344443;
+    padding-top: 5px;
     font-size: 14px;
 }
 

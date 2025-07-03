@@ -5,6 +5,7 @@ import api from "../../../services/Api";
 import { useUserContext } from "../../../contexts/UserContext";
 import { useNavigate, useLocation } from "react-router-dom";
 import { ArrowBack } from "@mui/icons-material";
+import { ErrorMessage } from "./ErrorMessage";
 
 export const LoginForm = ({ coordenadas }) => {
     const location = useLocation();
@@ -55,7 +56,7 @@ export const LoginForm = ({ coordenadas }) => {
                 }
             } catch (apiError) {
                 console.log(apiError);
-                setErrorMessage(apiError);
+                setErrorMessage(apiError.message);
                 setLoading(false);
             }
         }
@@ -82,7 +83,7 @@ export const LoginForm = ({ coordenadas }) => {
                 }
             } catch (apiError) {
                 console.log(apiError);
-                setErrorMessage(apiError);
+                setErrorMessage(apiError.message);
                 setLoading(false);
             }
         }
@@ -97,6 +98,11 @@ export const LoginForm = ({ coordenadas }) => {
             <div className={style.return_button} onClick={handleReturnClick}>
                 <ArrowBack className={style.arrow} sx={{ fill: "#FFFFFF" }} />
             </div>
+            {errorMessage != null ? (
+                <ErrorMessage message={errorMessage} />
+            ) : (
+                ""
+            )}
             <form className={style.login_form} onSubmit={handleLoginAction}>
                 <label>Email</label>
                 <input

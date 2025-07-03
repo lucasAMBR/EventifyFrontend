@@ -1,7 +1,6 @@
 .error_message {
     font-size: 14px;
-    margin-top: 5px;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
     background-color: rgb(243, 110, 110);
     padding: 10px;
     border-radius: 5px;

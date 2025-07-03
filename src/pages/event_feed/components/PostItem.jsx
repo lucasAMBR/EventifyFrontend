@@ -12,6 +12,7 @@ import { CommentsModal } from "./CommentsModal";
 import { useNavigate } from "react-router-dom";
 
 export const PostItem = ({
+    userType,
     postId,
     userId,
     userProfilePic,
@@ -85,9 +86,9 @@ export const PostItem = ({
                             onClick={() => navigate(`/home/user/profile/${userId}`)}
                             style={{ cursor: "pointer" }}
                         >
-                            {userName}
+                            {userName} {userType == "ORGANIZER" && <span>Organizer</span>}
                         </h3>
-                        <p>{`${formatNumber(date[2])}/${formatNumber(date[1])}/${formatNumber(date[0])}, ${formatNumber(date[3])}:${formatNumber(date[4])}`}</p>
+                        <p onClick={() => console.log(userProfilePic)}>{`${formatNumber(date[2])}/${formatNumber(date[1])}/${formatNumber(date[0])}, ${formatNumber(date[3])}:${formatNumber(date[4])}`}</p>
                     </div>
                 </div>
                 <div className={style.logged_user_post_menu}>

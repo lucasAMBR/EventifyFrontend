@@ -156,7 +156,7 @@ export const EventFeed = () => {
                             onChange={handleNewContentChange}
                         ></textarea>
                         <div className={style.post_buttons_area}>
-                            <button type="submit" className={style.publish_button}>Publish</button>
+                            <button type="submit" className={style.publish_button} disabled={newPostContent.length == ""}>Publish</button>
                         </div>
                     </form>
                 </div>
@@ -172,6 +172,7 @@ export const EventFeed = () => {
                                     key={post.id}
                                     postId={post.id}
                                     userId={post.userId}
+                                    userType={post.userType}    
                                     userProfilePic={post.userProfilePic}
                                     userName={post.userName}
                                     content={post.content}
@@ -233,6 +234,7 @@ export const EventFeed = () => {
                                         activeTab={organizerOptions}
                                         userId={member.id}
                                         userName={member.name}
+                                        userType={member.type}
                                         profilePic={member.profilePicPath}
                                         usertype={member.type}
                                         followers={member.followers}
@@ -259,6 +261,7 @@ export const EventFeed = () => {
                                         activeTab={organizerOptions}
                                         userId={member.id}
                                         userName={member.name}
+                                        userType={member.type}
                                         profilePic={member.profilePicPath}
                                         usertype={member.type}
                                         followers={member.followers}

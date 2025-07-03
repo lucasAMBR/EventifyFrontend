@@ -100,7 +100,7 @@ export const Profile = () => {
                     <div className={style.profile_header_info}>
                         <div className={style.profile_header_info_left}>
                             <h2>
-                                {userData.name}{" "}
+                                {userData.name}{"eventList" in userData && <span>Organizer</span>}
                                 {userData.id == loggedUser && (
                                     <div
                                         className={style.profile_header_edit_username}

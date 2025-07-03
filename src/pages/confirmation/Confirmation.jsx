@@ -7,12 +7,12 @@ export const Confirmation = () => {
     // === STATES ===
     const [section, setSection] = useState("login");
     const [coordenadas, setCoordenadas] = useState({ latitude: null, longitude: null });
-    const [erro, setErro] = useState(null);
+    const [errorMessage, setErrorMessage] = useState(null);
 
     // === EFFECTS ===
     useEffect(() => {
         if (!navigator.geolocation) {
-            setErro("Geolocalização não é suportada neste navegador.");
+            setErrorMessage("Geolocalização não é suportada neste navegador.");
             return;
         }
 
@@ -26,16 +26,16 @@ export const Confirmation = () => {
             (error) => {
                 switch (error.code) {
                     case error.PERMISSION_DENIED:
-                        setErro("Permissão de localização negada.");
+                        setErrorMessage("Permissão de localização negada.");
                         break;
                     case error.POSITION_UNAVAILABLE:
-                        setErro("Localização indisponível.");
+                        setErrorMessage("Localização indisponível.");
                         break;
                     case error.TIMEOUT:
-                        setErro("Tempo de solicitação expirado.");
+                        setErrorMessage("Tempo de solicitação expirado.");
                         break;
                     default:
-                        setErro("Erro desconhecido ao obter localização.");
+                        setErrorMessage("Erro desconhecido ao obter localização.");
                 }
             }
         );
@@ -46,7 +46,7 @@ export const Confirmation = () => {
         <div className={style.login_area}>
             <div className={style.login_section}>
                 <img src="/images/HorizontalLogo.png" />
-                {erro && <p>{erro}</p>}
+                {errorMessage && <p>{errorMessage}</p>}
                 <LoginForm coordenadas={coordenadas} />
                 {section == "register" && (
                     <p style={{ opacity: 0.0 }} className={style.minitext}>

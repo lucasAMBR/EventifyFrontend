@@ -247,11 +247,6 @@ export const DefaultRegister = () => {
             )}
             {userType == "organizer" && (
                 <form className={style.login_form} onSubmit={handleOrganizerUserSubmit}>
-                    {errorMessage != null ? (
-                        <ErrorMessage message={errorMessage.message} />
-                    ) : (
-                        ""
-                    )}
                     <label>Name</label>
                     <input
                         type="text"

@@ -6,7 +6,7 @@ export const UserCard = ({
     userId,
     profilePic,
     userName,
-    usertype,
+    usertype,  
     followers,
     following,
     posts,

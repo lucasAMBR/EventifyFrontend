@@ -193,6 +193,7 @@ export const Feed = () => {
                                             key={post.id}
                                             postId={post.id}
                                             userId={post.userId}
+                                            userType={post.userType}
                                             userProfilePic={post.userProfilePic}
                                             userName={post.userName}
                                             content={post.content}
@@ -216,6 +217,7 @@ export const Feed = () => {
                                             key={post.id}
                                             postId={post.id}
                                             userId={post.userId}
+                                            userType={post.userType}
                                             userProfilePic={post.userProfilePic}
                                             userName={post.userName}
                                             content={post.content}

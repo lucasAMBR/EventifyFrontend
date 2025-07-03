@@ -11,12 +11,15 @@ import PeopleIcon from "@mui/icons-material/People";
 import { Accessibility, DateRange } from "@mui/icons-material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { useUserContext } from "../../../contexts/UserContext";
+import { ErrorMessage } from "./ErrorMessage";
 
 export const SubscribeModal = ({ id, closeModal, fetchEvents }) => {
     const { loggedUser } = useUserContext();
 
     const [eventData, setEventData] = useState(null);
     const [organizerData, setOrganizerData] = useState(null);
+
+    const [errorMessage, setErrorMessage] = useState(null);
 
     const fetchData = async () => {
         const response = await api.get(`/event/find/${id}`);
@@ -37,9 +40,13 @@ export const SubscribeModal = ({ id, closeModal, fetchEvents }) => {
 
             closeModal();
         } catch (error) {
-            console.log(error);
+            setErrorMessage(error.message);
         }
     };
+
+    function formatNumber(n) {
+        return String(n).padStart(2, "0");
+    }
 
     useEffect(() => {
         fetchData();
@@ -68,11 +75,11 @@ export const SubscribeModal = ({ id, closeModal, fetchEvents }) => {
                             <h3>
                                 <DateRange sx={{ fill: "#004643" }} />
                                 Date:{" "}
-                                {`${eventData.date[2]}/${eventData.date[1]}/${eventData.date[0]}`}
+                                {`${formatNumber(eventData.date[2])}/${formatNumber(eventData.date[1])}/${formatNumber(eventData.date[0])}`}
                             </h3>
                             <h3>
                                 <AccessTimeIcon sx={{ fill: "#004643" }} />
-                                Hour: {`${eventData.hour[0]}:${eventData.hour[1]}`}
+                                Hour: {`${formatNumber(eventData.hour[0])}:${formatNumber(eventData.hour[1])}`}
                             </h3>
                             <h3>
                                 <LocationPinIcon sx={{ fill: "#004643" }} />
@@ -101,6 +108,11 @@ export const SubscribeModal = ({ id, closeModal, fetchEvents }) => {
                                 </h3>
                             )}
                         </div>
+                        {errorMessage != null ? (
+                            <ErrorMessage message={errorMessage} />
+                        ) : (
+                            ""
+                        )}
                         <button
                             className={style.subscribe_button}
                             onClick={handleSubscription}

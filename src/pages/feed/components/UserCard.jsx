@@ -32,7 +32,7 @@ export const UserCard = ({
                 </div>
                 <div className={style.user_details}>
                     <h3>
-                        {userName} {usertype == "ORGANIZER" && <span>Organizer</span>}
+                    {userName} {usertype == "ORGANIZER" && <span>Organizer</span>}
                     </h3>
                     <p>
                         Followers: {followers} | Following: {following} | Posts: {posts}
