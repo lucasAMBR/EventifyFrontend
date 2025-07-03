@@ -22,7 +22,9 @@ export const EventCard = ({EventId, EventBanner, EventLink, EventTitle, EventTyp
             </div>
             <div className={style.card_infos}>
                 <p className={style.card_title}>{EventTitle}</p>
-                <p><AccessTimeIcon sx={{fill: '#004643'}} /> {`${EventDate[2]}/${EventDate[1]}/${EventDate[0]}, ${EventHour[0]}:${EventHour[1]}`}</p>
+                <p>
+                    <AccessTimeIcon sx={{fill: '#004643'}} /> {`${EventDate[2]}/${EventDate[1]}/${EventDate[0]}, ${EventHour[0]}:${EventHour[1]}`}
+                </p>
                 {EventType == "PRESENTIAL" &&
                     <p><LocationPinIcon sx={{fill: '#004643'}} />{EventLocal}</p>
                 }

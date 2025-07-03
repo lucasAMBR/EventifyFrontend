@@ -13,13 +13,13 @@ export const EventCard = ({ id, title, type, organizer, organizerId, banner, dat
     return (
         <div className={style.popular_event_card} onClick={() => setModal(id)}>
             <div className={style.popular_event_image}>
-                <img src={banner}/>
+                <img src={banner} />
             </div>
             <div className={style.popular_event_infos}>
                 <div className={style.popular_infos_text}>
                     <h3>{title}</h3>
                     <p>{`${date[2]}/${date[1]}/${date[0]}, ${hour[0]}:${hour[1]}`}</p>
-                    <p onClick={() => navigate(organizerId == loggedUser ? `/home/user/profile/me` : `/home/user/profile/${organizerId}`)} style={{cursor: "pointer"}}>{organizer}</p>
+                    <p onClick={() => navigate(organizerId == loggedUser ? `/home/user/profile/me` : `/home/user/profile/${organizerId}`)} style={{ cursor: "pointer" }}>{organizer}</p>
                 </div>
             </div>
         </div>

@@ -1,62 +1,64 @@
 import { use, useState } from "react";
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import style from "../Events.module.css";
 import { useUserContext } from "../../../contexts/UserContext";
 import api from "../../../services/Api";
+import { ErrorMessage } from "./ErrorMessage";
 
 export const AddEventModal = ({ setEventModal, fetchData }) => {
-
     const { loggedUser } = useUserContext();
 
-    const [ eventType, setEventType ] = useState("presential");
+    const [eventType, setEventType] = useState("presential");
+    
+    const [errorMessage, setErrorMessage] = useState(null);
 
-    const [ titleInputContent, setTitleInputContent ] = useState("");
-    const [ descriptionInputContent, setDescriptionInputContent ] = useState("");
-    const [ dateInputContent, setDateInputContent ] = useState("");
-    const [ hourInputContent, setHourInputContent ] = useState("");
-    const [ guestLimitInputContent, setGuestLimitInputContent ] = useState("");
-    const [ locationInputContent, setLocationInputContent ] = useState("");
-    const [ linkInputContent, setLinkInputContent ] = useState("");
-    const [ eventBannerInputContent, setEventBannerInputContent ] = useState(null);
+    const [titleInputContent, setTitleInputContent] = useState("");
+    const [descriptionInputContent, setDescriptionInputContent] = useState("");
+    const [dateInputContent, setDateInputContent] = useState("");
+    const [hourInputContent, setHourInputContent] = useState("");
+    const [guestLimitInputContent, setGuestLimitInputContent] = useState("");
+    const [locationInputContent, setLocationInputContent] = useState("");
+    const [linkInputContent, setLinkInputContent] = useState("");
+    const [eventBannerInputContent, setEventBannerInputContent] = useState(null);
 
     const handleTitleInputChange = (event) => {
         setTitleInputContent(event.target.value);
-    }
+    };
 
     const handleDescriptionInputChange = (event) => {
         setDescriptionInputContent(event.target.value);
-    }
+    };
 
     const handleDataInputChange = (event) => {
         setDateInputContent(event.target.value);
-    }
+    };
 
     const handleHourInputChange = (event) => {
         setHourInputContent(event.target.value);
-    }
+    };
 
     const handleGuestLimitInputChange = (event) => {
         setGuestLimitInputContent(event.target.value);
-    }
+    };
 
     const handleLocationInputChange = (event) => {
         setLocationInputContent(event.target.value);
-    }
+    };
 
     const handleLinkInputChange = (event) => {
         setLinkInputContent(event.target.value);
-    }
+    };
 
     const handleEventBannerInputChange = (event) => {
         setEventBannerInputContent(event.target.files[0]);
-    }
+    };
 
     const handleSubmitSucess = () => {
         fetchData();
         setEventModal(false);
-    }
+    };
 
-    const handlePresentialEventSubmit = async(event) => {
+    const handlePresentialEventSubmit = async (event) => {
         event.preventDefault();
 
         const formData = new FormData();
@@ -67,26 +69,27 @@ export const AddEventModal = ({ setEventModal, fetchData }) => {
         formData.append("hour", hourInputContent);
         formData.append("guestLimit", guestLimitInputContent.toString());
         formData.append("organizerId", loggedUser);
-        if(eventBannerInputContent){
+        if (eventBannerInputContent) {
             formData.append("image", eventBannerInputContent);
         }
         formData.append("location", locationInputContent);
 
-        try{
+        try {
             const response = await api.post("/event/create/presential", formData, {
                 headers: {
-                    "Content-Type": "multipart/form-data"
-                }
+                    "Content-Type": "multipart/form-data",
+                },
             });
 
-            console.log(response.data)
+            console.log(response.data);
             handleSubmitSucess();
-        }catch(error){
+        } catch (error) {
             console.log(error);
+            setErrorMessage(error);
         }
-    }
+    };
 
-    const handleOnlineEventSubmit = async(event) => {
+    const handleOnlineEventSubmit = async (event) => {
         event.preventDefault();
 
         const formData = new FormData();
@@ -97,62 +100,165 @@ export const AddEventModal = ({ setEventModal, fetchData }) => {
         formData.append("hour", hourInputContent);
         formData.append("guestLimit", guestLimitInputContent.toString());
         formData.append("organizerId", loggedUser);
-        if(eventBannerInputContent){
+        if (eventBannerInputContent) {
             formData.append("image", eventBannerInputContent);
         }
         formData.append("eventLink", linkInputContent);
 
-        try{
+        try {
             const response = await api.post("/event/create/online", formData, {
                 headers: {
-                    "Content-Type": "multipart/form-data"
-                }
+                    "Content-Type": "multipart/form-data",
+                },
             });
 
-            console.log(response.data)
+            console.log(response.data);
             handleSubmitSucess();
-        }catch(error){
+        } catch (error) {
             console.log(error);
+            setErrorMessage(error);
         }
-    }
+    };
 
-    return(
+    return (
         <div className={style.event_modal}>
             <div className={style.add_event}>
-                <p className={style.close_add_event} onClick={() => setEventModal(false)}><ArrowBackIosIcon sx={{fill: "#004643"}}/> Close</p>
+                <p
+                    className={style.close_add_event}
+                    onClick={() => setEventModal(false)}
+                >
+                    <ArrowBackIosIcon sx={{ fill: "#004643" }} /> Close
+                </p>
                 <h1>Adding a new event</h1>
-                <p>Here you will add the details for the new event that you are planning, after this, people can subscribe on your event</p>
+                <p>
+                    Here you will add the details for the new event that you are planning,
+                    after this, people can subscribe on your event
+                </p>
                 <h2>Event type:</h2>
-                <p className={style.type_select}> <span className={eventType == "presential" ? style.active : ""} onClick={() => setEventType("presential")}>Presential</span> | <span className={eventType == "online" ? style.active : ""} onClick={() => setEventType("online")}>Online</span></p>
-                {eventType == "presential" &&
+                <p className={style.type_select}>
+                    {" "}
+                    <span
+                        className={eventType == "presential" ? style.active : ""}
+                        onClick={() => setEventType("presential")}
+                    >
+                        Presential
+                    </span>{" "}
+                    |{" "}
+                    <span
+                        className={eventType == "online" ? style.active : ""}
+                        onClick={() => setEventType("online")}
+                    >
+                        Online
+                    </span>
+                </p>
+                {eventType == "presential" && (
                     <form onSubmit={handlePresentialEventSubmit}>
                         <div>
-                            <input className={style.normal_input} type="text" placeholder="Event title" value={titleInputContent} onChange={handleTitleInputChange}/>
-                            <textarea type="text" placeholder="Description" value={descriptionInputContent} onChange={handleDescriptionInputChange}/>
-                            <input className={style.normal_input} type="date" value={dateInputContent} onChange={handleDataInputChange}/>
-                            <input className={style.normal_input} type="time" value={hourInputContent} onChange={handleHourInputChange}/>
-                            <input className={style.normal_input} type="number" placeholder="Guest limit" value={guestLimitInputContent} onChange={handleGuestLimitInputChange}/>
-                            <input className={style.normal_input} type="text" placeholder="Location"value={locationInputContent} onChange={handleLocationInputChange}/>
-                            <input type="file" accept="image/*" onChange={handleEventBannerInputChange}/>
-                        </div>
-                    <button type="submit">Create</button>
-                    </form>
-                }
-                {eventType == "online" && 
-                    <form onSubmit={handleOnlineEventSubmit}>
-                        <div>
-                            <input className={style.normal_input} type="text" placeholder="Event title" value={titleInputContent} onChange={handleTitleInputChange}/>
-                            <textarea type="text" placeholder="Description" value={descriptionInputContent} onChange={handleDescriptionInputChange}/>
-                            <input className={style.normal_input} type="date" value={dateInputContent} onChange={handleDataInputChange}/>
-                            <input className={style.normal_input} type="time" value={hourInputContent} onChange={handleHourInputChange}/>
-                            <input className={style.normal_input} type="number" placeholder="Guest limit" value={guestLimitInputContent} onChange={handleGuestLimitInputChange}/>
-                            <input className={style.normal_input} type="text" placeholder="Link" value={linkInputContent} onChange={handleLinkInputChange}/>
-                            <input type="file" accept="image/*" onChange={handleEventBannerInputChange}/>
+                            <input
+                                className={style.normal_input}
+                                type="text"
+                                placeholder="Event title"
+                                value={titleInputContent}
+                                onChange={handleTitleInputChange}
+                            />
+                            <textarea
+                                type="text"
+                                placeholder="Description"
+                                value={descriptionInputContent}
+                                onChange={handleDescriptionInputChange}
+                            />
+                            <input
+                                className={style.normal_input}
+                                type="date"
+                                value={dateInputContent}
+                                onChange={handleDataInputChange}
+                            />
+                            <input
+                                className={style.normal_input}
+                                type="time"
+                                value={hourInputContent}
+                                onChange={handleHourInputChange}
+                            />
+                            <input
+                                className={style.normal_input}
+                                type="number"
+                                placeholder="Guest limit"
+                                value={guestLimitInputContent}
+                                onChange={handleGuestLimitInputChange}
+                            />
+                            <input
+                                className={style.normal_input}
+                                type="text"
+                                placeholder="Location"
+                                value={locationInputContent}
+                                onChange={handleLocationInputChange}
+                            />
+                            <input
+                                type="file"
+                                accept="image/*"
+                                onChange={handleEventBannerInputChange}
+                            />
                         </div>
                         <button type="submit">Create</button>
                     </form>
-                }
+                )}
+                {eventType == "online" && (
+                    <form onSubmit={handleOnlineEventSubmit}>
+                        {errorMessage != null ? (
+                            <ErrorMessage message={errorMessage} />
+                        ) : (
+                            ""
+                        )}
+                        <div>
+                            <input
+                                className={style.normal_input}
+                                type="text"
+                                placeholder="Event title"
+                                value={titleInputContent}
+                                onChange={handleTitleInputChange}
+                            />
+                            <textarea
+                                type="text"
+                                placeholder="Description"
+                                value={descriptionInputContent}
+                                onChange={handleDescriptionInputChange}
+                            />
+                            <input
+                                className={style.normal_input}
+                                type="date"
+                                value={dateInputContent}
+                                onChange={handleDataInputChange}
+                            />
+                            <input
+                                className={style.normal_input}
+                                type="time"
+                                value={hourInputContent}
+                                onChange={handleHourInputChange}
+                            />
+                            <input
+                                className={style.normal_input}
+                                type="number"
+                                placeholder="Guest limit"
+                                value={guestLimitInputContent}
+                                onChange={handleGuestLimitInputChange}
+                            />
+                            <input
+                                className={style.normal_input}
+                                type="text"
+                                placeholder="Link"
+                                value={linkInputContent}
+                                onChange={handleLinkInputChange}
+                            />
+                            <input
+                                type="file"
+                                accept="image/*"
+                                onChange={handleEventBannerInputChange}
+                            />
+                        </div>
+                        <button type="submit">Create</button>
+                    </form>
+                )}
             </div>
         </div>
-    )
-}
+    );
+};

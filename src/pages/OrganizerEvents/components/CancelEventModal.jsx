@@ -1,30 +1,36 @@
 import { useUserContext } from "../../../contexts/UserContext";
 import api from "../../../services/Api";
-import style from "../Events.module.css"
+import style from "../Events.module.css";
 
-export const CancelEventModal = ( {id, closeModal, fetchEvents} ) => {
-    
+export const CancelEventModal = ({ id, closeModal, fetchEvents }) => {
     const { loggedUser } = useUserContext();
 
-    const handleSubscriptionCancel = async() => {
-        try{
-            const response = await api.put(`/event/cancel/${id}`)
+    const handleSubscriptionCancel = async () => {
+        try {
+            const response = await api.put(`/event/cancel/${id}`);
 
             fetchEvents();
             closeModal();
-        }catch(error){
+        } catch (error) {
             console.log(error);
         }
-    }
+    };
 
-    return(
+    return (
         <div className={style.cancel_modal_area}>
             <div className={style.cancel_modal}>
                 <h2>Are you sure that you want cancel this event?</h2>
                 <p>this action is permanent</p>
-                <button className={style.confirm_cancel}onClick={handleSubscriptionCancel}>Yes</button>
-                <button className={style.abort_cancel} onClick={closeModal}>No</button>
+                <button
+                    className={style.confirm_cancel}
+                    onClick={handleSubscriptionCancel}
+                >
+                    Yes
+                </button>
+                <button className={style.abort_cancel} onClick={closeModal}>
+                    No
+                </button>
             </div>
         </div>
-    )
-}
+    );
+};

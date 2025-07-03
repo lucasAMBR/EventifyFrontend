@@ -1,19 +1,18 @@
 import { Navigate, useNavigate } from "react-router-dom";
-import LoginIcon from '@mui/icons-material/Login';
-import SearchIcon from '@mui/icons-material/Search';
+import LoginIcon from "@mui/icons-material/Login";
+import SearchIcon from "@mui/icons-material/Search";
 import { useEffect } from "react";
 
 import style from "./Intro.module.css";
 
 export const Intro = () => {
-
     const navigate = useNavigate();
 
-    useEffect(()=>{
+    useEffect(() => {
         document.title = "Eventfy";
-    },[])
+    }, []);
 
-    return(
+    return (
         <>
             <nav className={style.navbar}>
                 <img src="/images/LogoWhite.png" />
@@ -22,11 +21,18 @@ export const Intro = () => {
                     <p>About us</p>
                     <p>User guide</p>
                 </div>
-                <div className={style.button} onClick={() => navigate("/login")}><LoginIcon sx={{fill: '#004643'}} className={style.button_icon}/>Login</div>
+                <div className={style.button} onClick={() => navigate("/login")}>
+                    <LoginIcon sx={{ fill: "#004643" }} className={style.button_icon} />
+                    Login
+                </div>
             </nav>
             <div className={style.mobile_search_event}>
-                <SearchIcon sx={{fill: '#004643'}} className={style.search_icon} onClick={() => navigate("/event-search")}/>
+                <SearchIcon
+                    sx={{ fill: "#004643" }}
+                    className={style.search_icon}
+                    onClick={() => navigate("/event-search")}
+                />
             </div>
         </>
-    )
-}
+    );
+};

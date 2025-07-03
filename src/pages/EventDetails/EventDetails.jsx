@@ -1,4 +1,4 @@
-import { useLocation, useNavigate, useParams } from "react-router-dom"
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
@@ -7,7 +7,7 @@ import LinkIcon from '@mui/icons-material/Link';
 import PeopleIcon from '@mui/icons-material/People';
 import api from "../../services/Api";
 
-import style from "./EventDetails.module.css"
+import style from "./EventDetails.module.css";
 import { useEffect, useState } from "react";
 import { Accessibility, DateRange } from "@mui/icons-material";
 import { useUserContext } from "../../contexts/UserContext";
@@ -39,7 +39,6 @@ export const EventDetails = () => {
     useEffect(() => {
         fetchData();
     }, [])
-
 
     const fetchData = async() => {
         setLoading(true);
@@ -102,8 +101,8 @@ export const EventDetails = () => {
                                     <h2><LocationPinIcon sx={{fill: "#004643"}} />Guest limit: {eventData.subscriptionList.length} / {eventData.guestLimit}</h2>
                                     {eventData.type == "PRESENTIAL" &&
                                         <>
-                                        <h2><LocationPinIcon sx={{fill: "#004643"}} />Local: {`${eventData.location}`}</h2>
-                                        <iframe className={style.map} width="100%" height="300" loading="lazy" allowFullScreen src={`https://www.google.com/maps?q=${eventData.latitude},${eventData.longitude}&output=embed`} />
+                                            <h2><LocationPinIcon sx={{fill: "#004643"}} />Local: {`${eventData.location}`}</h2>
+                                            <iframe className={style.map} width="100%" height="300" loading="lazy" allowFullScreen src={`https://www.google.com/maps?q=${eventData.latitude},${eventData.longitude}&output=embed`} />
                                         </>
                                     }
                                     {eventData.type == "ONLINE" &&
