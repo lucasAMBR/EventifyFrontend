@@ -1,5 +1,5 @@
 import style from "./Profile.module.css";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import api from "../../services/Api";
 import { useUserContext } from "../../contexts/UserContext";
@@ -10,9 +10,7 @@ import { SubscriptionItem } from "./components/SubscriptionItem";
 import { ChangePasswordModal } from "./components/ChangePasswordModal";
 import { UpdateProfileModal } from "./components/UpdateProfileModal";
 
-export const Profile = () => {
-
-    const { id } = useParams();
+export const MyProfile = () => {
 
     const { loggedUser } = useUserContext();
 
@@ -28,64 +26,37 @@ export const Profile = () => {
 
     const [ userEvents, setUserEvents ] = useState([]);
 
-    const [loggedUserFollowing, setLoggedUserFollowing] = useState([]);
-    const followingIds = useMemo(
-        () => loggedUserFollowing.map((item) => item.id),
-        [loggedUserFollowing]
-    );
-
-    const fetchLoggedUserFollowing = async () => {
-        const response = await api.get(`/user/profile/${loggedUser}`);
-        setLoggedUserFollowing(response.data.following);
-    };
-
-    const fetchUserPosts = async(userId) => {
-        const response = await api.get(`/post/user/${userId}`);
+    const fetchUserPosts = async() => {
+        const response = await api.get(`/post/user/${loggedUser}`);
         setUserPosts(response.data);
     }
 
-    const fetchUserLikedPosts = async(userId) => {
-        const response = await api.get(`/post/liked/user/${userId}`);
+    const fetchUserLikedPosts = async() => {
+        const response = await api.get(`/post/liked/user/${loggedUser}`);
         setUserLikedPosts(response.data);
     }
 
-    const fetchUserEvents = async(userId) => {
-        const response = await api.get(`/subscription/list/user/${userId}`);
+    const fetchUserEvents = async() => {
+        const response = await api.get(`/subscription/list/user/${loggedUser}`);
         setUserEvents(response.data);
     }
 
-    const fetchAllData = async(userId) => {
-        await fetchUserData(userId);
-        await fetchUserPosts(userId);
-        await fetchUserLikedPosts(userId);
-        await fetchUserEvents(userId);
-        await fetchLoggedUserFollowing();
+    const fetchAllData = async() => {
+        await fetchUserData();
+        await fetchUserPosts();
+        await fetchUserLikedPosts();
+        await fetchUserEvents();
     }
 
     useEffect(() => {
         document.title = "Eventfy - My Profile"
-        fetchAllData(id);
+        fetchAllData();
     }, [])
 
-    useEffect(() => {
-        fetchAllData(id);
-        setActiveTab("posts");
-    }, [id])
-
-    const fetchUserData = async(userId) => {
-        const response = await api.get(`/user/profile/${userId}`);
+    const fetchUserData = async() => {
+        const response = await api.get(`/user/profile/${loggedUser}`);
 
         setUserData(response.data);
-    }
-
-    const handleFollowUser = async (userId) => {
-        try {
-        await api.post(`/user/follow/${loggedUser}/${userId}`);
-        fetchAllData(id);
-        fetchLoggedUserFollowing();
-        } catch (error) {
-            console.log(error);
-        }
     }
 
     return(
@@ -108,7 +79,7 @@ export const Profile = () => {
                         )}
                         {userData.id != loggedUser && (
                             <div className={style.profile_header_edit_profile}>
-                                <button className={followingIds.includes(userData.id) ? style.secundary_button : style.primary_button} onClick={() => handleFollowUser(userData.id)}>{followingIds.includes(userData.id) ? "Unfollow" : "Follow"}</button>
+                                <button>Follow</button>
                             </div>
                         )}
                     </div>
@@ -119,7 +90,7 @@ export const Profile = () => {
                 <div className={style.profile_posts_container}>
                     <div className={style.profile_posts}>
                         <h2><span onClick={() => setActiveTab("posts")} className={activeTab == "posts" ? style.active_tab : style.inactive_tab}>Posts</span> | <span onClick={() => setActiveTab("liked_posts")} className={activeTab == "liked_posts" ? style.active_tab : style.inactive_tab}>Liked Posts</span></h2>
-                        <div className={style.profile_posts_list}>
+                        <div className={style.profile_posts_list} style={activeTab == "posts" ? {flexDirection: "column"} : {flexDirection: "column-reverse"}}>
                             {activeTab == "posts" && userPosts.filter(post => !post.hasOwnProperty("eventId")).map((post, index) => (
                                 <PostItem postId={post.id} userId={post.userId} userProfilePic={post.userProfilePic} userName={post.userName} content={post.content} imagesPath={post.imagesPath} likeList={post.likeList} commentList={post.commentList} date={post.date} />
                             ))}

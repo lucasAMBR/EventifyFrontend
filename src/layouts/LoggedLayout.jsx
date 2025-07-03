@@ -19,7 +19,7 @@ export const LoggedLayout = () => {
 
     const [ userData, setUserData ] = useState(null);
 
-    const { loggedUser, setLoggedUser, userRole, setUserRole } = useUserContext();
+    const { loggedUser, setLoggedUser, userRole, setUserRole, somethingChanged, setSomethingChanged } = useUserContext();
 
     const handleLogout = () => {
         setManualLogout(true)
@@ -39,6 +39,13 @@ export const LoggedLayout = () => {
     }
 
     useEffect(() => {
+        if(somethingChanged){
+            fetchUserData();
+            setSomethingChanged(false);
+        }
+    }, [somethingChanged])
+
+    useEffect(() => {
         if(loggedUser != null){
             fetchUserData();
         }
@@ -54,7 +61,7 @@ export const LoggedLayout = () => {
                         <img src="/images/LogoWhite.png" alt="" />
                     </div>
                     {userData != null ?
-                        <div className={location.pathname == `/home/me` ? [style.navbar_item, style.active].join(" ") : style.navbar_item} onClick={() => navigate(`/home/me`)}>
+                        <div className={location.pathname == `/home/user/profile/me` ? [style.navbar_item, style.active].join(" ") : style.navbar_item} onClick={() => navigate(`/home/user/profile/me`)}>
                             <div className={style.profile_pic}>
                                 <img src={`http://localhost:8080${userData.profilePicPath}`} />
                             </div>
@@ -152,7 +159,7 @@ export const LoggedLayout = () => {
                                         <DateRange sx={{fill: "#ffffff"}}/> Your Events
                                     </div>
                                 }
-                                <div className={style.mobile_sidebar_item}>
+                                <div className={style.mobile_sidebar_item} onClick={handleLogout}>
                                     <Logout sx={{fill: "#ffffff"}}/> Logout
                                 </div>
                             </div>

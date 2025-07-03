@@ -80,7 +80,7 @@
     margin-top: 15px;
 }
 
-.profile_header_edit_profile .primary_button{
+.profile_header_edit_profile button{
     background-color: #F9B663;
     padding: 10px;
     border-radius: 5px;
@@ -90,24 +90,9 @@
     transition: 0.3s;
 }
 
-.profile_header_edit_profile .secundary_button{
-    background-color: red;
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid red;
-    color: white;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.profile_header_edit_profile .primary_button:hover{
+.profile_header_edit_profile button:hover{
     background-color: white;
     color: #F9B663;
-}
-
-.profile_header_edit_profile .secundary_button:hover{
-    background-color: white;
-    color: red;
 }
 
 .profile_posts_container{

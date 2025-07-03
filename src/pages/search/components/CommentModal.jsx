@@ -6,10 +6,13 @@ import { useEffect, useState } from "react";
 import api from "../../../services/Api";
 import { useUserContext } from "../../../contexts/UserContext";
 import { CommentDropDownMenu } from "./CommentDropDownMenu";
+import { useNavigate } from "react-router-dom";
 
 export const CommentsModal = ({ setCommentModal, postId, fetchComments }) => {
 
     const { loggedUser } = useUserContext();
+
+    const navigate = useNavigate();
 
     const [commentList, setCommentList ] = useState([]);
 
@@ -82,7 +85,7 @@ export const CommentsModal = ({ setCommentModal, postId, fetchComments }) => {
                                             <img src={`http://localhost:8080${item.userProfilePic}`} />
                                         </div>
                                         <div className={style.comment_header_infos}>
-                                            <h3>{item.userName}</h3>
+                                            <h3 onClick={() => navigate(item.userId == loggedUser ? `/home/user/profile/me` : `/home/user/profile/${item.userId}`)} style={{cursor: "pointer"}}>{item.userName}</h3>
                                             <p>{`${formatNumber(item.date[2])}/${formatNumber(item.date[1])}/${formatNumber(item.date[0])}, ${formatNumber(item.date[3])}:${formatNumber(item.date[4])}`}</p>
                                         </div>
                                         </div>

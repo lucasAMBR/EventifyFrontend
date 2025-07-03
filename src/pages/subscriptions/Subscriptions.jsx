@@ -6,11 +6,12 @@ import style from "./Subscriptions.module.css";
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { SubscriptionCard } from "./components/SubscriptionCard";
 import { CancelSubsModal } from "./components/CancelSubsModal";
+import { useNavigate } from "react-router-dom";
 
 export const Subscriptions = () => {
 
     const { loggedUser } = useUserContext();
-
+    const navigate = useNavigate();
     const [ userEventList, setUserEventList ] = useState([]);
     const [ loading, setLoading ] = useState(false);
 
@@ -52,14 +53,16 @@ export const Subscriptions = () => {
                         {userEventList.length == 0 && loading && "loading..."}
                         {userEventList.length == 0 && !loading && 
                             <div className={style.no_events}>
-                                <h2>Parece que voce não se inscreveu em nenhum evento...</h2>
+                                <h2>You are not subscribed to any event...</h2>
+                                <p>You can subscribe to events in the search page</p>
+                                <button onClick={() => navigate("/home/search")}>Go to search page</button>
                             </div>
                         }
                         {userEventList.length > 0 && !loading && 
                             <div className={style.event_list_area}>
                                 <>
                                     {userEventList.map((item, index) => (
-                                        <SubscriptionCard setCancel={handleOpenUpdateModal} EventId={item.id} EventTitle={item.eventTitle} EventBanner={`http://localhost:8080${item.eventBannerPath}`} EventDate={item.date} EventHour={item.hour} status={item.status} />
+                                        <SubscriptionCard setCancel={handleOpenUpdateModal} EventId={item.eventId} EventTitle={item.eventTitle} EventBanner={`http://localhost:8080${item.eventBannerPath}`} EventDate={item.date} EventHour={item.hour} status={item.status} />
                                     ))}
                                 </>
                             </div>

@@ -9,8 +9,11 @@ import { useUserContext } from "../../../contexts/UserContext";
 import api from "../../../services/Api";
 import { DropDownMenu } from "./DropDownMenu";
 import { CommentsModal } from "./CommentModal";
+import { useNavigate } from "react-router-dom";
 
 export const PostItem = ({postId, userId, userProfilePic, userName, content, imagesPath, likeList, commentList, date }) => {
+
+    const navigate = useNavigate();
 
     const { loggedUser } = useUserContext();
 
@@ -68,7 +71,7 @@ export const PostItem = ({postId, userId, userProfilePic, userName, content, ima
                         <img src={`http://localhost:8080${userProfilePic}`} />
                     </div>
                     <div className={style.post_infos}>
-                        <h3>{userName}</h3>
+                        <h3 onClick={() => navigate(userId == loggedUser ? `/home/user/profile/me` : `/home/user/profile/${userId}`)} style={{cursor: "pointer"}}>{userName}</h3>
                         <p>{`${formatNumber(date[2])}/${formatNumber(date[1])}/${formatNumber(date[0])}, ${formatNumber(date[3])}:${formatNumber(date[4])}`}</p>
                     </div>
                 </div>

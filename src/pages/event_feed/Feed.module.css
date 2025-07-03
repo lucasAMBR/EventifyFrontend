@@ -1,394 +1,127 @@
-.search_area{
-    display: flex;
+.feed_area{
+    padding: 20px;
     flex: 1;
+    display: flex;
+    flex-direction: row;
     overflow-y: auto;
+}
+
+.post_list{
+    flex: 2;
+    display: flex;
     flex-direction: column;
-    padding: 20px;
+    align-items: stretch;
+    padding: 0 15px;
 }
 
-.search_bar{
+.add_post_form{
     background-color: #004643;
-    width: 100%;
-    height: 70px;
-    display: flex;
-    align-items: center;
-    justify-content: start;
+    color: white;
     padding: 20px;
-    border-radius: 40px;
+    width: 100%;
+    border-radius: 10px;
 }
 
-.search_bar_icon{
-    background-color: #F9B663;
+.event_feed_title{
+    color: #004643;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.form_header{
     display: flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 50px;
-    min-height: 50px;
-    border-radius: 50%;
+    min-width: 100%;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 15px;
 }
 
-.bar_input{
-    background-color: white;
+.form_header h2{
+    color: white;
+    margin-bottom: 10px;
+}
+
+.add_post_form form{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    width: 100%;
+}
+
+.add_post_form textarea{
+    width: 100%;
+    height: 140px;
     border: none;
-    width: 100%;
-    height: 45px;
-    margin: 10px;
-    padding: 20px;
-    border-radius: 22px;
-}
-
-.search_type{
-    margin-top: 10px;
-    display: flex;
-}
-
-.search_type .default_button{
-    background-color: #004643;
-    color: white;
-    padding: 10px;
-    border: 1px solid #004643;
-    margin-right: 10px;
-    border-radius: 5px;
-    transition: 0.3s;
-    cursor: pointer;
-}
-
-.default_button.active_button{
-    background-color: #F9B663;
-    border: 1px solid #F9B663;
-    color: #004643;
-    font-weight: bold;
-}
-
-.data_exib h2{
-    color: #004643;
-    margin-top: 10px;
-}
-
-.userList{
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-}
-
-.user_card{
-    background-color: #004643;
-    min-width: 300px;
-    color: white;
-    padding: 10px;
-    border-radius: 5px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.user_card_name{
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: white;
-}
-
-.user_card_image{
-    width: 100px;
-    height: 100px;
-    margin-bottom: 10px;
-    overflow: hidden;
-    border-radius: 50%;
-}
-
-.user_card_info{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-}
-
-.user_card_info p{
-    color: white;
-}
-
-.user_card_info p span{
-    font-weight: bold;
-    color: white
-}
-.user_card_button{
-    width: 100%;
-    margin-top: 10px;
-}
-
-.user_card_button button{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    width: 100%;
-    background-color: #F9B663;
-    color: #004643;
-    border: 1px solid #F9B663;
-    border-radius: 5px;
-    padding: 10px;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.user_card_button_unfollow{
-    width: 100%;
-    margin-top: 10px;
-}
-
-.user_card_button_unfollow button{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    width: 100%;
-    background-color: red;
-    color: white;
-    border: 1px solid red;
-    border-radius: 5px;
-    padding: 10px;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.user_card_button_unfollow button:hover{
     background-color: white;
-    color: red;
+    border-radius: 10px;
+    padding: 5px;
 }
 
-.user_card_button button:hover{
-    background-color: white;
-    color: #F9B663;
-}
-
-.user_card_image img{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.event_card{
-    background-color: #004643;
-    min-width: 350px;
-    color: white;
-    border-radius: 5px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-}
-
-.post_card{
-    background-color: #004643;
-    min-width: 450px;
-    max-width: 450px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-    color: white;
-    padding: 15px;
-}
-
-.event_card_image img{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.event_card_image{
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    overflow: hidden;
-}
-
-.event_card_info{
-    display: flex;
-    width: 100%;
-    padding: 10px;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-}
-
-.event_card_info p, .event_card_info h3{
-    text-align: left;
-    color: white;
-}
-
-.event_card_info p{
-    display: flex;
-    align-self: start;
-    margin-bottom: 5px;
-}
-
-.event_card_info p svg{
-    fill: white;
-    margin-right: 5px;
-}
-
-.event_card_button{
-    width: 100%;
-    padding: 10px;
-}
-
-.event_card_button .subscribe_button{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    padding: 10px;
+.add_post_form .publish_button{
     background-color: #F9B663;
+    width: 300px;
     color: #004643;
-    border: 1px solid #F9B663;
-    border-radius: 5px;
-    cursor: pointer;
     transition: 0.3s;
 }
 
-.event_card_button button:hover{
+.add_post_form .publish_button:hover{
     background-color: white;
-    color: #F9B663;
 }
 
-.post_user_info{
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 10px;
-}
-
-.post_user_image{
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    overflow: hidden;
-}   
-
-.post_user_image img{
-    width: 100%;
-    height: 100%;
-}
-
-.post_user_info_text p{
-    color: white;
-}
-
-.post_user_info_text p span{
-    font-weight: bold;
-    color: white;
-}
-
-.post_content{
-    margin-top: 10px;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    line-clamp: 3;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    hyphens: auto;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
+.image_input p{
     margin-bottom: 10px;
     color: white;
-    max-width: 100%;
 }
 
-.post_actions{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 10px;
-    color: white;
-}
-
-.post_likes{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 5px;
-    color: white;
-}
-
-.post_comments{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 5px;
-    color: white;
-}
-
-.post_actions .post_comments svg{
-    fill: white;
-}
-
-.post_actions .post_likes svg{
-    fill: white;
-}
-
-.unsubscribe_button{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    padding: 10px;
-    background-color: red;
-    color: white;
-    border: 1px solid red;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.data_exib h2{
-    margin-bottom: 25px;
-}
-
-.search_event_by{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 10px;
-    margin-bottom: 25px;
-    margin-top: 10px;
-}   
-
-.search_event_by .default_button{
-    padding: 10px;
-    background-color: #004643;
-    color: white;
-    border: 1px solid #004643;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: 0.3s;
-}           
-
-.search_event_by .active_button{
+.image_input input[type="file"]::file-selector-button{
     background-color: #F9B663;
-    border: 1px solid #F9B663;
+    border: #F9B663;
     color: #004643;
 }
 
+.post_buttons_area{
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+}
+
+.add_post_form div .image_input p{
+    margin-bottom: 10px;
+}
+
+.feed_selector{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 15px;
+    font-size: 23px;
+}
+
+.feed_selector span{
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.feed_post_list{
+    width: 90%;
+    padding-top: 20px;
+}
 
 .post_item{
-    background-color: #C5D3D3;
-    min-width: 90%;
-    max-width: 90%;
+    background-color: #C5D3D3;  
+    width: 100%;
     padding: 20px;
     border-radius: 10px;
     margin-bottom: 15px;
 }
+
 
 .post_item .post_text_content p{
     font-size: 18px;
@@ -422,6 +155,12 @@
 
 .post_infos h3{
     color: #004643;
+}
+
+.post_infos h3:hover{
+    cursor: pointer;
+    color: #609490;
+    text-decoration: underline;
 }
 
 .post_infos p{
@@ -472,6 +211,14 @@
 
 .menuButton:hover{
     background-color: #609490;
+}
+
+.user_card_follow_button{
+    background-color: #F9B663;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
 }
 
 .dropdown {
@@ -662,6 +409,22 @@
     overflow: hidden;
     display: flex;
     border-radius: 5px;
+}
+
+.recomendations{
+    flex: 1;
+}
+
+.mobile_add_image {
+    display: none;
+} 
+
+.image_selector_button{
+    width: 60px;
+    height: 60px;
+    background-color: #F9B663;
+    border-radius: 50%;
+    padding: 10px;
 }
 
 .delete_post_modal{
@@ -918,6 +681,184 @@
     align-items: center;
 }
 
+.popular_users h2{
+    color: white;
+    margin-bottom: 15px;
+}
+
+.popular_users{
+    background-color: #609490;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 10px;
+}
+
+.popular_events{
+    background-color: #609490;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+
+.popular_events h2{
+    color: white;
+    margin-bottom: 15px;
+}
+
+.popular_event_card{
+    background-color: #C5D3D3;
+    width: 100%;
+    height: 130px;
+    display: flex;
+    border-radius: 10px;
+    transition: 0.3s;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.popular_event_card:hover{
+    background-color: #b2cfcf;
+    scale: 1.01;
+}
+
+.popular_event_image img{
+    width: 150%;
+}
+
+.popular_event_image{
+    background-color: #004643;
+    width: 200px;
+    height: 100%;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+.popular_event_image img{
+    height: 100%;
+}
+
+.popular_event_infos{
+    padding: 10px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    width: 100%;
+}
+
+.popular_event_infos h3{
+    color: #004643;
+}
+
+.popular_infos_button button{
+    background-color: #004643;
+    padding: 10px;
+    color: white;
+    min-width: 80px;
+    border: 1px solid #004643;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.popular_infos_button button:hover{
+    background-color: white;
+    color: #004643;
+}
+
+.user_card{
+    background-color: #004643;
+    width: 100%;
+    padding: 15px;
+    margin-top: 8px;
+    color: white;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.user_card_follow_button{
+    padding: 15px;
+    background-color: #F9B663;
+    border: 1px solid #F9B663;
+    color: #004643;
+    border-radius: 5px;
+    height: fit-content;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.user_card_follow_button:hover{
+    background-color: white;
+    border: 1px solid white;
+    color: #004643;
+}
+
+.user_card_unfollow_button{
+    padding: 15px;
+    background-color: red;
+    border: 1px solid red;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.user_card_unfollow_button:hover{
+    background-color: white;
+    color: red;
+    cursor: pointer;
+}
+
+
+.card_infos{
+    color: white;
+    display: flex;
+    align-items: center;
+}
+
+.card_pic{
+    width: 65px;
+    height: 65px;
+    margin-right: 10px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.card_pic img{
+    width: 100%;
+}
+
+.user_details h3, .user_details p{
+    color: white;
+}
+
+.user_details h3{
+     display: flex;
+    align-items: center;
+}
+
+.user_details h3 span{
+    font-weight:normal;
+    font-size: 14px;
+    background-color: #e5bf91;
+    padding: 5px;
+    border-radius: 2px;
+    color: #004643;
+    margin-left: 10px;
+}
+
+.user_details p{
+    font-size: 14px;
+    font-weight: 200;
+}
 
 .subscribe_modal{
     position: fixed;
@@ -974,15 +915,14 @@
 }
 
 .subscribe_button{
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    background-color: #004643;
     width: 100%;
-    padding: 10px;
-    background-color: #F9B663;
+    height: 45px;
+    border: 1px solid #004643;
     color: white;
-    border: 1px solid #F9B663;
     border-radius: 5px;
+    font-weight: bold;
+    margin-top: 10px;
     cursor: pointer;
     transition: 0.3s;
 }
@@ -992,97 +932,90 @@
     color: #004643;
 }
 
-
-
-.cancel_modal_area{
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.651);
+.popular_users_search{
+    width: 100%;
+    height: 40px;
+    border-radius: 50px;
+    padding: 0 5px;
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.cancel_modal{
-    background-color: white;
-    padding: 20px;
-    max-width: 400px;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    border-radius: 10px;
-}
-
-.cancel_modal p {
-    margin-top: 10px;
     margin-bottom: 10px;
-}
-
-.confirm_cancel{
-    height: 45px;
-    background-color: red;
-    color: white;
-    font-weight: bold;
-    border-radius: 5px;
-    border: 1px solid red;
-    margin-bottom: 5px;
-    transition: 0.3s;
-    cursor: pointer;
-}
-
-.confirm_cancel:hover{
     background-color: white;
-    color: red;
+    overflow: hidden;
 }
 
-.abort_cancel{
-    height: 45px;
-    background-color: #004643;
-    color: white;
-    font-weight: bold;
-    border-radius: 5px;
+.popular_users_search_icon{
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #F9B663;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+.popular_users_search input{
+    flex: 1;
+    border: none;
+    background-color: transparent;
+    height: 100%;
+    padding-left: 10px;
+}
+
+.popular_users_search input:focus{
+    outline: none;
+}
+
+.organizer_options{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+
+.organizer_option_active{
+    background-color: white;
+    padding: 10px;
+    color: #004643;
     border: 1px solid #004643;
+    border-radius: 5px;
     cursor: pointer;
-    transition: 0.3s;
 }
 
-.abort_cancel:hover{
+.organizer_option_inactive:hover{
     background-color: white;
     color: #004643;
 }
 
-.cancel_modal h2{
-    color: #004643;
+.organizer_option_inactive{
+    background-color: #004643;
+    padding: 10px;
+    color: white;
+    border: 1px solid #004643;
+    border-radius: 5px;
+    cursor: pointer;
 }
+
+
 
 @media (max-width: 640px) {
-
-    .search_type{
-        flex-direction: column;
+    .event_feed_title{
+        color: #004643;
+        margin-top: 20px;
+    }
+    .recomendations{
+        display: none;
     }
 
-    .default_button{
-        margin-bottom: 5px;
+    .feed_area{
+        display: flex;
+        padding: 0;
     }
 
-    .userList{
-        flex-direction: column;
-    }
-
-    .user_card{
-        min-width: 100%;
-    }
-
-    .event_card{
-        min-width: 100%;
-    }
-
-    .post_card{
-        min-width: 100%;
-        max-width: 100%;
+    .post_list{
+        padding: 0;
     }
     .post_item{
         min-width: 100%;
@@ -1092,26 +1025,122 @@
     .post_item .post_text_content p{
         font-size: 16px;
     }
- 
-    .subscription_area{
-        width: 100vw;
-        height: 100vh;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-      }
-    
-      .close_subs_modal{
-        justify-content: flex-start;
-        margin-left: 30px;
-      }
-    
-      .subscribe_button{
-        min-height: 45px
-      }
-    
-      .more_infos h3{
-        margin-bottom: 10px;
-      }
 
+    .add_post_form{
+        width: 100%;
+        border-radius: 0px;
+    }
+
+    .image_input{
+        max-width: fit-content;
+    }
+
+    .post_buttons_area {
+        align-items: center;
+        justify-content: space-between;
+        flex-direction: row;
+    }
+
+    .post_buttons_area p{
+        display: none;
+    }
+
+    .mobile_publish{
+        background-color: #F9B663;
+    }
+
+
+    .form_header{
+        display: flex;
+        width: 100%;
+        flex-direction: row;
+        align-items: baseline;
+        justify-content: space-between;
+        margin-bottom: 15px;
+    }
+
+
+    .mobile_add_image input[type="file"]::file-selector-button{
+    background-color: #F9B663;
+    border: #F9B663;
+    color: #004643;
+    }   
+
+    .mobile_add_image{
+        display: flex;
+    }
+
+    .mobile_add_image input[type="file"]{
+    
+        width: 100%;
+    }
+
+    .image_input{
+        display: none;
+    }
+
+    .post_images{
+        flex-direction: column;
+    }
+
+    .post_images .image_column{
+        flex-direction: row;
+    }
+
+    .two_images {
+    flex-direction: column;
+  }
+
+  .two_image_item {
+    aspect-ratio: unset;
+    height: 200px;
+  }
+
+  .three_images {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .three_main_image {
+    height: 200px;
+  }
+
+  .three_side_images {
+    flex-direction: row;
+  }
+
+  .three_side_image {
+    height: 100px;
+  }
+
+  .comment_modal{
+    width: 100%;
+    height: 100%;
+  }
+
+  .comment_modal_list{
+    min-width: none;
+    max-height: none;
+  }
+  
+  .subscription_area{
+    width: 100vw;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .close_subs_modal{
+    justify-content: flex-start;
+    margin-left: 30px;
+  }
+
+  .subscribe_button{
+    min-height: 45px
+  }
+
+  .more_infos h3{
+    margin-bottom: 10px;
+  }
 }

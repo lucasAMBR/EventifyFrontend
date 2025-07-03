@@ -1,4 +1,4 @@
-import style from "../Feed.module.css"
+import style from "../../feed/Feed.module.css"
 
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -7,8 +7,8 @@ import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import { useEffect, useRef, useState } from "react";
 import { useUserContext } from "../../../contexts/UserContext";
 import api from "../../../services/Api";
-import { DropDownMenu } from "./DropDownMenu";
-import { CommentsModal } from "./CommentsModal";
+import { DropDownMenu } from "../../feed/components/DropDownMenu";
+import { CommentsModal } from "../../feed/components/CommentsModal";
 import { useNavigate } from "react-router-dom";
 
 export const PostItem = ({postId, userId, userProfilePic, userName, content, imagesPath, likeList, commentList, date }) => {
@@ -71,7 +71,7 @@ export const PostItem = ({postId, userId, userProfilePic, userName, content, ima
                         <img src={`http://localhost:8080${userProfilePic}`} />
                     </div>
                     <div className={style.post_infos}>
-                        <h3 onClick={() => navigate(`/home/user/profile/${userId}`)} style={{cursor: "pointer"}}>{userName}</h3>
+                        <h3 onClick={() => navigate(userId == loggedUser ? `/home/user/profile/me` : `/home/user/profile/${userId}`)} style={{cursor: "pointer"}}>{userName}</h3>
                         <p>{`${formatNumber(date[2])}/${formatNumber(date[1])}/${formatNumber(date[0])}, ${formatNumber(date[3])}:${formatNumber(date[4])}`}</p>
                     </div>
                 </div>

@@ -8,6 +8,7 @@ import { AddEventModal } from "./components/AddEventModal";
 import { EventCard } from "./components/EventCard";
 import { UpdateEventModal } from "./components/UpdateEventModal";
 import { CancelEventModal } from "./components/CancelEventModal";
+import { GenerateConfirmationCodeModal } from "./components/GenerateConfirmationCodeModal";
 
 export const Events = () => {
 
@@ -20,6 +21,16 @@ export const Events = () => {
     const [ updateEventModalIdOpen, setUpdateModalIsOpen ] = useState(false);
     const [ cancelEventModalIsOpen, setCancelEventModalIsOpen ] = useState(false)
     const [ choosedEvent, setChoosedEvent] = useState(null);
+
+    const [ generateConfirmationCodeModalIsOpen, setGenerateConfirmationCodeModalIsOpen ] = useState(false);
+    const [choosedEventId, setChoosedEventId] = useState(null);
+    const [choosedEventType, setChoosedEventType] = useState(null);
+
+    const handleOpenGenerateConfirmationCodeModal = (id, type) => {
+        setChoosedEventId(id);
+        setChoosedEventType(type);
+        setGenerateConfirmationCodeModalIsOpen(true);
+    }
 
     const [ hoverAddButton, setHoverAddButton ] = useState(false)
 
@@ -69,7 +80,7 @@ export const Events = () => {
                             <div className={style.event_list_area}>
                                 <>
                                     {userEventList.filter(event => event.active == true).slice().map((item, index) => (
-                                        <EventCard openCancelModal={handleOpenCancelEventModal} key={index} EventId={item.id} EventLink={item.link} EventType={item.type} EventBanner={`http://localhost:8080${item.imagePath}`} EventTitle={item.title} EventDate={item.date} EventHour={item.hour} EventLocal={item.location} EventGuestLimit={item.guestLimit} EventHostName={item.organizerName} handleOpenModal={handleOpenUpdateModal}/>
+                                        <EventCard openCancelModal={handleOpenCancelEventModal} openGenerateConfirmationCodeModal={handleOpenGenerateConfirmationCodeModal} key={index} EventId={item.id} EventLink={item.link} EventType={item.type} EventBanner={`http://localhost:8080${item.imagePath}`} EventTitle={item.title} EventDate={item.date} EventHour={item.hour} EventLocal={item.location} EventGuestLimit={item.guestLimit} EventHostName={item.organizerName} handleOpenModal={handleOpenUpdateModal}/>
                                     ))}
                                 </>
                             </div>
@@ -78,6 +89,7 @@ export const Events = () => {
                     {addEventModalIsOpen && <AddEventModal setEventModal={setAddEventModalIsOpen} fetchData={fetchUserEvents}/>}
                     {updateEventModalIdOpen && <UpdateEventModal EventId={choosedEvent} handleOpenModal={setUpdateModalIsOpen} updateEvents={fetchUserEvents}/>}
                     {cancelEventModalIsOpen && choosedEvent != null && <CancelEventModal id={choosedEvent} closeModal={handleCloseCancelEventModal} fetchEvents={fetchUserEvents}/>}
+                    {generateConfirmationCodeModalIsOpen && choosedEventId != null && <GenerateConfirmationCodeModal eventId={choosedEventId} eventType={choosedEventType} setGenerateConfirmationCodeModalIsOpen={setGenerateConfirmationCodeModalIsOpen}/>}
                 </>  
             }
         </div>

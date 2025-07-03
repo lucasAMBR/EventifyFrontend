@@ -10,14 +10,15 @@
     flex: 2;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: stretch;
+    padding: 0 15px;
 }
 
 .add_post_form{
     background-color: #004643;
     color: white;
     padding: 20px;
-    width: 90%;
+    width: 100%;
     border-radius: 10px;
 }
 
@@ -41,6 +42,7 @@
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
+    width: 100%;
 }
 
 .add_post_form textarea{
@@ -101,18 +103,18 @@
 }
 
 .feed_post_list{
-    max-width: 90%;
+    width: 90%;
     padding-top: 20px;
 }
 
 .post_item{
-    background-color: #C5D3D3;
-    min-width: 90%;
-    max-width: 90%;
+    background-color: #C5D3D3;  
+    width: 100%;
     padding: 20px;
     border-radius: 10px;
     margin-bottom: 15px;
 }
+
 
 .post_item .post_text_content p{
     font-size: 18px;
@@ -146,6 +148,12 @@
 
 .post_infos h3{
     color: #004643;
+}
+
+.post_infos h3:hover{
+    cursor: pointer;
+    color: #609490;
+    text-decoration: underline;
 }
 
 .post_infos p{
@@ -586,7 +594,7 @@
     background-color: #C5D3D3;
     padding: 20px;
     margin-bottom: 5px;
-    max-width: 400px;
+    width: 400px;
     border-radius: 10px;
 }
 
@@ -719,6 +727,9 @@
     justify-content: center;
     overflow: hidden;
 }
+.popular_event_image img{
+    height: 100%;
+}
 
 .popular_event_infos{
     padding: 10px;
@@ -800,6 +811,11 @@
 .user_details h3{
      display: flex;
     align-items: center;
+}
+
+.user_details p{
+    font-size: 14px;
+    font-weight: 200;
 }
 
 .user_details h3 span{
@@ -1005,6 +1021,14 @@
   .subscription_area{
     width: 100vw;
     height: 100vh;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .close_subs_modal{
+    justify-content: flex-start;
+    margin-left: 30px;
   }
 
   .subscribe_button{

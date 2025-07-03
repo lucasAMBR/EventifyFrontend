@@ -15,7 +15,7 @@ export const PostItem = ({postId, userId, userProfilePic, userName, content, ima
 
     const navigate = useNavigate();
 
-    const { loggedUser } = useUserContext();
+    const { loggedUser, userRole } = useUserContext();
 
     function formatNumber(n) {
         return String(n).padStart(2, '0');
@@ -76,7 +76,7 @@ export const PostItem = ({postId, userId, userProfilePic, userName, content, ima
                     </div>
                 </div>
                 <div className={style.logged_user_post_menu}>
-                    {userId == loggedUser ? <DropDownMenu postId={postId} setRemoved={setRemoved} postContent={content} setPostContent={setPostContent}/> : ""}
+                    {userId == loggedUser || userRole == "ORGANIZER" ? <DropDownMenu postId={postId} setRemoved={setRemoved} postContent={content} setPostContent={setPostContent} ownerId={userId}/> : ""}
                 </div>
             </div>
             <div className={style.post_text_content}>

@@ -123,8 +123,8 @@ export const EventSearch = () => {
                         <div className={style.recent_events_list}>
                             <h2>Recent events</h2>
                             <div className={style.event_list}>
-                                {popularEvents.length == 0 && "No registered events..."}
-                                {popularEvents.map((item, index) => 
+                                {recentEvents.length == 0 && "No registered events..."}
+                                {recentEvents.map((item, index) => 
                                     <EventCard key={index} EventId={item.id} EventType={item.type} EventLink={item.link} EventBanner={`http://localhost:8080${item.imagePath}`} EventTitle={item.title} EventDate={item.date} EventHour={item.hour} EventLocal={item.location} EventGuestLimit={item.guestLimit} EventHostName={item.organizerName}/>
                                 )}
                             </div>

@@ -154,26 +154,26 @@ export const Feed = () => {
                 <div><span className={selectedFeed == "popular" ? style.selected : ""} onClick={() => handleFeedSwitch("popular")}>Popular</span> | <span className={selectedFeed == "following" ? style.selected : ""} onClick={() => handleFeedSwitch("following")}>Following</span></div>
                 <div className={style.feed_post_list}>
                 </div>
-                    {!loading && userPopularFeed.length == 0 && selectedFeed == "popular" &&
+                    {!loading && userPopularFeed.filter(post => !post.hasOwnProperty("eventId")).length == 0 && selectedFeed == "popular" &&
                         <>
                             <p>It seems that we still don't have any posts...</p>
                         </>
                     }
-                    {!loading && userPopularFeed.length > 0 && selectedFeed == "popular" &&
+                    {!loading && userPopularFeed.filter(post => !post.hasOwnProperty("eventId")).length > 0 && selectedFeed == "popular" &&
                         <>
-                            {userPopularFeed.map((post, index) => (
-                                <PostItem key={index} postId={post.id} userId={post.userId} userProfilePic={post.userProfilePic} userName={post.userName} content={post.content} imagesPath={post.imagesPath} likeList={post.likeList} commentList={post.commentList} date={post.date}/>
+                            {userPopularFeed.filter(post => !post.hasOwnProperty("eventId")).map((post, index) => (
+                                <PostItem key={post.id} postId={post.id} userId={post.userId} userProfilePic={post.userProfilePic} userName={post.userName} content={post.content} imagesPath={post.imagesPath} likeList={post.likeList} commentList={post.commentList} date={post.date}/>
                             ))}
                         </>
                     }
-                    {!loading && userFollowingFeed.length > 0 && selectedFeed == "following" &&
+                    {!loading && userFollowingFeed.filter(post => !post.hasOwnProperty("eventId")).length > 0 && selectedFeed == "following" &&
                         <>
-                            {userFollowingFeed.map((post, index) => (
-                                <PostItem key={index} postId={post.id} userId={post.userId} userProfilePic={post.userProfilePic} userName={post.userName} content={post.content} imagesPath={post.imagesPath} likeList={post.likeList} commentList={post.commentList} date={post.date}/>
+                            {userFollowingFeed.filter(post => !post.hasOwnProperty("eventId")).map((post, index) => (
+                                <PostItem key={post.id} postId={post.id} userId={post.userId} userProfilePic={post.userProfilePic} userName={post.userName} content={post.content} imagesPath={post.imagesPath} likeList={post.likeList} commentList={post.commentList} date={post.date}/>
                             ))}
                         </>
                     }
-                    {!loading && userFollowingFeed.length == 0 && selectedFeed == "following" &&
+                    {!loading && userFollowingFeed.filter(post => !post.hasOwnProperty("eventId")).length == 0 && selectedFeed == "following" &&
                         <>
                             <p>It seems that you are still not following anyone...</p>
                         </>
@@ -186,8 +186,8 @@ export const Feed = () => {
                     {popularUsers.length == 0 &&
                         <p>It seems that we still don't have any registered users...</p>
                     }
-                    {popularUsers.map((item, index)=>(
-                        <UserCard fetchPopulars={fetchPopularUsers} userId={item.id} userName={item.name} profilePic={item.profilePicPath} usertype={item.type} followers={item.followers} following={item.following} posts={item.posts}/>
+                    {popularUsers.map((item)=>(
+                        <UserCard key={item.id} fetchPopulars={fetchPopularUsers} userId={item.id} userName={item.name} profilePic={item.profilePicPath} usertype={item.type} followers={item.followers} following={item.following} posts={item.posts}/>
                     ))}
                 </div>
                 {userRole != "ORGANIZER" &&
@@ -197,7 +197,7 @@ export const Feed = () => {
                         <p>It seems that we still don't have any registered users...</p>
                     }
                     {popularEvents.filter(event => event.active == true).map((item, index)=>(
-                        <EventCard id={item.id} type={item.type} banner={`http://localhost:8080${item.imagePath}`} title={item.title} organizer={item.organizerName} date={item.date} hour={item.hour} setModal={openSubscribeModal}/>
+                        <EventCard id={item.id} type={item.type} organizerId={item.organizerId} banner={`http://localhost:8080${item.imagePath}`} title={item.title} organizer={item.organizerName} date={item.date} hour={item.hour} setModal={openSubscribeModal}/>
                     ))}
                 </div>
                 }

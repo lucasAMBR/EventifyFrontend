@@ -8,7 +8,7 @@ import PeopleIcon from '@mui/icons-material/People';
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
-export const EventCard = ({EventId, EventBanner, EventTitle, EventType, EventLink, EventLocal, EventDate, EventHour, EventGuestLimit, handleOpenModal, openCancelModal}) => {
+export const EventCard = ({EventId, EventBanner, EventTitle, EventType, EventLink, EventLocal, EventDate, EventHour, EventGuestLimit, handleOpenModal, openCancelModal, openGenerateConfirmationCodeModal}) => {
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -36,8 +36,8 @@ export const EventCard = ({EventId, EventBanner, EventTitle, EventType, EventLin
                     <p><LinkIcon sx={{fill: '#004643'}} />{EventLink}</p>
                 }
                 <p><PeopleIcon sx={{fill: '#004643'}} />Limit: {EventGuestLimit} person</p>
-                <button className={style.normal_button} onClick={() => handleOpenEventDetails(EventId)}>View event feed</button>
-                <button className={style.normal_button} onClick={() => handleOpenModal(EventId)}>Generate confirmation link</button>
+                <button className={style.normal_button} onClick={() => navigate(`/home/event/${EventId}`)}>View event feed</button>
+                <button className={style.normal_button} onClick={() => openGenerateConfirmationCodeModal(EventId, EventType)}>Generate confirmation link</button>
                 <button className={style.normal_button} onClick={() => handleOpenModal(EventId)}>Edit event data</button>
                 <button className={style.cancel_button} onClick={() => openCancelModal(EventId)}>Cancel event</button>
             </div>

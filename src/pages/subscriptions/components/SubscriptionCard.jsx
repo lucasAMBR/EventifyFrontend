@@ -11,10 +11,6 @@ export const SubscriptionCard = ({EventId, EventBanner, EventTitle, EventDate, E
     const navigate = useNavigate();
     const location = useLocation();
 
-    const handleOpenEventDetails = ( id ) => {
-        navigate(`/event-search/details/${id}`, {state: {from: location.pathname}});
-    };
-
     function formatNumber(n) {
         return String(n).padStart(2, '0');
     }
@@ -28,7 +24,7 @@ export const SubscriptionCard = ({EventId, EventBanner, EventTitle, EventDate, E
                 <p className={style.card_title}>{EventTitle}</p>
                 <p><AccessTimeIcon sx={{fill: '#004643'}} /> {`${formatNumber(EventDate[2])}/${formatNumber(EventDate[1])}/${formatNumber(EventDate[0])}, ${formatNumber(EventHour[0])}:${formatNumber(EventHour[1])}`}</p>
                 <p><CoPresentIcon sxx={{fill: '#004643'}} /> Presence: {status}</p>
-                <button className={style.normal_subs_button} onClick={() => handleOpenEventDetails(EventId)}>View event feed</button>
+                <button className={style.normal_subs_button} onClick={() => navigate(`/home/event/${EventId}`)}>View event feed</button>
                 <button className={style.cancel_subs_button} onClick={() => setCancel(EventId)}>Cancel Subscription</button>
             </div>
         

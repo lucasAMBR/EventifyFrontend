@@ -13,8 +13,12 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 import PeopleIcon from "@mui/icons-material/People";
 import LinkIcon from "@mui/icons-material/Link";
+import { useNavigate } from "react-router-dom";
 
 export const Search = () => {
+
+    const navigate = useNavigate(); 
+
     const { loggedUser, userRole } = useUserContext();
 
     const [searchType, setSearchType] = useState("User");
@@ -249,6 +253,7 @@ export const Search = () => {
             <div className={style.data_exib}>
             <h2>Popular Users</h2>
             <div className={style.userList}>
+                {allRegisteredUsers.filter((item) => item.id !== loggedUser).length == 0 && <p>No users found</p>}   
                 {allRegisteredUsers
                 .filter((item) => item.id !== loggedUser)
                 .sort((a, b) => b.followers - a.followers)
@@ -261,7 +266,7 @@ export const Search = () => {
                         alt="user_profile"
                         />
                     </div>
-                    <p className={style.user_card_name}>{item.name}</p>
+                    <p className={style.user_card_name} onClick={() => navigate(item.id == loggedUser ? `/home/user/profile/me` : `/home/user/profile/${item.id}`)} style={{cursor: "pointer"}}>{item.name}</p>
                     <div className={style.user_card_info}>
                         <p>
                         <span>{item.followers}</span> Followers
@@ -353,10 +358,10 @@ export const Search = () => {
             </div>
             <h2>Popular Posts</h2>
             <div className={style.userList}>
-                {allRegisteredPosts.length == 0 && <p>No posts found</p>}
+                {allRegisteredPosts.filter((item) => item.userId !== loggedUser && !item.hasOwnProperty("eventId")).length == 0 && <p>No posts found</p>}
                 {allRegisteredPosts
+                .filter((item) => item.userId !== loggedUser && !item.hasOwnProperty("eventId"))
                 .slice(0, 3)
-                .filter((item) => item.userId !== loggedUser)
                 .sort((a, b) => {
                     const totalA = a.likeList.length + a.commentList.length;
                     const totalB = b.likeList.length + b.commentList.length;
@@ -402,6 +407,7 @@ export const Search = () => {
             <div className={style.data_exib}>
             <h2>Users</h2>
             <div className={style.userList}>
+                {allRegisteredUsers.filter((item) => item.id !== loggedUser && item.name.toLowerCase().includes(searchTerm.toLowerCase())).length == 0 && <p>No users found</p>}
                 {allRegisteredUsers
                 .filter(
                     (item) =>
@@ -519,6 +525,7 @@ export const Search = () => {
             <div className={style.data_exib}>
             <h2>Searching for events: including "{searchTerm}"</h2>
             <div className={style.userList}>
+                {allRegisteredEvents.filter((item) => item.organizerId !== loggedUser || item.title.toLowerCase().includes(searchTerm.toLowerCase())).length == 0 && <p>No events found</p>}
                 {allRegisteredEvents
                 .filter((item) =>
                     `${formatNumber(item.date[2])}/${formatNumber(
@@ -583,6 +590,7 @@ export const Search = () => {
             searchEventBy == "location" && (
             <div className={style.data_exib}>
                 <h2>Searching for events: including "{searchTerm}"</h2>
+                {allRegisteredEvents.filter((item) => item.organizerId !== loggedUser || item.location.toLowerCase().includes(searchTerm.toLowerCase())).length == 0 && <p>No events found</p>}
                 <div className={style.userList}>
                 {allRegisteredEvents
                     .filter((item) =>
@@ -650,6 +658,7 @@ export const Search = () => {
             <div className={style.data_exib}>
             <h2>Searching for events: including "{searchTerm}"</h2>
             <div className={style.userList}>
+                {allRegisteredEvents.filter((item) => item.organizerId !== loggedUser || item.organizerName.toLowerCase().includes(searchTerm.toLowerCase())).length == 0 && <p>No events found</p>}
                 {allRegisteredEvents
                 .filter((item) =>
                     item.type.toLowerCase().includes(searchTerm.toLowerCase())
@@ -717,6 +726,7 @@ export const Search = () => {
             searchEventBy == "organizer" && (
             <div className={style.data_exib}>
                 <h2>Searching for events: including "{searchTerm}"</h2>
+                {allRegisteredEvents.filter((item) => item.organizerId !== loggedUser && item.organizerName.toLowerCase().includes(searchTerm.toLowerCase())).length == 0 && <p>No events found</p>}
                 <div className={style.userList}>
                 {allRegisteredEvents
                     .filter((item) =>
@@ -788,9 +798,12 @@ export const Search = () => {
             <div className={style.data_exib}>
                 <h2>Searching for posts: including "{searchTerm}"</h2>
                 <div className={style.post_list}>
+                {allRegisteredPosts.filter((item) =>
+                    item.content.toLowerCase().includes(searchTerm.toLowerCase()) && item.userId !== loggedUser && !item.hasOwnProperty("eventId")
+                ).length == 0 && <p>No posts found</p>}
                 {allRegisteredPosts
                     .filter((item) =>
-                    item.content.toLowerCase().includes(searchTerm.toLowerCase())
+                    item.content.toLowerCase().includes(searchTerm.toLowerCase()) && item.userId !== loggedUser && !item.hasOwnProperty("eventId")  
                     )
                     .map((item, index) => (
                     <PostItem
@@ -813,9 +826,12 @@ export const Search = () => {
             <div className={style.data_exib}>
             <h2>Searching for posts: including "{searchTerm}"</h2>
             <div className={style.post_list}>
+                {allRegisteredPosts.filter((item) =>
+                    item.userName.toLowerCase().includes(searchTerm.toLowerCase()) && item.userId !== loggedUser && !item.hasOwnProperty("eventId")
+                ).length == 0 && <p>No posts found</p>}
                 {allRegisteredPosts
                 .filter((item) =>
-                    item.userName.toLowerCase().includes(searchTerm.toLowerCase())
+                    item.userName.toLowerCase().includes(searchTerm.toLowerCase()) && item.userId !== loggedUser && !item.hasOwnProperty("eventId") 
                 )
                 .map((item, index) => (
                     <PostItem

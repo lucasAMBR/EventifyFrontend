@@ -10,6 +10,9 @@ import { Subscriptions } from "../pages/subscriptions/Subscriptions";
 import { Search } from "../pages/search/Search";
 import { Profile } from "../pages/profile/Profile";
 import { Events } from "../pages/OrganizerEvents/Events";
+import { MyProfile } from "../pages/my_profile/My_profile";
+import { EventFeed } from "../pages/event_feed/EventFeed";
+import { Confirmation } from "../pages/confirmation/Confirmation";
 
 const Router = createBrowserRouter([
     {
@@ -23,6 +26,10 @@ const Router = createBrowserRouter([
             {
                 path:"/login",
                 element: <Login />
+            },
+            {
+                path: "/confirmation",
+                element: <Confirmation />
             },
             {
                 path: "/event-search",
@@ -43,6 +50,10 @@ const Router = createBrowserRouter([
                 element: <Feed />
             },
             {
+                path: "/home/event/:id",
+                element: <EventFeed />
+            },
+            {
                 path: "/home/subscriptions",
                 element: <Subscriptions />
             },
@@ -51,8 +62,12 @@ const Router = createBrowserRouter([
                 element: <Search />
             },
             {
-                path: "/home/me",
+                path: "/home/user/profile/:id",
                 element: <Profile />
+            },
+            {
+                path: "/home/user/profile/me",
+                element: <MyProfile />
             },
             {
                 path: "/home/my_events",
