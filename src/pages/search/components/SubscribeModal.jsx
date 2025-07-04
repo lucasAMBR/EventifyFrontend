@@ -62,7 +62,7 @@ export const SubscribeModal = ({ id, closeModal, fetchEvents }) => {
                 {eventData != null && (
                     <>
                         <h2>{eventData.title}</h2>
-                        <p>{eventData.description}</p>
+                        <p style={{maxWidth: "400px"}}>{eventData.description}</p>
                         <div className={style.more_infos}>
                             <h3>
                                 <AccountCircleIcon sx={{ fill: "#004643" }} />

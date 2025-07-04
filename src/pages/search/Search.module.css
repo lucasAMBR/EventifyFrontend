@@ -172,6 +172,7 @@
 .event_card{
     background-color: #004643;
     min-width: 350px;
+    max-width: 350px;
     color: white;
     border-radius: 5px;
     display: flex;

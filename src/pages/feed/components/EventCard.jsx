@@ -19,6 +19,11 @@ export const EventCard = ({
 
     const navigate = useNavigate();
 
+    
+    function formatNumber(n) {
+        return String(n).padStart(2, "0");
+    }
+
     return (
         <div className={style.popular_event_card} onClick={() => setModal(id)}>
             <div className={style.popular_event_image}>
@@ -27,7 +32,7 @@ export const EventCard = ({
             <div className={style.popular_event_infos}>
                 <div className={style.popular_infos_text}>
                     <h3>{title}</h3>
-                    <p>{`${date[2]}/${date[1]}/${date[0]}, ${hour[0]}:${hour[1]}`}</p>
+                    <p>{`${formatNumber(date[2])}/${formatNumber(date[1])}/${formatNumber(date[0])}, ${formatNumber(hour[0])}:${formatNumber(hour[1])}`}</p>
                     <p
                         onClick={() =>
                             navigate(
@@ -38,7 +43,7 @@ export const EventCard = ({
                         }
                         style={{ cursor: "pointer" }}
                     >
-                        {organizer}
+                        <p style={{fontWeight: "bold"}}>{organizer}</p>
                     </p>
                 </div>
             </div>

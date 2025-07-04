@@ -85,7 +85,7 @@ export const AddEventModal = ({ setEventModal, fetchData }) => {
             handleSubmitSucess();
         } catch (error) {
             console.log(error);
-            setErrorMessage(error);
+            setErrorMessage(error.message);
         }
     };
 
@@ -151,6 +151,11 @@ export const AddEventModal = ({ setEventModal, fetchData }) => {
                         Online
                     </span>
                 </p>
+                {errorMessage != null ? (
+                    <ErrorMessage message={errorMessage} />
+                ) : (
+                    ""
+                )}
                 {eventType == "presential" && (
                     <form onSubmit={handlePresentialEventSubmit}>
                         <div>

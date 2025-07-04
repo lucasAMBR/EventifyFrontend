@@ -1,4 +1,5 @@
 import style from "../Profile.module.css";
+import { useState } from "react";
 
 export const SubscriptionItem = ({
     eventId,
@@ -9,13 +10,37 @@ export const SubscriptionItem = ({
     eventLocation,
     eventOrganizer,
 }) => {
+
+    const [aspectRatio, setAspectRatio] = useState(null);
+
+    const handleImageLoad = (event) => {
+        const { naturalWidth, naturalHeight } = event.target;
+        const ratio = naturalWidth / naturalHeight;
+    
+        setAspectRatio(ratio);
+    };
+
+    const getStyleByAspectRatio = () => {
+        if (!aspectRatio) return {};
+        if (aspectRatio > 1.2) {
+          // Landscape
+          return { height: '100%' };
+        } else if (aspectRatio < 0.8) {
+          // Portrait
+          return { width: '100%' };
+        } else {
+          // Square-ish
+          return {width: '100%' };
+        }
+      };
+
     function formatNumber(n) {
         return String(n).padStart(2, "0");
     }
     return (
         <div className={style.subscription_item}>
             <div className={style.subscription_item_image}>
-                <img src={eventBanner} alt={eventTitle} />
+                <img src={eventBanner} alt={eventTitle} onLoad={handleImageLoad} style={getStyleByAspectRatio()} />
             </div>
             <div className={style.subscription_item_infos}>
                 <h3>{eventTitle}</h3>

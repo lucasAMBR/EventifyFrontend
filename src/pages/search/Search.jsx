@@ -73,6 +73,10 @@ export const Search = () => {
         return String(n).padStart(2, "0");
     }
 
+    const normalizeText = (text) => {
+        return text.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    };
+
     const handleSearchTerm = (e) => {
         setSearchTerm(e.target.value);
     };
@@ -307,11 +311,11 @@ export const Search = () => {
                     <h2>Popular Events</h2>
                     <div className={style.userList}>
                         {allRegisteredEvents.filter(
-                            (item) => item.organizerId !== loggedUser
+                            (item) => item.organizerId !== loggedUser && item.active == true
                         ).length == 0 && <p>No events found</p>}
                         {allRegisteredEvents
                             .slice(0, 3)
-                            .filter((item) => item.organizerId !== loggedUser)
+                            .filter((item) => item.organizerId !== loggedUser && item.active == true)
                             .map((item, index) => (
                                 <div className={style.event_card}>
                                     <div className={style.event_card_image}>
@@ -332,12 +336,12 @@ export const Search = () => {
                                             )}:${formatNumber(item.hour[1])}`}
                                         </p>
                                         {item.type == "PRESENTIAL" && (
-                                            <p className={style.event_card_location}>
+                                            <p className={style.event_card_location} style={{overflow: "hidden", whiteSpace: "nowrap", textOverflow: "ellipsis"}}>
                                                 <LocationPinIcon /> {item.location}
                                             </p>
                                         )}
                                         {item.type == "ONLINE" && (
-                                            <p className={style.event_card_location}>
+                                            <p className={style.event_card_location} style={{overflow: "hidden", whiteSpace: "nowrap", textOverflow: "ellipsis"}}>
                                                 <LinkIcon /> {item.link}
                                             </p>
                                         )}
@@ -428,12 +432,12 @@ export const Search = () => {
                         {allRegisteredUsers.filter(
                             (item) =>
                                 item.id !== loggedUser &&
-                                item.name.toLowerCase().includes(searchTerm.toLowerCase())
+                                normalizeText(item.name.toLowerCase()).includes(normalizeText(searchTerm.toLowerCase()))
                         ).length == 0 && <p>No users found</p>}
                         {allRegisteredUsers
                             .filter(
                                 (item) =>
-                                    item.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
+                                    normalizeText(item.name.toLowerCase()).includes(normalizeText(searchTerm.toLowerCase())) &&
                                     item.id !== loggedUser
                             )
                             .map((item, index) => (
@@ -479,11 +483,11 @@ export const Search = () => {
                         <h2>Searching for events: including "{searchTerm}"</h2>
                         <div className={style.userList}>
                             {allRegisteredEvents.filter((item) =>
-                                item.title.toLowerCase().includes(searchTerm.toLowerCase())
+                                normalizeText(item.title.toLowerCase()).includes(normalizeText(searchTerm.toLowerCase())) && item.active == true
                             ).length == 0 && <p>No events found</p>}
                             {allRegisteredEvents
                                 .filter((item) =>
-                                    item.title.toLowerCase().includes(searchTerm.toLowerCase())
+                                    normalizeText(item.title.toLowerCase()).includes(normalizeText(searchTerm.toLowerCase())) && item.active == true
                                 )
                                 .map((item, index) => (
                                     <div className={style.event_card}>
@@ -505,12 +509,12 @@ export const Search = () => {
                                                 )}:${formatNumber(item.hour[1])}`}
                                             </p>
                                             {item.type == "PRESENTIAL" && (
-                                                <p className={style.event_card_location}>
+                                                <p className={style.event_card_location} style={{overflow: "hidden", whiteSpace: "nowrap", textOverflow: "ellipsis"}}>
                                                     <LocationPinIcon /> {item.location}
                                                 </p>
                                             )}
                                             {item.type == "ONLINE" && (
-                                                <p className={style.event_card_location}>
+                                                <p className={style.event_card_location} style={{overflow: "hidden", whiteSpace: "nowrap", textOverflow: "ellipsis"}}>
                                                     <LinkIcon /> {item.link}
                                                 </p>
                                             )}
@@ -550,13 +554,13 @@ export const Search = () => {
                         {allRegisteredEvents.filter(
                             (item) =>
                                 item.organizerId !== loggedUser ||
-                                item.title.toLowerCase().includes(searchTerm.toLowerCase())
+                                normalizeText(item.title.toLowerCase()).includes(normalizeText(searchTerm.toLowerCase())) && item.active == true
                         ).length == 0 && <p>No events found</p>}
                         {allRegisteredEvents
                             .filter((item) =>
                                 `${formatNumber(item.date[2])}/${formatNumber(
                                     item.date[1]
-                                )}/${formatNumber(item.date[0])}`.includes(searchTerm)
+                                )}/${formatNumber(item.date[0])}`.includes(normalizeText(searchTerm)) && item.active == true
                             )
                             .map((item, index) => (
                                 <div className={style.event_card}>
@@ -578,7 +582,7 @@ export const Search = () => {
                                             )}:${formatNumber(item.hour[1])}`}
                                         </p>
                                         {item.type == "PRESENTIAL" && (
-                                            <p className={style.event_card_location}>
+                                            <p className={style.event_card_location} style={{overflow: "hidden", whiteSpace: "nowrap", textOverflow: "ellipsis"}}>
                                                 <LocationPinIcon /> {item.location}
                                             </p>
                                         )}
@@ -616,15 +620,18 @@ export const Search = () => {
                 searchEventBy == "location" && (
                     <div className={style.data_exib}>
                         <h2>Searching for events: including "{searchTerm}"</h2>
-                        {allRegisteredEvents.filter(
+                        {allRegisteredEvents
+                        .filter((item) => item.location)
+                        .filter(
                             (item) =>
                                 item.organizerId !== loggedUser ||
-                                item.location.toLowerCase().includes(searchTerm.toLowerCase())
+                                normalizeText(item.location.toLowerCase()).includes(normalizeText(searchTerm.toLowerCase())) && item.active == true
                         ).length == 0 && <p>No events found</p>}
                         <div className={style.userList}>
                             {allRegisteredEvents
+                            .filter((item) => item.location)
                                 .filter((item) =>
-                                    item.location.toLowerCase().includes(searchTerm.toLowerCase())
+                                    normalizeText(item.location.toLowerCase()).includes(normalizeText(searchTerm.toLowerCase())) && item.active == true
                                 )
                                 .map((item, index) => (
                                     <div className={style.event_card}>
@@ -646,12 +653,12 @@ export const Search = () => {
                                                 )}:${formatNumber(item.hour[1])}`}
                                             </p>
                                             {item.type == "PRESENTIAL" && (
-                                                <p className={style.event_card_location}>
+                                                <p className={style.event_card_location} style={{overflow: "hidden", whiteSpace: "nowrap", textOverflow: "ellipsis"}}>
                                                     <LocationPinIcon /> {item.location}
                                                 </p>
                                             )}
                                             {item.type == "ONLINE" && (
-                                                <p className={style.event_card_location}>
+                                                <p className={style.event_card_location} style={{overflow: "hidden", whiteSpace: "nowrap", textOverflow: "ellipsis"}}>
                                                     <LinkIcon /> {item.link}
                                                 </p>
                                             )}
@@ -693,11 +700,11 @@ export const Search = () => {
                                 item.organizerId !== loggedUser ||
                                 item.organizerName
                                     .toLowerCase()
-                                    .includes(searchTerm.toLowerCase())
+                                    .includes(normalizeText(searchTerm.toLowerCase())) && item.active == true
                         ).length == 0 && <p>No events found</p>}
                         {allRegisteredEvents
                             .filter((item) =>
-                                item.type.toLowerCase().includes(searchTerm.toLowerCase())
+                                normalizeText(item.type.toLowerCase()).includes(normalizeText(searchTerm.toLowerCase())) && item.active == true
                             )
                             .map((item, index) => (
                                 <div className={style.event_card}>
@@ -719,12 +726,12 @@ export const Search = () => {
                                             )}:${formatNumber(item.hour[1])}`}
                                         </p>
                                         {item.type == "PRESENTIAL" && (
-                                            <p className={style.event_card_location}>
+                                            <p className={style.event_card_location} style={{overflow: "hidden", whiteSpace: "nowrap", textOverflow: "ellipsis"}}>
                                                 <LocationPinIcon /> {item.location}
                                             </p>
                                         )}
                                         {item.type == "ONLINE" && (
-                                            <p className={style.event_card_location}>
+                                            <p className={style.event_card_location} style={{overflow: "hidden", whiteSpace: "nowrap", textOverflow: "ellipsis"}}>
                                                 <LinkIcon /> {item.link}
                                             </p>
                                         )}
@@ -767,14 +774,14 @@ export const Search = () => {
                                 item.organizerId !== loggedUser &&
                                 item.organizerName
                                     .toLowerCase()
-                                    .includes(searchTerm.toLowerCase())
+                                    .includes(normalizeText(searchTerm.toLowerCase())) && item.active == true
                         ).length == 0 && <p>No events found</p>}
                         <div className={style.userList}>
                             {allRegisteredEvents
                                 .filter((item) =>
                                     item.organizerName
                                         .toLowerCase()
-                                        .includes(searchTerm.toLowerCase())
+                                        .includes(normalizeText(searchTerm.toLowerCase())) && item.active == true  
                                 )
                                 .map((item, index) => (
                                     <div className={style.event_card}>
@@ -796,12 +803,12 @@ export const Search = () => {
                                                 )}:${formatNumber(item.hour[1])}`}
                                             </p>
                                             {item.type == "PRESENTIAL" && (
-                                                <p className={style.event_card_location}>
+                                                <p className={style.event_card_location} style={{overflow: "hidden", whiteSpace: "nowrap", textOverflow: "ellipsis"}}>
                                                     <LocationPinIcon /> {item.location}
                                                 </p>
                                             )}
                                             {item.type == "ONLINE" && (
-                                                <p className={style.event_card_location}>
+                                                <p className={style.event_card_location} style={{overflow: "hidden", whiteSpace: "nowrap", textOverflow: "ellipsis"}}>
                                                     <LinkIcon /> {item.link}
                                                 </p>
                                             )}
@@ -844,7 +851,7 @@ export const Search = () => {
                                 (item) =>
                                     item.content
                                         .toLowerCase()
-                                        .includes(searchTerm.toLowerCase()) &&
+                                        .includes(normalizeText(searchTerm.toLowerCase())) &&
                                     item.userId !== loggedUser &&
                                     !item.hasOwnProperty("eventId")
                             ).length == 0 && <p>No posts found</p>}
@@ -853,7 +860,7 @@ export const Search = () => {
                                     (item) =>
                                         item.content
                                             .toLowerCase()
-                                            .includes(searchTerm.toLowerCase()) &&
+                                            .includes(normalizeText(searchTerm.toLowerCase())) &&
                                         item.userId !== loggedUser &&
                                         !item.hasOwnProperty("eventId")
                                 )
@@ -882,7 +889,7 @@ export const Search = () => {
                             (item) =>
                                 item.userName
                                     .toLowerCase()
-                                    .includes(searchTerm.toLowerCase()) &&
+                                    .includes(normalizeText(searchTerm.toLowerCase())) &&
                                 item.userId !== loggedUser &&
                                 !item.hasOwnProperty("eventId")
                         ).length == 0 && <p>No posts found</p>}
@@ -891,7 +898,7 @@ export const Search = () => {
                                 (item) =>
                                     item.userName
                                         .toLowerCase()
-                                        .includes(searchTerm.toLowerCase()) &&
+                                        .includes(normalizeText(searchTerm.toLowerCase())) &&
                                     item.userId !== loggedUser &&
                                     !item.hasOwnProperty("eventId")
                             )

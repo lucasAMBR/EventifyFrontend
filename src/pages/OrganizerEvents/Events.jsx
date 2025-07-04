@@ -89,12 +89,12 @@ export const Events = () => {
                             }
                         />
                     </div>
-                    <div className={style.page_content}>
-                        {userEventList.filter((event) => event.active == true).length ==
+                    <div className={style.page_content} onClick={() => console.log(userEventList)}>
+                        {userEventList.filter((event) => (event.active == true) || (event.active == false && event.subscriptionList.length > 0)).length ==
                             0 &&
                             loading &&
                             "loading..."}
-                        {userEventList.filter((event) => event.active == true).length ==
+                        {userEventList.filter((event) => (event.active == true) || (event.active == false && event.subscriptionList.length > 0)).length ==
                             0 &&
                             !loading && (
                                 <div className={style.no_events}>
@@ -104,12 +104,12 @@ export const Events = () => {
                                     </button>
                                 </div>
                             )}
-                        {userEventList.filter((event) => event.active == true).length > 0 &&
+                        {userEventList.filter((event) => (event.active == true) || (event.active == false && event.subscriptionList.length > 0)).length > 0 &&
                             !loading && (
                                 <div className={style.event_list_area}>
                                     <>
                                         {userEventList
-                                            .filter((event) => event.active == true)
+                                            .filter((event) => (event.active == true) || (event.active == false && event.subscriptionList.length > 0))
                                             .slice()
                                             .map((item, index) => (
                                                 <EventCard
@@ -121,6 +121,7 @@ export const Events = () => {
                                                     EventId={item.id}
                                                     EventLink={item.link}
                                                     EventType={item.type}
+                                                    EventActive={item.active}
                                                     EventBanner={`http://localhost:8080${item.imagePath}`}
                                                     EventTitle={item.title}
                                                     EventDate={item.date}

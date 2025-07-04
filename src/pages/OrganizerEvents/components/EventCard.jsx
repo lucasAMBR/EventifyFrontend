@@ -12,6 +12,7 @@ export const EventCard = ({
     EventId,
     EventBanner,
     EventTitle,
+    EventActive,
     EventType,
     EventLink,
     EventLocal,
@@ -51,7 +52,7 @@ export const EventCard = ({
                     )}:${formatNumber(EventHour[1])}`}
                 </p>
                 {EventType == "PRESENTIAL" && (
-                    <p>
+                    <p style={{overflow: "hidden", whiteSpace: "nowrap", textOverflow: "ellipsis"}}>
                         <LocationPinIcon sx={{ fill: "#004643" }} />
                         {EventLocal}
                     </p>
@@ -78,14 +79,16 @@ export const EventCard = ({
                 >
                     Generate confirmation link
                 </button>
+            
                 <button
-                    className={style.normal_button}
+                    className={EventActive ? style.normal_button : style.disabled_button}
                     onClick={() => handleOpenModal(EventId)}
                 >
                     Edit event data
                 </button>
+                
                 <button
-                    className={style.cancel_button}
+                    className={EventActive ? style.cancel_button : style.disabled_button}
                     onClick={() => openCancelModal(EventId)}
                 >
                     Cancel event

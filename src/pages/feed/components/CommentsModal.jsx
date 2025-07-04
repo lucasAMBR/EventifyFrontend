@@ -51,6 +51,7 @@ export const CommentsModal = ({ setCommentModal, postId, fetchComments }) => {
             });
 
             fetchCommentList();
+            setCommentContent("");
         } catch (error) {
             console.log(error);
         }
