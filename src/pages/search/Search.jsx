@@ -15,6 +15,7 @@ import PeopleIcon from "@mui/icons-material/People";
 import LinkIcon from "@mui/icons-material/Link";
 import { useNavigate } from "react-router-dom";
 
+
 export const Search = () => {
     const navigate = useNavigate();
 
